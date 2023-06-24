@@ -10,6 +10,6 @@ class ButtonCreator(element: ButtonElement) : ElementCreator<ButtonElement>(elem
     }
 
     override fun createImportCode(): HashSet<String> {
-        return hashSetOf("import androidx.compose.foundation.layout.Column")
+        return hashSetOf("import androidx.compose.material.Button")
     }
 }

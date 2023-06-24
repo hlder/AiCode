@@ -1,11 +1,9 @@
 package pcui.beans.elements
 
 import pcui.beans.Element
-import pcui.beans.ElementType
 import pcui.beans.TextWeight
 
 open class TextButtonElement(
-    type: ElementType,
     width: Int? = null,
     height: Int? = null,
     paddingTop: Int? = null,
@@ -17,4 +15,4 @@ open class TextButtonElement(
     val textColor: Int? = null, //字体颜色
     val textSize: Int? = null, // 字体大小，dp
     val textWeight: TextWeight? = null, // 字体的粗细
-) : Element(type, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor)
+) : Element(width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor)

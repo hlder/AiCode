@@ -9,7 +9,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import pcui.beans.Element
-import pcui.beans.ElementType
 import pcui.beans.elements.*
 import pcui.main.PageMainViewModel
 

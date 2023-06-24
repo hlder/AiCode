@@ -2,7 +2,6 @@ package createcode.templatecode.elements
 
 import createcode.templatecode.elements.propertys.ModifierCreator
 import pcui.beans.Element
-import pcui.beans.ElementType
 import pcui.beans.elements.*
 
 /**
@@ -55,22 +54,26 @@ abstract class ElementCreator<T:Element>(val element: T) {
             }
         }
 
+        /**
+         * 获取ElementCreator
+         */
         fun get(element: Element): ElementCreator<out Element> {
-            return when (element.type) {
+            return when (element) {
                 // 文本Text
-                ElementType.TEXT -> getFromCache(element) { TextCreator(element as TextElement) }
+                is TextElement -> getFromCache(element) { TextCreator(element) }
                 // 输入框
-                ElementType.TEXT_FIELD -> getFromCache(element) { TextFieldCreator(element as TextFieldElement) }
+                is TextFieldElement -> getFromCache(element) { TextFieldCreator(element) }
                 // 分割线
-                ElementType.DIVIDER -> getFromCache(element) { DividerCreator(element as DividerElement) }
+                is DividerElement -> getFromCache(element) { DividerCreator(element) }
                 // 文本按钮
-                ElementType.TEXT_BUTTON -> getFromCache(element) { TextButtonCreator(element as TextButtonElement) }
+                is TextButtonElement -> getFromCache(element) { TextButtonCreator(element) }
                 // 图片按钮
-                ElementType.BUTTON -> getFromCache(element) { ButtonCreator(element as ButtonElement) }
+                is ButtonElement -> getFromCache(element) { ButtonCreator(element) }
                 // Row
-                ElementType.ROW -> getFromCache(element) { RowCreator(element as RowElement) }
+                is RowElement -> getFromCache(element) { RowCreator(element) }
                 // Column
-                ElementType.COLUMN -> getFromCache(element) { ColumnCreator(element as ColumnElement) }
+                is ColumnElement -> getFromCache(element) { ColumnCreator(element) }
+                else -> { EmptyCreator(element) }
             }
         }
     }
