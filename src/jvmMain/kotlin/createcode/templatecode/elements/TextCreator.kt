@@ -1,8 +1,8 @@
 package createcode.templatecode.elements
 
-import pcui.beans.Element
+import pcui.beans.elements.TextElement
 
-class TextCreator(element: Element) : ElementCreator(element) {
+class TextCreator(element: TextElement) : ElementCreator<TextElement>(element) {
     private val importSets = HashSet<String>()
 
     override fun createCode(space: String): String {

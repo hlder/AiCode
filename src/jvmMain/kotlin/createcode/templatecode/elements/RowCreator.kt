@@ -1,8 +1,8 @@
 package createcode.templatecode.elements
 
-import pcui.beans.Element
+import pcui.beans.elements.RowElement
 
-class RowCreator(element: Element) : ElementCreator(element) {
+class RowCreator(element: RowElement) : ElementCreator<RowElement>(element) {
     override fun createCode(space: String): String {
         val childContent = StringBuffer()
         element.childs?.forEach {

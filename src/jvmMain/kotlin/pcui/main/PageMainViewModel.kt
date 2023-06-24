@@ -4,6 +4,10 @@ import pcui.beans.Element
 import pcui.beans.ElementType
 import pcui.beans.Page
 import pcui.beans.TextWeight
+import pcui.beans.elements.ColumnElement
+import pcui.beans.elements.DividerElement
+import pcui.beans.elements.TextButtonElement
+import pcui.beans.elements.TextElement
 import java.awt.Color
 
 class PageMainViewModel {
@@ -11,10 +15,10 @@ class PageMainViewModel {
         add(
             Page(
                 "HomePage",
-                Element(
+                ColumnElement(
                     ElementType.COLUMN,
                     childs = listOf(
-                        Element(
+                        TextElement(
                             ElementType.TEXT,
                             text = "aaaaa1",
                             textColor = Color.RED.rgb,
@@ -24,22 +28,22 @@ class PageMainViewModel {
                             backgroundColor = Color.BLACK.rgb,
                             textWeight = TextWeight.Bold
                         ),
-                        Element(
+                        DividerElement(
                             ElementType.DIVIDER,
                             width = 10000,
                             height = 1,
                             dividerColor = Color.RED.rgb
                         ),
-                        Element(
+                        TextElement(
                             ElementType.TEXT,
                             text = "aaaaa2",
                             backgroundColor = Color.BLUE.rgb
                         ),
-                        Element(
+                        TextButtonElement(
                             ElementType.TEXT_BUTTON,
                             text = "textButton"
                         ),
-                        Element(
+                        TextElement(
                             ElementType.TEXT,
                             text = "aaaaa2",
                             backgroundColor = Color.BLUE.rgb,

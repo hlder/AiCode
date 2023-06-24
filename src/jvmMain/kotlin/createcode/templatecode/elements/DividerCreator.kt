@@ -1,8 +1,8 @@
 package createcode.templatecode.elements
 
-import pcui.beans.Element
+import pcui.beans.elements.DividerElement
 
-class DividerCreator(element: Element) : ElementCreator(element) {
+class DividerCreator(element: DividerElement) : ElementCreator<DividerElement>(element) {
     override fun createCode(space: String): String {
         return "${space}Divider()\n"
     }

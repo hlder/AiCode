@@ -1,8 +1,8 @@
 package createcode.templatecode.elements
 
-import pcui.beans.Element
+import pcui.beans.elements.ButtonElement
 
-class ButtonCreator(element: Element) : ElementCreator(element) {
+class ButtonCreator(element: ButtonElement) : ElementCreator<ButtonElement>(element) {
     override fun createCode(space: String): String {
         return "${space}Button(onClick = { /*TODO*/ }) {\n" +
                 "$space    Text(text = \"button1\")\n" +

@@ -10,6 +10,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import pcui.beans.Element
 import pcui.beans.ElementType
+import pcui.beans.elements.*
 import pcui.main.PageMainViewModel
 
 @Composable
@@ -27,37 +28,37 @@ fun PageCenter(viewModel: PageMainViewModel) {
 
 @Composable
 private fun itemElement(element: Element) {
-    when (element.type) {
-        ElementType.TEXT -> { // 文本Text
+    when (element) {
+        is TextElement -> { // 文本Text
             Text(
                 element.text ?: "",
                 modifier = getBaseElementModifier(element),
-                color = element.textColor?.let { Color(it) }?:Color.Black,
-                fontSize = (element.textSize?:14).sp
+                color = element.textColor?.let { Color(it) } ?: Color.Black,
+                fontSize = (element.textSize ?: 14).sp
             )
         }
-        ElementType.TEXT_FIELD -> {
+        is TextFieldElement -> {
             TextField(element.text ?: "", {})
         }
-        ElementType.DIVIDER -> {
+        is DividerElement -> {
             Divider(
                 modifier = getBaseElementModifier(element).width(1.dp).fillMaxHeight(),
                 color = Color(element.dividerColor ?: 0x00000000)
             )
         }
-        ElementType.TEXT_BUTTON -> {
+        is TextButtonElement -> {
             TextButton(
                 modifier = getBaseElementModifier(element),
                 onClick = { }
             ) {
                 Text(
                     element.text ?: "",
-                    color = element.textColor?.let { Color(it) }?:Color.Black,
-                    fontSize = (element.textSize?:14).sp
+                    color = element.textColor?.let { Color(it) } ?: Color.Black,
+                    fontSize = (element.textSize ?: 14).sp
                 )
             }
         }
-        ElementType.ROW -> {
+        is RowElement -> {
             Row(modifier = getBaseElementModifier(element)) {
                 element.childs?.let { childs ->
                     childs.forEach {
@@ -66,7 +67,7 @@ private fun itemElement(element: Element) {
                 }
             }
         }
-        ElementType.COLUMN -> {
+        is ColumnElement -> {
             Column(modifier = getBaseElementModifier(element)) {
                 element.childs?.let { childs ->
                     childs.forEach {
@@ -75,7 +76,6 @@ private fun itemElement(element: Element) {
                 }
             }
         }
-        else -> {}
     }
 }
 
