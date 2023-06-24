@@ -1,8 +1,9 @@
-package pcui.main
+package createcode
 
-import pcui.beans.Page
 import createcode.templatecode.MainActivityCodeCreator
 import createcode.util.FileUtils
+import pcui.beans.Page
+import pcui.main.PageMainViewModel
 import java.io.File
 
 fun main() {
