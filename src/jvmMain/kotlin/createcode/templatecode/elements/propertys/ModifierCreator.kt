@@ -1,5 +1,6 @@
 package createcode.templatecode.elements.propertys
 
+import createcode.util.ConstantValues.ITEM_SPACE
 import pcui.beans.Element
 
 /**
@@ -65,9 +66,5 @@ class ModifierCreator(private val element: Element) {
             ""
         }
         return Pair(contentStr, importSets)
-    }
-
-    companion object {
-        private const val ITEM_SPACE = "    "
     }
 }

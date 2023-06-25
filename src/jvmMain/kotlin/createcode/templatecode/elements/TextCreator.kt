@@ -1,5 +1,6 @@
 package createcode.templatecode.elements
 
+import createcode.util.ConstantValues.ITEM_SPACE
 import pcui.beans.elements.TextElement
 
 class TextCreator(element: TextElement) : ElementCreator<TextElement>(element) {
@@ -10,17 +11,25 @@ class TextCreator(element: TextElement) : ElementCreator<TextElement>(element) {
         return "${space}Text(\n" +
                 "${space}${ITEM_SPACE}text = \"${element.text}\",\n" +
                 getFontSize(space + ITEM_SPACE) +
-                getFontColor(space + ITEM_SPACE) +
+                getColor(space + ITEM_SPACE, element.textColor) +
                 getFontWeight(space + ITEM_SPACE) +
+                getTextAlign(space + ITEM_SPACE) +
                 getModifier(space + ITEM_SPACE) +
                 "${space})\n"
+    }
+
+    private fun getTextAlign(space: String): String {
+        return element.textAlign?.let {
+            importSets.add("import androidx.compose.ui.text.style.TextAlign")
+            "${space}textAlign = TextAlign.${it},\n"
+        } ?: ""
     }
 
     private fun getFontWeight(space: String): String {
         return element.textWeight?.let {
             importSets.add("import androidx.compose.ui.text.font.FontWeight")
             "${space}fontWeight = FontWeight.${it},\n"
-        }?:""
+        } ?: ""
     }
 
     private fun getFontSize(space: String): String {
@@ -30,18 +39,5 @@ class TextCreator(element: TextElement) : ElementCreator<TextElement>(element) {
         } ?: ""
     }
 
-    private fun getFontColor(space: String): String {
-        return element.textColor?.let {
-            importSets.add("import androidx.compose.ui.graphics.Color")
-            "${space}color = Color(${it}),\n"
-        } ?: ""
-    }
-
-    override fun createImportCode(): HashSet<String> {
-        return importSets
-    }
-
-    companion object {
-        private const val ITEM_SPACE = "    "
-    }
+    override fun createImportCode(): HashSet<String> = importSets
 }

@@ -1,5 +1,6 @@
 package createcode.templatecode.elements
 
+import createcode.templatecode.elements.propertys.ColorCreator
 import createcode.templatecode.elements.propertys.ModifierCreator
 import pcui.beans.Element
 import pcui.beans.elements.*
@@ -17,6 +18,17 @@ abstract class ElementCreator<T:Element>(val element: T) {
         val (contentStr, importSets) = ModifierCreator(element).createCode(space)
         importSets.forEach { this.importSets.add(it) }
         return contentStr
+    }
+
+    /**
+     * 获取颜色的代码
+     */
+    fun getColor(space: String, color: Int?): String {
+        return color?.let {
+            val (content, importSet) = ColorCreator().createCode(space, color)
+            importSet.forEach { this.importSets.add(it) }
+            content
+        } ?: ""
     }
 
     /**
@@ -73,6 +85,8 @@ abstract class ElementCreator<T:Element>(val element: T) {
                 is RowElement -> getFromCache(element) { RowCreator(element) }
                 // Column
                 is ColumnElement -> getFromCache(element) { ColumnCreator(element) }
+                // Space
+                is SpaceElement -> getFromCache(element) {SpaceCreator(element)}
                 else -> { EmptyCreator(element) }
             }
         }

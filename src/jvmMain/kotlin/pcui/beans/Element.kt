@@ -13,3 +13,7 @@ open class Element(
 enum class TextWeight {
     W100, W200, W300, W400, W500, W600, W700, W800, W900, Thin, ExtraLight, Light, Normal, Medium, SemiBold, Bold, ExtraBold, Black
 }
+
+enum class TextAlign{
+    Left, Right, Center, Start, End
+}

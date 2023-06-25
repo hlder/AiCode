@@ -2,6 +2,7 @@ package pcui.main
 
 import pcui.beans.Element
 import pcui.beans.Page
+import pcui.beans.TextAlign
 import pcui.beans.TextWeight
 import pcui.beans.elements.*
 import java.awt.Color
@@ -20,12 +21,19 @@ class PageMainViewModel {
                             width = 10000,
                             height = 50,
                             backgroundColor = Color.BLACK.rgb,
-                            textWeight = TextWeight.Bold
+                            textWeight = TextWeight.Bold,
+                            textAlign = TextAlign.Center
+                        ),
+                        SpaceElement(
+                            height = 20
                         ),
                         DividerElement(
                             width = 10000,
                             height = 1,
                             dividerColor = Color.RED.rgb
+                        ),
+                        SpaceElement(
+                            height = 20
                         ),
                         TextElement(
                             text = "aaaaa2",
