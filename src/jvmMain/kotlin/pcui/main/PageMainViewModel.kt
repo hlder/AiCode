@@ -13,6 +13,7 @@ class PageMainViewModel {
             Page(
                 "HomePage",
                 ColumnElement(
+                    backgroundColor = Color.BLACK.rgb,
                     childs = listOf(
                         TextElement(
                             text = "aaaaa1",
@@ -20,7 +21,7 @@ class PageMainViewModel {
                             textSize = 20,
                             width = 10000,
                             height = 50,
-                            backgroundColor = Color.BLACK.rgb,
+                            backgroundColor = Color.GRAY.rgb,
                             textWeight = TextWeight.Bold,
                             textAlign = TextAlign.Center
                         ),
@@ -45,14 +46,35 @@ class PageMainViewModel {
                         TextButtonElement(
                             text = "textButton"
                         ),
+                        RowElement(
+                            width = 250,
+                            height = 80,
+                            backgroundColor = Color.GREEN.rgb,
+                            childs = listOf(
+                                TextElement(
+                                    text = "text1"
+                                ),
+                                SpaceElement(
+                                    width = 10
+                                ),
+                                TextElement(
+                                    text = "text2",
+                                    textColor = Color.RED.rgb
+                                )
+                            )
+                        ),
                         TextElement(
                             text = "aaaaa2",
                             backgroundColor = Color.BLUE.rgb,
-                            width = 100,
-                            height = 10000
+                            width = 100
+                        ),
+                        TextFieldElement(
+                            text = "测试输入框",
+                            textColor = Color.RED.rgb,
+                            textSize = 20,
+                            textWeight = TextWeight.Bold,
                         )
                     ),
-                    backgroundColor = Color.YELLOW.rgb
                 )
             )
         )

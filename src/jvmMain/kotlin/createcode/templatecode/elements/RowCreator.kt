@@ -1,16 +1,20 @@
 package createcode.templatecode.elements
 
+import createcode.util.ConstantValues.ITEM_SPACE
 import pcui.beans.elements.RowElement
 
 class RowCreator(element: RowElement) : ElementCreator<RowElement>(element) {
     override fun createCode(space: String): String {
         val childContent = StringBuffer()
         element.childs?.forEach {
-            childContent.append(get(it).createCode("${space}    "))
+            val itemContent = get(it).createCode(space + ITEM_SPACE)
+            childContent.append(itemContent)
         }
-        return "${space}Row {\n" +
-                "${childContent}\n" +
-                "${space}}"
+        return "${space}Row(\n" +
+                getModifier(space + ITEM_SPACE) +
+                "${space}) {\n" +
+                childContent +
+                "${space}}\n"
     }
 
     override fun createImportCode(): HashSet<String> {
