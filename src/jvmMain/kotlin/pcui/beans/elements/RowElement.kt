@@ -1,5 +1,7 @@
 package pcui.beans.elements
 
+import createcode.templatecode.elements.ElementCreator
+import createcode.templatecode.elements.RowCreator
 import pcui.beans.Element
 
 class RowElement(
@@ -11,4 +13,9 @@ class RowElement(
     paddingEnd: Int? = null,
     backgroundColor: Int? = null, // 背景颜色
     val childs: List<Element>? = null, // 如果是row，column则会有子元素
-) : Element(width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor)
+) : Element(width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor) {
+    private var rowCreator: RowCreator? = null
+    override fun createElementCreator(): ElementCreator<out Element> = rowCreator ?: RowCreator(this).apply {
+        rowCreator = this
+    }
+}

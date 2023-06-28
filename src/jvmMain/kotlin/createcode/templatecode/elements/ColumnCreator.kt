@@ -7,7 +7,7 @@ class ColumnCreator(element: ColumnElement) : ElementCreator<ColumnElement>(elem
     override fun createCode(space: String): String {
         val childContent = StringBuffer()
         element.childs?.forEach {
-            childContent.append(get(it).createCode("$space    "))
+            childContent.append(it.getCreator().createCode("$space    "))
         }
         return "${space}Column(\n" +
                 getModifier(space + ITEM_SPACE) +
@@ -19,7 +19,7 @@ class ColumnCreator(element: ColumnElement) : ElementCreator<ColumnElement>(elem
     override fun createImportCode(): HashSet<String> {
         val set = hashSetOf("import androidx.compose.foundation.layout.Column")
         element.childs?.forEach { item ->
-            get(item).getImportCode().forEach {
+            item.getCreator().getImportCode().forEach {
                 set.add(it)
             }
         }

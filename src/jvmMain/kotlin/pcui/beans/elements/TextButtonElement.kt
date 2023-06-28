@@ -1,5 +1,7 @@
 package pcui.beans.elements
 
+import createcode.templatecode.elements.ElementCreator
+import createcode.templatecode.elements.TextButtonCreator
 import pcui.beans.Element
 import pcui.beans.TextWeight
 
@@ -15,4 +17,9 @@ open class TextButtonElement(
     val textColor: Int? = null, //字体颜色
     val textSize: Int? = null, // 字体大小，dp
     val textWeight: TextWeight? = null, // 字体的粗细
-) : Element(width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor)
+) : Element(width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor) {
+    private var textButtonCreator: TextButtonCreator? = null
+    override fun createElementCreator(): ElementCreator<out Element> = textButtonCreator ?: TextButtonCreator(this).apply {
+            textButtonCreator = this
+        }
+}

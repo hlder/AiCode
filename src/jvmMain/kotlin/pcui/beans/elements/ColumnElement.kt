@@ -1,5 +1,7 @@
 package pcui.beans.elements
 
+import createcode.templatecode.elements.ColumnCreator
+import createcode.templatecode.elements.ElementCreator
 import pcui.beans.Element
 
 class ColumnElement(
@@ -11,4 +13,9 @@ class ColumnElement(
     paddingEnd: Int? = null,
     backgroundColor: Int? = null, // 背景颜色
     val childs: List<Element>? = null, // 如果是row，column则会有子元素
-) : Element(width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor)
+) : Element(width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor) {
+    private var columnCreator: ColumnCreator? = null
+    override fun createElementCreator(): ElementCreator<out Element> = columnCreator ?: ColumnCreator(this).apply {
+        columnCreator = this
+    }
+}

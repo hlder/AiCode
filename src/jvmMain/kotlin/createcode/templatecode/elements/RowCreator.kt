@@ -7,7 +7,7 @@ class RowCreator(element: RowElement) : ElementCreator<RowElement>(element) {
     override fun createCode(space: String): String {
         val childContent = StringBuffer()
         element.childs?.forEach {
-            val itemContent = get(it).createCode(space + ITEM_SPACE)
+            val itemContent = it.getCreator().createCode(space + ITEM_SPACE)
             childContent.append(itemContent)
         }
         return "${space}Row(\n" +
@@ -20,7 +20,7 @@ class RowCreator(element: RowElement) : ElementCreator<RowElement>(element) {
     override fun createImportCode(): HashSet<String> {
         val set = hashSetOf("import androidx.compose.foundation.layout.Row")
         element.childs?.forEach { item ->
-            get(item).getImportCode().forEach {
+            item.getCreator().getImportCode().forEach {
                 set.add(it)
             }
         }

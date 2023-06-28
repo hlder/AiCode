@@ -1,10 +1,9 @@
 package createcode.templatecode
 
-import createcode.templatecode.elements.ElementCreator
 import pcui.beans.Element
 
 class ElementCodeCreator(element: Element) {
-    private val elementCreator = ElementCreator.get(element)
+    private val elementCreator = element.getCreator()
 
     /**
      * 创建element的代码

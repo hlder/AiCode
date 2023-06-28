@@ -1,5 +1,7 @@
 package pcui.beans.elements
 
+import createcode.templatecode.elements.ElementCreator
+import createcode.templatecode.elements.SpaceCreator
 import pcui.beans.Element
 
 class SpaceElement(
@@ -10,4 +12,9 @@ class SpaceElement(
     paddingStart: Int? = null,
     paddingEnd: Int? = null,
     backgroundColor: Int? = null, // 背景颜色
-) : Element(width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor)
+) : Element(width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor) {
+    private var spaceCreator: SpaceCreator? = null
+    override fun createElementCreator(): ElementCreator<out Element> = spaceCreator ?: SpaceCreator(this).apply {
+        spaceCreator = this
+    }
+}
