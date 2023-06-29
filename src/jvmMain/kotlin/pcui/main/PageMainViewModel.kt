@@ -77,6 +77,16 @@ class PageMainViewModel {
                 )
             )
         )
+        add(
+            Page(
+                pageName = "TestPage",
+                element = TextElement(
+                    text = "TestPage",
+                    backgroundColor = Color.BLUE.rgb,
+                    width = 100
+                )
+            )
+        )
     }
 
 }

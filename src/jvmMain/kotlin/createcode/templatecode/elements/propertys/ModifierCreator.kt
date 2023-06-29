@@ -37,6 +37,7 @@ class ModifierCreator(private val element: Element) {
         }
         element.backgroundColor?.let {
             importSets.add("import androidx.compose.foundation.background")
+            importSets.add("import androidx.compose.ui.graphics.Color")
             modifierSb.append("\n${space}${ITEM_SPACE}.background(color = Color(${it}))")
         }
 
