@@ -15,9 +15,7 @@ class ElementCodeCreator(element: Element) {
     /**
      * 创建element所需要的import的代码
      */
-    fun createElementImportCode(): String {
-        val sb = StringBuffer()
-        elementCreator.getImportCode().forEach { sb.append("${it}\n") }
-        return sb.toString()
+    fun createElementImportCode(): HashSet<String> {
+        return elementCreator.getImportCode()
     }
 }

@@ -10,7 +10,7 @@ object MainActivityCodeCreator {
         val navigateCodes = StringBuffer()
         val navigateImportCodes = StringBuffer()
         listPage.forEach {
-            PageCodeCreator.createPageCodeAndFile("${file.parentFile.absolutePath}\\pages", it, packageName)
+            PageCodeCreator.createPageCodeAndFile("${file.parentFile.absolutePath}\\pages\\${it.pageName.lowercase()}", it, packageName)
             // 路由的代码
             navigateCodes.append(PageCodeCreator.createRouterCode(it)+"\n")
             // import内容的代码
