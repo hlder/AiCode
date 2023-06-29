@@ -1,12 +1,15 @@
 package createcode.templatecode.elements
 
+import createcode.util.toCodeString
 import pcui.beans.elements.ButtonElement
 
 class ButtonCreator(element: ButtonElement) : ElementCreator<ButtonElement>(element) {
     override fun createCode(space: String): String {
-        return "${space}Button(onClick = { /*TODO*/ }) {\n" +
-                "$space    Text(text = \"button1\")\n" +
-                "${space}}\n"
+        return """
+            Button(onClick = { /*TODO*/ }) {
+                Text(text = "button1")
+            }
+        """.toCodeString(space)
     }
 
     override fun createImportCode(): HashSet<String> {

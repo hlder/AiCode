@@ -1,6 +1,7 @@
 package createcode.templatecode.elements
 
 import createcode.util.ConstantValues.ITEM_SPACE
+import createcode.util.toCodeString
 import pcui.beans.elements.ColumnElement
 
 class ColumnCreator(element: ColumnElement) : ElementCreator<ColumnElement>(element) {
@@ -9,11 +10,16 @@ class ColumnCreator(element: ColumnElement) : ElementCreator<ColumnElement>(elem
         element.childs?.forEach {
             childContent.append(it.getCreator().createCode("$space    "))
         }
-        return "${space}Column(\n" +
-                getModifier(space + ITEM_SPACE) +
-                "${space}) {\n" +
-                childContent +
-                "${space}}"
+        return """
+            Column(
+                %s
+            ) {
+                %s
+            }
+        """.toCodeString(space).format(
+            getModifier(space + ITEM_SPACE),
+            childContent
+        )
     }
 
     override fun createImportCode(): HashSet<String> {

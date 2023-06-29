@@ -1,6 +1,7 @@
 package createcode.templatecode.elements
 
 import createcode.util.ConstantValues.ITEM_SPACE
+import createcode.util.toCodeString
 import pcui.beans.elements.RowElement
 
 class RowCreator(element: RowElement) : ElementCreator<RowElement>(element) {
@@ -10,11 +11,16 @@ class RowCreator(element: RowElement) : ElementCreator<RowElement>(element) {
             val itemContent = it.getCreator().createCode(space + ITEM_SPACE)
             childContent.append(itemContent)
         }
-        return "${space}Row(\n" +
-                getModifier(space + ITEM_SPACE) +
-                "${space}) {\n" +
-                childContent +
-                "${space}}\n"
+        return """
+            Row(
+                %s
+            ) {
+                %s
+            }
+        """.toCodeString(space).format(
+            getModifier(space + ITEM_SPACE),
+            childContent
+        )
     }
 
     override fun createImportCode(): HashSet<String> {

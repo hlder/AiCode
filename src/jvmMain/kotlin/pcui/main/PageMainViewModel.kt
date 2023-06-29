@@ -1,6 +1,5 @@
 package pcui.main
 
-import pcui.beans.Element
 import pcui.beans.Page
 import pcui.beans.TextAlign
 import pcui.beans.TextWeight
@@ -13,7 +12,7 @@ class PageMainViewModel {
             Page(
                 "HomePage",
                 ColumnElement(
-                    backgroundColor = Color.BLACK.rgb,
+                    backgroundColor = Color.ORANGE.rgb,
                     childs = listOf(
                         TextElement(
                             text = "aaaaa1",

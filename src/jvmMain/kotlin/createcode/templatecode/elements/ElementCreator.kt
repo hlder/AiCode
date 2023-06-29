@@ -3,7 +3,6 @@ package createcode.templatecode.elements
 import createcode.templatecode.elements.propertys.ColorCreator
 import createcode.templatecode.elements.propertys.ModifierCreator
 import pcui.beans.Element
-import pcui.beans.elements.*
 
 /**
  * Element代码的创建者
