@@ -5,12 +5,21 @@ import java.io.File
 import java.io.FileReader
 import java.io.FileWriter
 
+fun createFile(filePath: String): File {
+    println("=======filePath:$filePath")
+    return if (isWindows()) {
+        File(filePath)
+    } else {
+        File(filePath.replace("\\", "/"))
+    }
+}
+
 object FileUtils {
     /**
      * 复制模板代码
      */
     fun copyTemplateCode(filePath: String, appName: String, packageName: String) {
-        val fromFileDir = File("./androidCodeTemplate")
+        val fromFileDir = createFile("./androidCodeTemplate")
         copyFile(fromFileDir, "${filePath}\\${appName}")
     }
 
@@ -21,16 +30,17 @@ object FileUtils {
         if (fromFile.isDirectory) {
             fromFile.listFiles()?.forEach {
 //                println("----------from:${fromFile.absolutePath}")
-                val str = fromFile.absolutePath.split("\\")
+                var str = fromFile.absolutePath.split("\\") // window电脑是正斜杠
+                str = str[str.size - 1].split("/") // mac电脑室反斜杠
                 copyFile(it, toFilePath + "\\" + str[str.size - 1])
             }
         } else {
             // 复制的路径，删除androidCodeTemplate文件夹
-            val filePath = toFilePath.replace("androidCodeTemplate", "") + "\\${fromFile.name}"
+            val filePath = toFilePath.replace("androidCodeTemplate", "") + "$\\${fromFile.name}"
 //            println("===========filePath")
-            File(filePath).let {
+            createFile(filePath).let {
                 if (!it.exists()) {
-                    fromFile.copyTo(File(filePath))
+                    fromFile.copyTo(createFile(filePath))
                 }
             }
         }
@@ -52,7 +62,7 @@ object FileUtils {
     }
 
     fun insertToFile(file: File, content: String) {
-        if(!file.parentFile.exists()){
+        if (!file.parentFile.exists()) {
             file.parentFile.mkdirs()
         }
         if (!file.exists()) {

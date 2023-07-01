@@ -2,8 +2,8 @@ package createcode.templatecode
 
 import pcui.beans.Page
 import createcode.util.FileUtils
+import createcode.util.createFile
 import createcode.util.toCodeString
-import java.io.File
 
 object PageCodeCreator {
 
@@ -46,7 +46,7 @@ object PageCodeCreator {
             scaffoldContent,
             elementContent
         )
-        val file = File("${pageFilePath}\\${page.pageName}.kt")
+        val file = createFile("${pageFilePath}\\${page.pageName}.kt")
         FileUtils.insertToFile(file, pageContent)
     }
 
