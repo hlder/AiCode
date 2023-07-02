@@ -25,7 +25,7 @@ fun createScaffoldCreator(): Pair<String, HashSet<String>> {
             }
         ){
             Box(modifier = Modifier.padding(it)){
-                PageView()
+                PageView(navController)
             }
         }
     """.toCodeString(ITEM_SPACE)

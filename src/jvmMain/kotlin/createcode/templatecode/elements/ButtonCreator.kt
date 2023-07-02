@@ -5,9 +5,13 @@ import createcode.util.toCodeString
 import pcui.beans.elements.ButtonElement
 
 class ButtonCreator(element: ButtonElement) : ElementCreator<ButtonElement>(element) {
+    private val imports = hashSetOf<String>()
     override fun createCode(space: String): String {
         val textElementStr = TextCreator(element).createCode(space + ITEM_SPACE)
-        val clickCode = ""
+
+        val (clickCode, imports) = element.buttonAction.createCode(space + ITEM_SPACE + ITEM_SPACE)
+        imports.forEach { this.imports.add(it) }
+        this.imports.add("import androidx.compose.material.Button")
         return """
             Button(
                 onClick = { 
@@ -22,7 +26,5 @@ class ButtonCreator(element: ButtonElement) : ElementCreator<ButtonElement>(elem
         )
     }
 
-    override fun createImportCode(): HashSet<String> {
-        return hashSetOf("import androidx.compose.material.Button")
-    }
+    override fun createImportCode(): HashSet<String> = imports
 }

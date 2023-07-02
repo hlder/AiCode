@@ -46,8 +46,9 @@ class PageMainViewModel {
                             backgroundColor = Color.BLUE.rgb
                         ),
                         ButtonElement(
-                            id = "跳转TestPage页面",
-                            text = "Button"
+                            id = "button1",
+                            text = "跳转TestPage页面",
+                            buttonAction = ButtonActionSkipPage(Action("TestPage"))
                         ),
                         TextButtonElement(
                             id = "textButton1",

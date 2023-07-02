@@ -19,6 +19,7 @@ object PageCodeCreator {
         importCode.forEach {
             elementNeedImport.add(it)
         }
+        elementNeedImport.add("import androidx.navigation.NavHostController")
 
         // import代码
         val elementNeedImportStr = StringBuffer()
@@ -33,12 +34,12 @@ object PageCodeCreator {
             %s
             
             @Composable
-            fun ${page.pageName}() {
+            fun ${page.pageName}(navController: NavHostController) {
                 %s
             }
             
             @Composable
-            fun PageView() {
+            fun PageView(navController: NavHostController) {
                 %s
             }
         """.toCodeString("").format(
@@ -54,7 +55,7 @@ object PageCodeCreator {
      * 创建路由的代码
      */
     fun createRouterCode(page: Page): String {
-        return "            composable(\"${page.pageName}\") { ${page.pageName}() }"
+        return "            composable(\"${page.pageName}\") { ${page.pageName}(navController) }"
     }
 
     /**
