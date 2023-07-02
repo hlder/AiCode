@@ -2,33 +2,27 @@ package createcode.templatecode
 
 import createcode.util.ConstantValues.ITEM_SPACE
 import createcode.util.toCodeString
+import pcui.beans.Page
+import pcui.beans.ScreenType
 
-fun createScaffoldCreator(): Pair<String, HashSet<String>> {
+fun createScaffoldCreator(page: Page): Pair<String, HashSet<String>> {
     val content = """
         Scaffold (
-            topBar = {
-                TopAppBar { Text(text = "aaaaaaa") }
-            },
-            bottomBar = {
-                BottomAppBar { Text(text = "bottomAppBar") }
-            },
-            drawerContent = {
-                Text("Drawer title", modifier = Modifier.padding(16.dp))
-                Divider()
-            },
-            floatingActionButton = {
-                ExtendedFloatingActionButton(
-                    text = { Text("Show snackbar") },
-                    onClick = {
-                    }
-                )
-            }
+            %s
+            %s
+            %s
+            %s
         ){
             Box(modifier = Modifier.padding(it)){
                 PageView(navController)
             }
         }
-    """.toCodeString(ITEM_SPACE)
+    """.toCodeString(ITEM_SPACE).format(
+        createTopActionBarCode(page),
+        createBottomBarCode(page),
+        createFloatingActionButtonCode(page),
+        createDrawerContentCode(page),
+    )
 
     val importCode = hashSetOf(
         "import androidx.compose.material.BottomAppBar",
@@ -40,4 +34,65 @@ fun createScaffoldCreator(): Pair<String, HashSet<String>> {
         "import androidx.compose.material.Divider"
     )
     return Pair(content, importCode)
+}
+
+/**
+ * 创建actionbar的代码
+ */
+private fun createTopActionBarCode(page: Page): String {
+    return if (page.screenType == ScreenType.ACTION) {
+        """
+            topBar = {
+                TopAppBar { 
+                    Text(
+                        text = "${page.title}",
+                        modifier = Modifier.padding(start = 10.dp),
+                    )
+                }
+            },
+        """.toCodeString(ITEM_SPACE + ITEM_SPACE)
+    } else {
+        ""
+    }
+}
+
+/**
+ * 创建bottomBar的代码
+ */
+private fun createBottomBarCode(page: Page): String {
+//    return """
+//        bottomBar = {
+//            BottomAppBar { Text(text = "bottomAppBar") }
+//        },
+//    """.toCodeString(ITEM_SPACE + ITEM_SPACE)
+    return ""
+}
+
+/**
+ * 右下角的悬浮控件
+ */
+private fun createFloatingActionButtonCode(page: Page): String {
+//    return """
+//        floatingActionButton = {
+//            ExtendedFloatingActionButton(
+//                text = { Text("Show snackbar") },
+//                onClick = {
+//                }
+//            )
+//        },
+//    """.toCodeString(ITEM_SPACE + ITEM_SPACE)
+    return ""
+}
+
+/**
+ * 抽屉代码
+ */
+private fun createDrawerContentCode(page: Page): String {
+//    return """
+//        drawerContent = {
+//            Text("Drawer title", modifier = Modifier.padding(16.dp))
+//            Divider()
+//        },
+//    """.toCodeString(ITEM_SPACE + ITEM_SPACE)
+    return ""
 }

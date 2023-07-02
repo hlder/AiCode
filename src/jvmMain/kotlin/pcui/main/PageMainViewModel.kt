@@ -10,8 +10,9 @@ class PageMainViewModel {
     val listPage: List<Page> = ArrayList<Page>().apply {
         add(
             Page(
-                "HomePage",
-                ColumnElement(
+                pageName = "HomePage",
+                title = "主页",
+                element =  ColumnElement(
                     id = "column1",
                     backgroundColor = Color.ORANGE.rgb,
                     childs = listOf(
@@ -95,6 +96,7 @@ class PageMainViewModel {
         add(
             Page(
                 pageName = "TestPage",
+                title = "测试页",
                 element = TextElement(
                     id = "text4",
                     text = "TestPage",

@@ -15,7 +15,7 @@ object PageCodeCreator {
         val elementContent = elementCodeCreator.createElementCode()
         val elementNeedImport = elementCodeCreator.createElementImportCode()
 
-        val (scaffoldContent, importCode) = createScaffoldCreator()
+        val (scaffoldContent, importCode) = createScaffoldCreator(page)
         importCode.forEach {
             elementNeedImport.add(it)
         }
