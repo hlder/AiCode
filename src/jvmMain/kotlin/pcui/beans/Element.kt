@@ -3,6 +3,7 @@ package pcui.beans
 import createcode.templatecode.elements.ElementCreator
 
 abstract class Element(
+    val id: String, // element的id
     val width: Int?, // 大于等于9999表示充满，其他则直接设置
     val height: Int?, // 大于等于9999表示充满，其他则直接设置
     val paddingTop: Int?,

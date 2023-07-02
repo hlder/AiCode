@@ -12,7 +12,8 @@ fun main() {
 }
 
 private fun testCreateAndroidProject(listPage: List<Page>) {
-    val filePath = "/Users/admin/Documents/temp"
+//    val filePath = "/Users/admin/Documents/temp" // mac电脑的地址
+    val filePath = "F:\\temp" // windows电脑的地址
     val appName = "TestAiCodeProject"
     val packageName = "com.test.testaicode"
     // 1.复制模板代码

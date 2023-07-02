@@ -7,6 +7,7 @@ import pcui.beans.TextAlign
 import pcui.beans.TextWeight
 
 open class TextFieldElement(
+    id: String,
     width: Int? = null,
     height: Int? = null,
     paddingTop: Int? = null,
@@ -19,7 +20,7 @@ open class TextFieldElement(
     val textSize: Int? = null, // 字体大小，dp
     val textWeight: TextWeight? = null, // 字体的粗细
     val textAlign: TextAlign? = null // 文字的对齐方式
-) : Element(width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor) {
+) : Element(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor) {
     private var textFieldCreator: TextFieldCreator? = null
     override fun createElementCreator(): ElementCreator<out Element> = textFieldCreator ?: TextFieldCreator(this).apply {
             textFieldCreator = this

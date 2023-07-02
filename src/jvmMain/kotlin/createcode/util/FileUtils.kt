@@ -6,7 +6,7 @@ import java.io.FileReader
 import java.io.FileWriter
 
 fun createFile(filePath: String): File {
-    println("=======filePath:$filePath")
+    println("=======isWindows:${isWindows()} filePath:$filePath")
     return if (isWindows()) {
         File(filePath)
     } else {
@@ -30,13 +30,16 @@ object FileUtils {
         if (fromFile.isDirectory) {
             fromFile.listFiles()?.forEach {
 //                println("----------from:${fromFile.absolutePath}")
-                var str = fromFile.absolutePath.split("\\") // window电脑是正斜杠
-                str = str[str.size - 1].split("/") // mac电脑室反斜杠
+                val str = if (isWindows()) {
+                    fromFile.absolutePath.split("\\") // window电脑是正斜杠
+                }else{
+                    fromFile.absolutePath.split("/") // mac电脑室反斜杠
+                }
                 copyFile(it, toFilePath + "\\" + str[str.size - 1])
             }
         } else {
             // 复制的路径，删除androidCodeTemplate文件夹
-            val filePath = toFilePath.replace("androidCodeTemplate", "") + "$\\${fromFile.name}"
+            val filePath = toFilePath.replace("androidCodeTemplate", "") + "\\${fromFile.name}"
 //            println("===========filePath")
             createFile(filePath).let {
                 if (!it.exists()) {
