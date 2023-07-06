@@ -5,10 +5,10 @@ import createcode.util.toCodeString
 import pcui.beans.elements.ColumnElement
 
 class ColumnCreator(element: ColumnElement) : ElementCreator<ColumnElement>(element) {
-    override fun createCode(space: String): String {
+    override fun createUiCode(space: String): String {
         val childContent = StringBuffer()
         element.childs?.forEach {
-            childContent.append(it.getCreator().createCode("$space    "))
+            childContent.append(it.getCreator().createUiCode("$space    "))
         }
         return """
             Column(

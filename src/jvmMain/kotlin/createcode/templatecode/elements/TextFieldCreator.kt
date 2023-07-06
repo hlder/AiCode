@@ -7,11 +7,11 @@ import pcui.beans.elements.TextFieldElement
 class TextFieldCreator(element: TextFieldElement) : ElementCreator<TextFieldElement>(element) {
     private val importSets = HashSet<String>()
 
-    override fun createCode(space: String): String {
-        importSets.add("import androidx.compose.material.TextField")
+    override fun createUiCode(space: String): String {
+        importSets.add("import com.aicode.widgets.HintTextFiled")
         importSets.add("import androidx.compose.ui.text.TextStyle")
         return """
-            TextField(
+            HintTextFiled(
                 textStyle = TextStyle(
                     %s
                 ),

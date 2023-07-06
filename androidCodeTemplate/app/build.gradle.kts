@@ -91,6 +91,8 @@ androidComponents {
 }
 
 dependencies {
+  implementation(project(":aicode"))
+
   kapt(libs.androidx.room.compiler)
   kapt(libs.hilt.android.compiler)
   implementation(libs.androidx.appcompat)

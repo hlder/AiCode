@@ -42,7 +42,7 @@ abstract class ElementCreator<T:Element>(val element: T) {
     /**
      * 创建元素代码
      */
-    abstract fun createCode(space: String): String
+    abstract fun createUiCode(space: String): String
 
     /**
      * 创建该元素代码中需要的import代码

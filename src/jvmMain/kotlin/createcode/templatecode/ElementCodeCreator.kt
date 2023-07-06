@@ -1,5 +1,6 @@
 package createcode.templatecode
 
+import createcode.util.ConstantValues.ITEM_SPACE
 import pcui.beans.Element
 
 class ElementCodeCreator(element: Element) {
@@ -9,7 +10,7 @@ class ElementCodeCreator(element: Element) {
      * 创建element的代码
      */
     fun createElementCode(): String {
-        return elementCreator.createCode("    ")
+        return elementCreator.createUiCode(ITEM_SPACE)
     }
 
     /**

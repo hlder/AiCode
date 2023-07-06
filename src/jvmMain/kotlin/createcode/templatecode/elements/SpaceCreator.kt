@@ -6,7 +6,7 @@ import pcui.beans.elements.SpaceElement
 
 class SpaceCreator(element: SpaceElement) : ElementCreator<SpaceElement>(element) {
     private val importSets = HashSet<String>()
-    override fun createCode(space: String): String {
+    override fun createUiCode(space: String): String {
         importSets.add("import androidx.compose.foundation.layout.Spacer")
         return """
             Spacer(

@@ -49,3 +49,4 @@ dependencyResolutionManagement {
 }
 
 include(":app")
+include(":aicode")

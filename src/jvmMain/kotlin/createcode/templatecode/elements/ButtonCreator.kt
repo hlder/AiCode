@@ -6,8 +6,8 @@ import pcui.beans.elements.ButtonElement
 
 class ButtonCreator(element: ButtonElement) : ElementCreator<ButtonElement>(element) {
     private val imports = hashSetOf<String>()
-    override fun createCode(space: String): String {
-        val textElementStr = TextCreator(element).createCode(space + ITEM_SPACE)
+    override fun createUiCode(space: String): String {
+        val textElementStr = TextCreator(element).createUiCode(space + ITEM_SPACE)
 
         val (clickCode, imports) = element.buttonAction.createCode(space + ITEM_SPACE + ITEM_SPACE)
         imports.forEach { this.imports.add(it) }

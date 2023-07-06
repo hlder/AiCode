@@ -4,7 +4,7 @@ import createcode.util.toCodeString
 import pcui.beans.elements.TextButtonElement
 
 class TextButtonCreator(element: TextButtonElement) : ElementCreator<TextButtonElement>(element) {
-    override fun createCode(space: String): String {
+    override fun createUiCode(space: String): String {
         return """
             TextButton(onClick = { /*TODO*/ }) {
                 Text(text = "${element.text}")

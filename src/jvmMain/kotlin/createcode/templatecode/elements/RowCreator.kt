@@ -5,10 +5,10 @@ import createcode.util.toCodeString
 import pcui.beans.elements.RowElement
 
 class RowCreator(element: RowElement) : ElementCreator<RowElement>(element) {
-    override fun createCode(space: String): String {
+    override fun createUiCode(space: String): String {
         val childContent = StringBuffer()
         element.childs?.forEach {
-            val itemContent = it.getCreator().createCode(space + ITEM_SPACE)
+            val itemContent = it.getCreator().createUiCode(space + ITEM_SPACE)
             childContent.append(itemContent)
         }
         return """

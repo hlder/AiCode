@@ -6,7 +6,7 @@ import pcui.beans.elements.DividerElement
 
 class DividerCreator(element: DividerElement) : ElementCreator<DividerElement>(element) {
     private val importSets = HashSet<String>()
-    override fun createCode(space: String): String {
+    override fun createUiCode(space: String): String {
         importSets.add("import androidx.compose.material.Divider")
         return """
             Divider(
