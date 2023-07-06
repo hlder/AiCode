@@ -17,5 +17,7 @@ class DividerCreator(element: DividerElement) : ElementCreator<DividerElement>(e
         )
     }
 
+    override fun createLogicCode(space: String): String = ""
+
     override fun createImportCode(): HashSet<String> = importSets
 }

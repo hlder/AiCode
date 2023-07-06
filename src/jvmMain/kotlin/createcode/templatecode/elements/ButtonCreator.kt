@@ -26,5 +26,7 @@ class ButtonCreator(element: ButtonElement) : ElementCreator<ButtonElement>(elem
         )
     }
 
+    override fun createLogicCode(space: String): String = ""
+
     override fun createImportCode(): HashSet<String> = imports
 }

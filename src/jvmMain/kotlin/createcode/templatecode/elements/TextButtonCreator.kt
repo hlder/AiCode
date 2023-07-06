@@ -12,6 +12,8 @@ class TextButtonCreator(element: TextButtonElement) : ElementCreator<TextButtonE
         """.toCodeString(space)
     }
 
+    override fun createLogicCode(space: String): String = ""
+
     override fun createImportCode(): HashSet<String> {
         return hashSetOf("import androidx.compose.material.TextButton")
     }

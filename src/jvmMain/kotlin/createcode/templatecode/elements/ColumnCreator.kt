@@ -22,6 +22,8 @@ class ColumnCreator(element: ColumnElement) : ElementCreator<ColumnElement>(elem
         )
     }
 
+    override fun createLogicCode(space: String): String = ""
+
     override fun createImportCode(): HashSet<String> {
         val set = hashSetOf("import androidx.compose.foundation.layout.Column")
         element.childs?.forEach { item ->

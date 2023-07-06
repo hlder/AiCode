@@ -23,6 +23,8 @@ class RowCreator(element: RowElement) : ElementCreator<RowElement>(element) {
         )
     }
 
+    override fun createLogicCode(space: String): String = ""
+
     override fun createImportCode(): HashSet<String> {
         val set = hashSetOf("import androidx.compose.foundation.layout.Row")
         element.childs?.forEach { item ->

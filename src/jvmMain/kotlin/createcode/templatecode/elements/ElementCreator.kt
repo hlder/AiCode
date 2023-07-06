@@ -7,7 +7,7 @@ import pcui.beans.Element
 /**
  * Element代码的创建者
  */
-abstract class ElementCreator<T:Element>(val element: T) {
+abstract class ElementCreator<T : Element>(val element: T) {
     private val importSets = HashSet<String>()
 
     /**
@@ -43,6 +43,11 @@ abstract class ElementCreator<T:Element>(val element: T) {
      * 创建元素代码
      */
     abstract fun createUiCode(space: String): String
+
+    /**
+     * 创建元素相关的逻辑代码
+     */
+    abstract fun createLogicCode(space: String): String
 
     /**
      * 创建该元素代码中需要的import代码

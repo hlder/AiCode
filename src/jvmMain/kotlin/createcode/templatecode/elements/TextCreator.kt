@@ -44,5 +44,7 @@ class TextCreator(element: TextElement) : ElementCreator<TextElement>(element) {
         } ?: ""
     }
 
+    override fun createLogicCode(space: String): String = ""
+
     override fun createImportCode(): HashSet<String> = importSets
 }

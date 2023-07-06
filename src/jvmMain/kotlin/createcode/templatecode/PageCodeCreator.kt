@@ -12,7 +12,11 @@ object PageCodeCreator {
      */
     fun createPageCodeAndFile(pageFilePath: String, page: Page, packageName: String) {
         val elementCodeCreator = ElementCodeCreator(page.element)
-        val elementContent = elementCodeCreator.createElementCode()
+        // ui代码
+        val elementUiCode = elementCodeCreator.createUiCode()
+        // 逻辑代码
+        val elementLogicCode = elementCodeCreator.createLogicCode()
+        // import代码
         val elementNeedImport = elementCodeCreator.createElementImportCode()
 
         val (scaffoldContent, importCode) = createScaffoldCreator(page)
@@ -41,11 +45,13 @@ object PageCodeCreator {
             @Composable
             fun PageView(navController: NavHostController) {
                 %s
+                %s
             }
         """.toCodeString("").format(
             elementNeedImportStr.toString(),
             scaffoldContent,
-            elementContent
+            elementLogicCode,
+            elementUiCode
         )
         val file = createFile("${pageFilePath}\\${page.pageName}.kt")
         FileUtils.insertToFile(file, pageContent)

@@ -17,5 +17,7 @@ class SpaceCreator(element: SpaceElement) : ElementCreator<SpaceElement>(element
         )
     }
 
+    override fun createLogicCode(space: String): String = ""
+
     override fun createImportCode(): HashSet<String> = importSets
 }
