@@ -40,6 +40,9 @@ class ModifierCreator(private val element: Element) {
             importSets.add("import androidx.compose.ui.graphics.Color")
             modifierSb.append("\n${space}${ITEM_SPACE}.background(color = Color(${it}))")
         }
+        element.weight?.let {
+            modifierSb.append("\n${space}${ITEM_SPACE}.weight(${it}f)")
+        }
 
         val paddingSb = StringBuffer()
         element.paddingTop?.let {

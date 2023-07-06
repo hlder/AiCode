@@ -13,7 +13,8 @@ class DividerElement(
     paddingStart: Int? = null,
     paddingEnd: Int? = null,
     backgroundColor: Int? = null, // 背景颜色
+    weight: Float? = null,
     val dividerColor: Int? = null, // 分割线的颜色
-) : Element(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor) {
+) : Element(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, weight) {
     override fun createElementCreator(): ElementCreator<out Element> = DividerCreator(this)
 }

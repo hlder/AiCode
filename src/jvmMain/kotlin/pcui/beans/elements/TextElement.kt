@@ -15,11 +15,12 @@ open class TextElement(
     paddingStart: Int? = null,
     paddingEnd: Int? = null,
     backgroundColor: Int? = null, // 背景颜色
+    weight: Float? = null,
     val text: String? = null, // 文本内容
     val textColor: Int? = null, //字体颜色
     val textSize: Int? = null, // 字体大小，dp
     val textWeight: TextWeight? = null, // 字体的粗细
     val textAlign: TextAlign? = null // 文字的对齐方式
-) : Element(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor) {
+) : Element(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, weight) {
     override fun createElementCreator(): ElementCreator<out Element> = TextCreator(this)
 }

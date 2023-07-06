@@ -31,7 +31,10 @@ fun createScaffoldCreator(page: Page): Pair<String, HashSet<String>> {
         "import androidx.compose.material.TopAppBar",
         "import androidx.compose.foundation.layout.Box",
         "import androidx.compose.foundation.layout.padding",
-        "import androidx.compose.material.Divider"
+        "import androidx.compose.material.Divider",
+        "import androidx.compose.ui.Modifier",
+        "import androidx.compose.ui.unit.dp",
+        "import androidx.compose.ui.unit.sp"
     )
     return Pair(content, importCode)
 }

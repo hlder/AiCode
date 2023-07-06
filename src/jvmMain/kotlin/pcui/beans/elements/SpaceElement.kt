@@ -13,6 +13,7 @@ class SpaceElement(
     paddingStart: Int? = null,
     paddingEnd: Int? = null,
     backgroundColor: Int? = null, // 背景颜色
-) : Element(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor) {
+    weight: Float? = null,
+) : Element(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, weight) {
     override fun createElementCreator(): ElementCreator<out Element> = SpaceCreator(this)
 }

@@ -12,6 +12,78 @@ class PageMainViewModel {
             Page(
                 pageName = "HomePage",
                 title = "主页",
+                element = RowElement(
+                    id = "topActionLayout",
+                    childs = listOf(
+                        ColumnElement(
+                            id = "actionItemLayout1",
+                            weight = 1f,
+                            align = LayoutAlignment.CENTER,
+                            childs = listOf(
+                                TextElement(
+                                    id = "Image1",
+                                    text = "图片"
+                                ),
+                                TextElement(
+                                    id = "actionItemText1",
+                                    text = "美食"
+                                )
+                            )
+                        ),
+                        ColumnElement(
+                            id = "actionItemLayout2",
+                            weight = 1f,
+                            align = LayoutAlignment.CENTER,
+                            childs = listOf(
+                                TextElement(
+                                    id = "Image2",
+                                    text = "甜品饮料"
+                                ),
+                                TextElement(
+                                    id = "actionItemText2",
+                                    text = "甜品饮料"
+                                )
+                            )
+                        ),
+                        ColumnElement(
+                            id = "actionItemLayout3",
+                            weight = 1f,
+                            align = LayoutAlignment.CENTER,
+                            childs = listOf(
+                                TextElement(
+                                    id = "Image3",
+                                    text = "蔬菜水果"
+                                ),
+                                TextElement(
+                                    id = "actionItemText3",
+                                    text = "蔬菜水果"
+                                )
+                            )
+                        ),
+                        ColumnElement(
+                            id = "actionItemLayout4",
+                            weight = 1f,
+                            backgroundColor = Color.RED.rgb,
+                            align = LayoutAlignment.CENTER,
+                            childs = listOf(
+                                TextElement(
+                                    id = "Image4",
+                                    text = "看病买药"
+                                ),
+                                TextElement(
+                                    id = "actionItemText4",
+                                    text = "看病买药"
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+        add(
+            Page(
+                pageName = "TestPage",
+                title = "测试",
                 element =  ColumnElement(
                     id = "column1",
                     backgroundColor = Color.ORANGE.rgb,
