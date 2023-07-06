@@ -12,10 +12,17 @@ abstract class Element(
     val paddingEnd: Int?,
     val backgroundColor: Int?, // 背景颜色
 ) {
+    private var elementCreator: ElementCreator<out Element>? = null
+
     /**
      * 获取creator
      */
-    fun getCreator(): ElementCreator<out Element> = createElementCreator()
+    fun getCreator(): ElementCreator<out Element> {
+        if (elementCreator == null) {
+            elementCreator = createElementCreator()
+        }
+        return elementCreator as ElementCreator<out Element>
+    }
 
     /**
      * 模板方法，创建creator

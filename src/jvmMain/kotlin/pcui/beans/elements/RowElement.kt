@@ -15,8 +15,5 @@ class RowElement(
     backgroundColor: Int? = null, // 背景颜色
     childs: List<Element>? = null, // 如果是row，column则会有子元素
 ) : LayoutElement(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, childs) {
-    private var rowCreator: RowCreator? = null
-    override fun createElementCreator(): ElementCreator<out Element> = rowCreator ?: RowCreator(this).apply {
-        rowCreator = this
-    }
+    override fun createElementCreator(): ElementCreator<out Element> = RowCreator(this)
 }

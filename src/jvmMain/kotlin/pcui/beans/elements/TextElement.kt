@@ -21,8 +21,5 @@ open class TextElement(
     val textWeight: TextWeight? = null, // 字体的粗细
     val textAlign: TextAlign? = null // 文字的对齐方式
 ) : Element(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor) {
-    private var textCreator: TextCreator? = null
-    override fun createElementCreator(): ElementCreator<out Element> = textCreator ?: TextCreator(this).apply {
-        textCreator = this
-    }
+    override fun createElementCreator(): ElementCreator<out Element> = TextCreator(this)
 }

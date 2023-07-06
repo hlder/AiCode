@@ -21,8 +21,5 @@ open class TextFieldElement(
     val textWeight: TextWeight? = null, // 字体的粗细
     val textAlign: TextAlign? = null // 文字的对齐方式
 ) : Element(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor) {
-    private var textFieldCreator: TextFieldCreator? = null
-    override fun createElementCreator(): ElementCreator<out Element> = textFieldCreator ?: TextFieldCreator(this).apply {
-            textFieldCreator = this
-        }
+    override fun createElementCreator(): ElementCreator<out Element> = TextFieldCreator(this)
 }

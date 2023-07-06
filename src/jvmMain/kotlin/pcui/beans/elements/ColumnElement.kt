@@ -15,8 +15,5 @@ class ColumnElement(
     backgroundColor: Int? = null, // 背景颜色
     childs: List<Element>? = null, // 如果是row，column则会有子元素
 ) : LayoutElement(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, childs) {
-    private var columnCreator: ColumnCreator? = null
-    override fun createElementCreator(): ElementCreator<out Element> = columnCreator ?: ColumnCreator(this).apply {
-        columnCreator = this
-    }
+    override fun createElementCreator(): ElementCreator<out Element> = ColumnCreator(this)
 }

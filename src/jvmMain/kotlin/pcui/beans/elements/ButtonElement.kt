@@ -23,10 +23,7 @@ open class ButtonElement(
     textAlign: TextAlign? = null, // 文字的对齐方式
     val buttonAction: ButtonAction // 按钮的行为（点击事件跳转）
 ) : TextElement(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, text, textColor, textSize, textWeight, textAlign) {
-    private var buttonCreator: ButtonCreator? = null
-    override fun createElementCreator(): ElementCreator<out Element> = buttonCreator ?: ButtonCreator(this).apply {
-        buttonCreator = this
-    }
+    override fun createElementCreator(): ElementCreator<out Element> = ButtonCreator(this)
 }
 
 data class Action(
