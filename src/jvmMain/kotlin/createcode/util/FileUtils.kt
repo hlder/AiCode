@@ -20,13 +20,24 @@ object FileUtils {
      */
     fun copyTemplateCode(filePath: String, appName: String, packageName: String) {
         val fromFileDir = createFile("./androidCodeTemplate")
-        copyFile(fromFileDir, "${filePath}\\${appName}")
+        copyDir(fromFileDir, "${filePath}\\${appName}")
+    }
+
+    /**
+     * 复制单个文件
+     */
+    fun copyFile(fromPath: String, toPath: String) {
+        File(fromPath).copyTo(createFile(toPath).apply {
+            if (exists()) {
+                this.delete()
+            }
+        })
     }
 
     /**
      * 递归复制文件
      */
-    private fun copyFile(fromFile: File, toFilePath: String) {
+    private fun copyDir(fromFile: File, toFilePath: String) {
         if (fromFile.isDirectory) {
             fromFile.listFiles()?.forEach {
 //                println("----------from:${fromFile.absolutePath}")
@@ -35,7 +46,7 @@ object FileUtils {
                 }else{
                     fromFile.absolutePath.split("/") // mac电脑室反斜杠
                 }
-                copyFile(it, toFilePath + "\\" + str[str.size - 1])
+                copyDir(it, toFilePath + "\\" + str[str.size - 1])
             }
         } else {
             // 复制的路径，删除androidCodeTemplate文件夹

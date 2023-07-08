@@ -1,13 +1,18 @@
 package createcode.templatecode
 
+import createcode.templatecode.elements.propertys.getColorCodeStr
 import createcode.util.ConstantValues.ITEM_SPACE
 import createcode.util.toCodeString
 import pcui.beans.Page
 import pcui.beans.ScreenType
 
 fun createScaffoldCreator(page: Page): Pair<String, HashSet<String>> {
+    val pageBackgroundColor = page.backgroundColor?.let {
+        getColorCodeStr(it)
+    } ?: "Color.White"
     val content = """
         Scaffold (
+            backgroundColor = ${pageBackgroundColor},
             %s
             %s
             %s

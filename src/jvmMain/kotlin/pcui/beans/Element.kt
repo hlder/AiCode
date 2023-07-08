@@ -2,6 +2,7 @@ package pcui.beans
 
 import androidx.compose.ui.graphics.Color
 import createcode.templatecode.elements.ElementCreator
+import pcui.beans.elements.LayoutElement
 
 abstract class Element(
     val id: String, // element的id
@@ -12,7 +13,7 @@ abstract class Element(
     val paddingStart: Int?,
     val paddingEnd: Int?,
     val backgroundColor: Color?, // 背景颜色
-    val weight:Float?, // 权重，可以设置平均分配
+    val weight: Float?, // 权重，可以设置平均分配
 ) {
     private var elementCreator: ElementCreator<out Element>? = null
 
@@ -30,6 +31,18 @@ abstract class Element(
      * 模板方法，创建creator
      */
     protected abstract fun createElementCreator(): ElementCreator<out Element>
+}
+
+/**
+ * 遍历整个element元素树
+ */
+fun Element.foreach(block: (element: Element) -> Unit) {
+    if (this is LayoutElement) {
+        this.childs?.forEach {
+            it.foreach(block)
+        }
+    }
+    block(this)
 }
 
 enum class TextWeight {

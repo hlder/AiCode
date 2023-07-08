@@ -1,7 +1,6 @@
 package createcode.templatecode.elements.propertys
 
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.toUpperCase
 import java.util.*
 import kotlin.collections.HashSet
 

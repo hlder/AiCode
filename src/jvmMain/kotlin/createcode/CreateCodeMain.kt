@@ -1,5 +1,6 @@
 package createcode
 
+import createcode.copyres.CopyRes
 import createcode.templatecode.MainActivityCodeCreator
 import createcode.util.FileUtils
 import createcode.util.createFile
@@ -11,11 +12,19 @@ fun main() {
     testCreateAndroidProject(viewModel.listPage)
 }
 
-private fun testCreateAndroidProject(listPage: List<Page>) {
+class ProjectInfo {
 //    val filePath = "/Users/admin/Documents/temp" // mac电脑的地址
     val filePath = "F:\\temp" // windows电脑的地址
     val appName = "TestAiCodeProject"
     val packageName = "com.test.testaicode"
+}
+
+var projectInfo: ProjectInfo = ProjectInfo()
+
+private fun testCreateAndroidProject(listPage: List<Page>) {
+    val filePath = projectInfo.filePath
+    val appName = projectInfo.appName
+    val packageName = projectInfo.packageName
     // 1.复制模板代码
     FileUtils.copyTemplateCode(filePath, appName, packageName)
     // 2.修改包名
@@ -26,4 +35,6 @@ private fun testCreateAndroidProject(listPage: List<Page>) {
     // 3.创建MainActivity
     val activityFilePath = "${filePath}\\${appName}\\app\\src\\main\\java\\${packageName.replace(".", "\\")}\\MainActivity.kt"
     MainActivityCodeCreator.createCode(createFile(activityFilePath), packageName, listPage)
+    // 复制图片等资源
+    CopyRes.copy(listPage, "${filePath}\\${appName}")
 }
