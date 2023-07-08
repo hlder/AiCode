@@ -1,5 +1,6 @@
 package pcui.beans
 
+import androidx.compose.ui.graphics.Color
 import createcode.templatecode.elements.ElementCreator
 
 abstract class Element(
@@ -10,7 +11,7 @@ abstract class Element(
     val paddingBottom: Int?,
     val paddingStart: Int?,
     val paddingEnd: Int?,
-    val backgroundColor: Int?, // 背景颜色
+    val backgroundColor: Color?, // 背景颜色
     val weight:Float?, // 权重，可以设置平均分配
 ) {
     private var elementCreator: ElementCreator<out Element>? = null

@@ -16,7 +16,7 @@ class TextFieldCreator(element: TextFieldElement) : ElementCreator<TextFieldElem
 
         val valueFiledName = "${element.id}Text"
 
-        logicCode.add(ITEM_SPACE+"val $valueFiledName = remember { mutableStateOf(\"测试输入框\") }")
+        logicCode.add(ITEM_SPACE+"val $valueFiledName = remember { mutableStateOf(\"${element.text}\") }")
 
         return """
             HintTextFiled(

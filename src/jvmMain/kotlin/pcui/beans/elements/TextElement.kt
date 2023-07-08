@@ -1,5 +1,6 @@
 package pcui.beans.elements
 
+import androidx.compose.ui.graphics.Color
 import createcode.templatecode.elements.ElementCreator
 import createcode.templatecode.elements.TextCreator
 import pcui.beans.Element
@@ -14,10 +15,10 @@ open class TextElement(
     paddingBottom: Int? = null,
     paddingStart: Int? = null,
     paddingEnd: Int? = null,
-    backgroundColor: Int? = null, // 背景颜色
+    backgroundColor: Color? = null, // 背景颜色
     weight: Float? = null,
     val text: String? = null, // 文本内容
-    val textColor: Int? = null, //字体颜色
+    val textColor: Color? = null, //字体颜色
     val textSize: Int? = null, // 字体大小，dp
     val textWeight: TextWeight? = null, // 字体的粗细
     val textAlign: TextAlign? = null // 文字的对齐方式

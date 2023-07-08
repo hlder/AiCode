@@ -1,10 +1,10 @@
 package pcui.main
 
+import androidx.compose.ui.graphics.Color
 import pcui.beans.Page
 import pcui.beans.TextAlign
 import pcui.beans.TextWeight
 import pcui.beans.elements.*
-import java.awt.Color
 
 class PageMainViewModel {
     val listPage: List<Page> = ArrayList<Page>().apply {
@@ -63,7 +63,7 @@ class PageMainViewModel {
                         ColumnElement(
                             id = "actionItemLayout4",
                             weight = 1f,
-                            backgroundColor = Color.RED.rgb,
+                            backgroundColor = Color(0xFF99EE11),
                             align = LayoutAlignment.CENTER,
                             childs = listOf(
                                 TextElement(
@@ -86,16 +86,16 @@ class PageMainViewModel {
                 title = "测试",
                 element =  ColumnElement(
                     id = "column1",
-                    backgroundColor = Color.ORANGE.rgb,
+                    backgroundColor = Color.Yellow,
                     childs = listOf(
                         TextElement(
                             id = "text1",
                             text = "aaaaa1",
-                            textColor = Color.RED.rgb,
+                            textColor = Color.Red,
                             textSize = 20,
                             width = 10000,
                             height = 50,
-                            backgroundColor = Color.GRAY.rgb,
+                            backgroundColor = Color.Gray,
                             textWeight = TextWeight.Bold,
                             textAlign = TextAlign.Center
                         ),
@@ -107,7 +107,7 @@ class PageMainViewModel {
                             id = "divider1",
                             width = 10000,
                             height = 1,
-                            dividerColor = Color.RED.rgb
+                            dividerColor = Color.Red
                         ),
                         SpaceElement(
                             id = "space2",
@@ -116,7 +116,7 @@ class PageMainViewModel {
                         TextElement(
                             id = "text2",
                             text = "aaaaa2",
-                            backgroundColor = Color.BLUE.rgb
+                            backgroundColor = Color.Blue
                         ),
                         ButtonElement(
                             id = "button1",
@@ -131,7 +131,7 @@ class PageMainViewModel {
                             id = "row1",
                             width = 250,
                             height = 80,
-                            backgroundColor = Color.GREEN.rgb,
+                            backgroundColor = Color.Green,
                             childs = listOf(
                                 TextElement(
                                     id = "text5",
@@ -144,20 +144,20 @@ class PageMainViewModel {
                                 TextElement(
                                     id = "text6",
                                     text = "text2",
-                                    textColor = Color.RED.rgb
+                                    textColor = Color.Red
                                 )
                             )
                         ),
                         TextElement(
                             id = "text3",
                             text = "aaaaa2",
-                            backgroundColor = Color.BLUE.rgb,
+                            backgroundColor = Color.Blue,
                             width = 100
                         ),
                         TextFieldElement(
                             id = "textField1",
                             text = "测试输入框",
-                            textColor = Color.RED.rgb,
+                            textColor = Color.Red,
                             textSize = 20,
                             textWeight = TextWeight.Bold,
                         )
@@ -172,7 +172,7 @@ class PageMainViewModel {
                 element = TextElement(
                     id = "text4",
                     text = "TestPage",
-                    backgroundColor = Color.BLUE.rgb,
+                    backgroundColor = Color.Blue,
                     width = 100
                 )
             )

@@ -1,5 +1,6 @@
 package pcui.beans.elements
 
+import androidx.compose.ui.graphics.Color
 import createcode.templatecode.elements.ColumnCreator
 import createcode.templatecode.elements.ElementCreator
 import pcui.beans.Element
@@ -12,7 +13,7 @@ class ColumnElement(
     paddingBottom: Int? = null,
     paddingStart: Int? = null,
     paddingEnd: Int? = null,
-    backgroundColor: Int? = null, // 背景颜色
+    backgroundColor: Color? = null, // 背景颜色
     weight: Float? = null,
     align: LayoutAlignment? = null,
     childs: List<Element>? = null, // 如果是row，column则会有子元素

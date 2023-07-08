@@ -32,7 +32,7 @@ private fun itemElement(element: Element) {
             Text(
                 element.text ?: "",
                 modifier = getBaseElementModifier(element),
-                color = element.textColor?.let { Color(it) } ?: Color.Black,
+                color = element.textColor?: Color.Black,
                 fontSize = (element.textSize ?: 14).sp
             )
         }
@@ -42,7 +42,7 @@ private fun itemElement(element: Element) {
         is DividerElement -> {
             Divider(
                 modifier = getBaseElementModifier(element).width(1.dp).fillMaxHeight(),
-                color = Color(element.dividerColor ?: 0x00000000)
+                color = element.dividerColor?:Color(0x00000000)
             )
         }
         is TextButtonElement -> {
@@ -52,7 +52,7 @@ private fun itemElement(element: Element) {
             ) {
                 Text(
                     element.text ?: "",
-                    color = element.textColor?.let { Color(it) } ?: Color.Black,
+                    color = element.textColor?: Color.Black,
                     fontSize = (element.textSize ?: 14).sp
                 )
             }
@@ -99,5 +99,5 @@ private fun getBaseElementModifier(element: Element): Modifier {
             modifier.height(element.height.dp)
         }
     }
-    return element.backgroundColor?.let { modifier.background(color = Color(it)) }?:modifier
+    return element.backgroundColor?.let { modifier.background(color = it) }?:modifier
 }

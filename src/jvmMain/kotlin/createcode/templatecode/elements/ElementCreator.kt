@@ -1,5 +1,6 @@
 package createcode.templatecode.elements
 
+import androidx.compose.ui.graphics.Color
 import createcode.templatecode.elements.propertys.ColorCreator
 import createcode.templatecode.elements.propertys.ModifierCreator
 import pcui.beans.Element
@@ -22,7 +23,7 @@ abstract class ElementCreator<T : Element>(val element: T) {
     /**
      * 获取颜色的代码
      */
-    fun getColor(space: String, color: Int?): String {
+    fun getColor(space: String, color: Color?): String {
         return color?.let {
             val (content, importSet) = ColorCreator().createCode(space, color)
             importSet.forEach { this.importSets.add(it) }

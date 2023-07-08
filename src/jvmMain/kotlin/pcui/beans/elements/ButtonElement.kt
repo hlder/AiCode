@@ -1,5 +1,6 @@
 package pcui.beans.elements
 
+import androidx.compose.ui.graphics.Color
 import createcode.templatecode.elements.ButtonCreator
 import createcode.templatecode.elements.ElementCreator
 import createcode.util.toCodeString
@@ -15,9 +16,9 @@ open class ButtonElement(
     paddingBottom: Int? = null,
     paddingStart: Int? = null,
     paddingEnd: Int? = null,
-    backgroundColor: Int? = null, // 背景颜色
+    backgroundColor: Color? = null, // 背景颜色
     text: String? = null, // 文本内容
-    textColor: Int? = null, //字体颜色
+    textColor: Color? = null, //字体颜色
     textSize: Int? = null, // 字体大小，dp
     textWeight: TextWeight? = null, // 字体的粗细
     textAlign: TextAlign? = null, // 文字的对齐方式
