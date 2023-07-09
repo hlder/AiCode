@@ -10,9 +10,7 @@ class ElementCodeCreator(private val element: Element) {
     /**
      * 创建element的代码
      */
-    fun createUiCode(): String {
-        return elementCreator.createUiCode()
-    }
+    fun createUiCode(): String = elementCreator.createUiCode()
 
     /**
      * 创建元素相关的逻辑代码,逻辑代码是放在方法体的元素代码上面
@@ -40,7 +38,5 @@ class ElementCodeCreator(private val element: Element) {
     /**
      * 创建element所需要的import的代码
      */
-    fun createElementImportCode(): HashSet<String> {
-        return elementCreator.getImportCode()
-    }
+    fun createElementImportCode(): HashSet<String> = elementCreator.getImportCode()
 }
