@@ -30,10 +30,6 @@ class PageMainViewModel {
                             paddingTop = 10,
                             paddingBottom = 10,
                             childs = listOf(
-                                TextFieldElement(
-                                    id = "testTest",
-                                    text = "aaaaa"
-                                ),
                                 TextElement(
                                     id = "top1Text",
                                     text = "美食百货，随叫随到",

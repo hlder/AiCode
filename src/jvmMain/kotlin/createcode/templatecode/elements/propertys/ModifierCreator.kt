@@ -3,6 +3,7 @@ package createcode.templatecode.elements.propertys
 import createcode.util.ConstantValues.ITEM_SPACE
 import pcui.beans.Element
 import pcui.beans.elements.ColumnElement
+import pcui.beans.elements.LayoutElement
 import pcui.beans.elements.RowElement
 
 /**
@@ -104,14 +105,16 @@ class ModifierCreator(private val element: Element, private val space: String) {
      * 添加需要滚动的代码
      */
     private fun addScrollCode() {
-        if (element is ColumnElement && element.isNeedScroll == true) {
-            modifierSb.append("\n${space}${ITEM_SPACE}.verticalScroll(scrollState)")
-            listLogicCode.add("val scrollState = rememberScrollState()")
-            importSets.add("import androidx.compose.foundation.rememberScrollState")
-            importSets.add("import androidx.compose.foundation.verticalScroll")
-        } else if (element is RowElement && element.isNeedScroll == true) {
-            modifierSb.append("\n${space}${ITEM_SPACE}.horizontalScroll(scrollState)")
-            listLogicCode.add("val scrollState = rememberScrollState()")
+        if (element is LayoutElement && element.isNeedScroll == true) {
+            val fieldName = "${element.id}ScrollState"
+            if (element is ColumnElement) {
+                modifierSb.append("\n${space}${ITEM_SPACE}.verticalScroll(${fieldName})")
+            } else if (element is RowElement) {
+                modifierSb.append("\n${space}${ITEM_SPACE}.horizontalScroll(${fieldName})")
+            }
+
+            listLogicCode.add("val $fieldName = rememberScrollState()")
+
             importSets.add("import androidx.compose.foundation.rememberScrollState")
             importSets.add("import androidx.compose.foundation.verticalScroll")
         }

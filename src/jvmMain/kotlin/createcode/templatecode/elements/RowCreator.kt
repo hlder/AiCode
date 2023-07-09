@@ -4,7 +4,7 @@ import createcode.util.ConstantValues.ITEM_SPACE
 import createcode.util.toCodeString
 import pcui.beans.elements.RowElement
 
-class RowCreator(element: RowElement, space: String) : ElementCreator<RowElement>(element, space) {
+class RowCreator(element: RowElement, space: String) : LayoutCreator<RowElement>(element, space) {
     override fun createUiCode(): String {
         val childContent = StringBuffer()
         element.childs?.forEach {
@@ -14,11 +14,13 @@ class RowCreator(element: RowElement, space: String) : ElementCreator<RowElement
         return """
             Row(
                 %s
+                %s
             ) {
                 %s
             }
         """.toCodeString(space).format(
             getModifier(),
+            getAlignCode(),
             childContent
         )
     }

@@ -48,6 +48,10 @@ abstract class ElementCreator<T : Element>(val element: T, val space: String) {
         return list
     }
 
+    protected fun addImportCode(importCode: String) {
+        importSets.add(importCode)
+    }
+
     /**
      * 创建元素代码
      */
