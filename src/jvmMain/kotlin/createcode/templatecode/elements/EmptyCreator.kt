@@ -6,6 +6,4 @@ class EmptyCreator(element: Element, space: String) : ElementCreator<Element>(el
     override fun createUiCode(): String {
         return ""
     }
-
-    override fun createLogicCode() = mutableListOf<String>()
 }

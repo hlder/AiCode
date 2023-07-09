@@ -23,6 +23,4 @@ class ButtonCreator(element: ButtonElement, space: String) : ElementCreator<Butt
             textElementStr
         )
     }
-
-    override fun createLogicCode() = mutableListOf<String>()
 }

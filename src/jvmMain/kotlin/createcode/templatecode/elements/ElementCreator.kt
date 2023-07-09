@@ -5,12 +5,14 @@ import createcode.templatecode.elements.propertys.ColorCreator
 import createcode.templatecode.elements.propertys.ModifierCreator
 import createcode.util.ConstantValues.ITEM_SPACE
 import pcui.beans.Element
+import java.util.LinkedList
 
 /**
  * Element代码的创建者
  */
 abstract class ElementCreator<T : Element>(val element: T, val space: String) {
     private val importSets = HashSet<String>()
+    private val listLogicCode = LinkedList<String>()
     private val modifierCreator: ModifierCreator = ModifierCreator(element, space + ITEM_SPACE)
 
     /**
@@ -43,7 +45,8 @@ abstract class ElementCreator<T : Element>(val element: T, val space: String) {
      * 获得逻辑代码
      */
     fun getLogicCode(): MutableList<String> {
-        val list = createLogicCode()
+        val list = mutableListOf<String>()
+        list.addAll(listLogicCode)
         list.addAll(modifierCreator.getLogicCode())
         return list
     }
@@ -52,17 +55,20 @@ abstract class ElementCreator<T : Element>(val element: T, val space: String) {
         importSets.add(importCode)
     }
 
-    protected fun addImportCode(imports:HashSet<String>){
+    protected fun addImportCode(imports: HashSet<String>) {
         importSets.addAll(imports)
+    }
+
+    protected fun addLogicCode(logicCode: String) {
+        listLogicCode.add(logicCode)
+    }
+
+    protected fun addLogicCode(list: List<String>) {
+        listLogicCode.addAll(list)
     }
 
     /**
      * 创建元素代码
      */
     abstract fun createUiCode(): String
-
-    /**
-     * 创建元素相关的逻辑代码
-     */
-    protected abstract fun createLogicCode(): MutableList<String>
 }

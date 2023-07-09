@@ -32,6 +32,4 @@ class RowCreator(element: RowElement, space: String) : LayoutCreator<RowElement>
             childContent
         )
     }
-
-    override fun createLogicCode() = mutableListOf<String>()
 }

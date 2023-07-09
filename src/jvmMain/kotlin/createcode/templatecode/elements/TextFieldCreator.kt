@@ -5,7 +5,6 @@ import createcode.util.toCodeString
 import pcui.beans.elements.TextFieldElement
 
 class TextFieldCreator(element: TextFieldElement, space: String) : ElementCreator<TextFieldElement>(element, space) {
-    private val logicCodeList = mutableListOf<String>()
 
     override fun createUiCode(): String {
         addImportCode("import com.aicode.widgets.HintTextFiled")
@@ -15,7 +14,7 @@ class TextFieldCreator(element: TextFieldElement, space: String) : ElementCreato
 
         val valueFiledName = "${element.id}Text"
 
-        logicCodeList.add("val $valueFiledName = remember { mutableStateOf(\"${element.text}\") }")
+        addLogicCode("val $valueFiledName = remember { mutableStateOf(\"${element.text}\") }")
 
         return """
             HintTextFiled(
@@ -55,6 +54,4 @@ class TextFieldCreator(element: TextFieldElement, space: String) : ElementCreato
             "${space}fontSize = ${it}.sp,\n"
         } ?: ""
     }
-
-    override fun createLogicCode() = logicCodeList
 }

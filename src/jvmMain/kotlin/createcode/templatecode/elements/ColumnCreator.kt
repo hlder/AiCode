@@ -30,6 +30,4 @@ class ColumnCreator(element: ColumnElement, space: String) : LayoutCreator<Colum
             childContent
         )
     }
-
-    override fun createLogicCode() = mutableListOf<String>()
 }

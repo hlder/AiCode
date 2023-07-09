@@ -15,6 +15,4 @@ class SpaceCreator(element: SpaceElement, space: String) : ElementCreator<SpaceE
             getModifier()
         )
     }
-
-    override fun createLogicCode() = mutableListOf<String>()
 }

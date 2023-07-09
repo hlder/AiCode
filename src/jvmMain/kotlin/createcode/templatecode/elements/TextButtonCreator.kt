@@ -12,6 +12,4 @@ class TextButtonCreator(element: TextButtonElement, space: String) : ElementCrea
             }
         """.toCodeString(space)
     }
-
-    override fun createLogicCode() = mutableListOf<String>()
 }

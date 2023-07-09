@@ -41,6 +41,4 @@ class TextCreator(element: TextElement, space: String) : ElementCreator<TextElem
             "${space}fontSize = ${it}.sp,\n"
         } ?: ""
     }
-
-    override fun createLogicCode() = mutableListOf<String>()
 }

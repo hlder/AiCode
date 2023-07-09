@@ -14,6 +14,4 @@ class DividerCreator(element: DividerElement, space: String) : ElementCreator<Di
             getColor(element.dividerColor) + getModifier()
         )
     }
-
-    override fun createLogicCode() = mutableListOf<String>()
 }

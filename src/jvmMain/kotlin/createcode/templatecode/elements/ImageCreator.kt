@@ -33,6 +33,4 @@ class ImageCreator(element: ImageElement, space: String) : ElementCreator<ImageE
             getModifier()
         )
     }
-
-    override fun createLogicCode() = mutableListOf<String>()
 }
