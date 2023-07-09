@@ -5,12 +5,12 @@ import createcode.util.toCodeString
 import pcui.beans.elements.ColumnElement
 import pcui.beans.elements.LayoutAlignment
 
-class ColumnCreator(element: ColumnElement) : ElementCreator<ColumnElement>(element) {
+class ColumnCreator(element: ColumnElement, space: String) : ElementCreator<ColumnElement>(element, space) {
     private val importSet = hashSetOf<String>()
-    override fun createUiCode(space: String): String {
+    override fun createUiCode(): String {
         val childContent = StringBuffer()
         element.childs?.forEach {
-            childContent.append(it.getCreator().createUiCode("$space${ITEM_SPACE}"))
+            childContent.append(it.getCreator("$space${ITEM_SPACE}").createUiCode())
         }
 
         val alignCodeSb = StringBuffer()
@@ -68,18 +68,18 @@ class ColumnCreator(element: ColumnElement) : ElementCreator<ColumnElement>(elem
                 %s
             }
         """.toCodeString(space).format(
-            getModifier(space + ITEM_SPACE),
+            getModifier(),
             alignCodeSb.toString(),
             childContent
         )
     }
 
-    override fun createLogicCode(space: String): String = ""
+    override fun createLogicCode() = mutableListOf<String>()
 
     override fun createImportCode(): HashSet<String> {
         importSet.add("import androidx.compose.foundation.layout.Column")
         element.childs?.forEach { item ->
-            item.getCreator().getImportCode().forEach {
+            item.getCreator(space + ITEM_SPACE).getImportCode().forEach {
                 importSet.add(it)
             }
         }

@@ -5,13 +5,13 @@ import pcui.beans.Element
 import pcui.beans.elements.LayoutElement
 
 class ElementCodeCreator(private val element: Element) {
-    private val elementCreator = element.getCreator()
+    private val elementCreator = element.getCreator(ITEM_SPACE)
 
     /**
      * 创建element的代码
      */
     fun createUiCode(): String {
-        return elementCreator.createUiCode(ITEM_SPACE)
+        return elementCreator.createUiCode()
     }
 
     /**
@@ -20,7 +20,7 @@ class ElementCodeCreator(private val element: Element) {
     fun createLogicCode(): String {
         val codeSb = StringBuffer()
         createAllElementLogicCode(element, codeSb)
-        return codeSb.toString()
+        return codeSb.toString() + "\n"
     }
 
     private fun createAllElementLogicCode(element: Element, codeSb: StringBuffer) {
@@ -29,9 +29,11 @@ class ElementCodeCreator(private val element: Element) {
                 createAllElementLogicCode(it, codeSb)
             }
         }
-        val itemLine = element.getCreator().createLogicCode(ITEM_SPACE)
-        if (itemLine.isNotEmpty()) {
-            codeSb.append(itemLine + "\n")
+        val logicCodeList = element.getCreator(ITEM_SPACE).getLogicCode()
+        if (logicCodeList.isNotEmpty()) {
+            logicCodeList.forEach {
+                codeSb.append("$ITEM_SPACE${it}\n")
+            }
         }
     }
 

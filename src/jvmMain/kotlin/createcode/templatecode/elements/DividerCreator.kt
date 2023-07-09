@@ -1,23 +1,22 @@
 package createcode.templatecode.elements
 
-import createcode.util.ConstantValues.ITEM_SPACE
 import createcode.util.toCodeString
 import pcui.beans.elements.DividerElement
 
-class DividerCreator(element: DividerElement) : ElementCreator<DividerElement>(element) {
+class DividerCreator(element: DividerElement, space: String) : ElementCreator<DividerElement>(element, space) {
     private val importSets = HashSet<String>()
-    override fun createUiCode(space: String): String {
+    override fun createUiCode(): String {
         importSets.add("import androidx.compose.material.Divider")
         return """
             Divider(
                 %s
             )
         """.toCodeString(space).format(
-            getColor(space + ITEM_SPACE, element.dividerColor) + getModifier(space + ITEM_SPACE)
+            getColor(element.dividerColor) + getModifier()
         )
     }
 
-    override fun createLogicCode(space: String): String = ""
+    override fun createLogicCode() = mutableListOf<String>()
 
     override fun createImportCode(): HashSet<String> = importSets
 }

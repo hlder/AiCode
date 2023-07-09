@@ -21,7 +21,7 @@ class ImageElement(
     val image: String, // 图片,本地图片为图片的id，远程图片则为图片的url
     val filePath: String, // 本地图片的位置
     ) : Element(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, backgroundRounded, weight) {
-    override fun createElementCreator(): ElementCreator<out Element> = ImageCreator(this)
+    override fun createElementCreator(space: String): ElementCreator<out Element> = ImageCreator(this, space)
 }
 
 enum class ImageFrom {

@@ -26,7 +26,7 @@ open class ButtonElement(
     weight: Float? = null,
     val buttonAction: ButtonAction // 按钮的行为（点击事件跳转）
 ) : TextElement(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, backgroundRounded, weight, text, textColor, textSize, textWeight, textAlign) {
-    override fun createElementCreator(): ElementCreator<out Element> = ButtonCreator(this)
+    override fun createElementCreator(space: String): ElementCreator<out Element> = ButtonCreator(this, space)
 }
 
 data class Action(

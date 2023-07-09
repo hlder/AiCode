@@ -22,5 +22,5 @@ open class TextButtonElement(
     val textSize: Int? = null, // 字体大小，dp
     val textWeight: TextWeight? = null, // 字体的粗细
 ) : Element(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, backgroundRounded, weight) {
-    override fun createElementCreator(): ElementCreator<out Element> = TextButtonCreator(this)
+    override fun createElementCreator(space: String): ElementCreator<out Element> = TextButtonCreator(this, space)
 }

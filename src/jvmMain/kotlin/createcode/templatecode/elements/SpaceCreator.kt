@@ -1,23 +1,22 @@
 package createcode.templatecode.elements
 
-import createcode.util.ConstantValues
 import createcode.util.toCodeString
 import pcui.beans.elements.SpaceElement
 
-class SpaceCreator(element: SpaceElement) : ElementCreator<SpaceElement>(element) {
+class SpaceCreator(element: SpaceElement, space: String) : ElementCreator<SpaceElement>(element, space) {
     private val importSets = HashSet<String>()
-    override fun createUiCode(space: String): String {
+    override fun createUiCode(): String {
         importSets.add("import androidx.compose.foundation.layout.Spacer")
         return """
             Spacer(
                 %s
             )
         """.toCodeString(space).format(
-            getModifier(space + ConstantValues.ITEM_SPACE)
+            getModifier()
         )
     }
 
-    override fun createLogicCode(space: String): String = ""
+    override fun createLogicCode() = mutableListOf<String>()
 
     override fun createImportCode(): HashSet<String> = importSets
 }

@@ -17,5 +17,5 @@ class SpaceElement(
     backgroundRounded: Int? = null, // 背景的圆角
     weight: Float? = null,
 ) : Element(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, backgroundRounded, weight) {
-    override fun createElementCreator(): ElementCreator<out Element> = SpaceCreator(this)
+    override fun createElementCreator(space: String): ElementCreator<out Element> = SpaceCreator(this, space)
 }

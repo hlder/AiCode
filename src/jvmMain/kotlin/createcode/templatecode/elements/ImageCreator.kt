@@ -1,15 +1,14 @@
 package createcode.templatecode.elements
 
 import createcode.projectInfo
-import createcode.util.ConstantValues.ITEM_SPACE
 import createcode.util.toCodeString
 import pcui.beans.elements.ImageElement
 import pcui.beans.elements.ImageFrom
 
-class ImageCreator(element: ImageElement) : ElementCreator<ImageElement>(element) {
+class ImageCreator(element: ImageElement, space: String) : ElementCreator<ImageElement>(element, space) {
     private val importSet = hashSetOf<String>()
 
-    override fun createUiCode(space: String): String {
+    override fun createUiCode(): String {
         val codeStr = if (element.imageFrom == ImageFrom.LOCAL) {
             importSet.add("import androidx.compose.foundation.Image")
             importSet.add("import androidx.compose.ui.res.painterResource")
@@ -32,13 +31,11 @@ class ImageCreator(element: ImageElement) : ElementCreator<ImageElement>(element
             """.toCodeString(space)
         }
         return codeStr.format(
-            getModifier(space + ITEM_SPACE)
+            getModifier()
         )
     }
 
-    override fun createLogicCode(space: String): String {
-        return ""
-    }
+    override fun createLogicCode() = mutableListOf<String>()
 
     override fun createImportCode(): HashSet<String> {
         return importSet

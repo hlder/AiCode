@@ -21,9 +21,9 @@ abstract class Element(
     /**
      * 获取creator
      */
-    fun getCreator(): ElementCreator<out Element> {
+    fun getCreator(space: String): ElementCreator<out Element> {
         if (elementCreator == null) {
-            elementCreator = createElementCreator()
+            elementCreator = createElementCreator(space)
         }
         return elementCreator as ElementCreator<out Element>
     }
@@ -31,7 +31,7 @@ abstract class Element(
     /**
      * 模板方法，创建creator
      */
-    protected abstract fun createElementCreator(): ElementCreator<out Element>
+    protected abstract fun createElementCreator(space: String): ElementCreator<out Element>
 }
 
 /**

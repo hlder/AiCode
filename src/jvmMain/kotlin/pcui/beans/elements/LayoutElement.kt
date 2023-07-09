@@ -14,6 +14,7 @@ abstract class LayoutElement(
     backgroundColor: Color? = null, // 背景颜色
     backgroundRounded: Int? = null, // 背景的圆角
     weight: Float? = null,
+    val isNeedScroll: Boolean? = false, // 是否需要滚动
     val align: LayoutAlignment? = null,
     val childs: List<Element>? = null, // 如果是row，column则会有子元素
 ) : Element(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, backgroundRounded, weight)

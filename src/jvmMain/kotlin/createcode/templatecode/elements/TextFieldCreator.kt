@@ -4,11 +4,11 @@ import createcode.util.ConstantValues.ITEM_SPACE
 import createcode.util.toCodeString
 import pcui.beans.elements.TextFieldElement
 
-class TextFieldCreator(element: TextFieldElement) : ElementCreator<TextFieldElement>(element) {
+class TextFieldCreator(element: TextFieldElement, space: String) : ElementCreator<TextFieldElement>(element, space) {
     private val importSets = HashSet<String>()
-    private val logicCode = mutableListOf<String>()
+    private val logicCodeList = mutableListOf<String>()
 
-    override fun createUiCode(space: String): String {
+    override fun createUiCode(): String {
         importSets.add("import com.aicode.widgets.HintTextFiled")
         importSets.add("import androidx.compose.ui.text.TextStyle")
         importSets.add("import androidx.compose.runtime.mutableStateOf")
@@ -16,7 +16,7 @@ class TextFieldCreator(element: TextFieldElement) : ElementCreator<TextFieldElem
 
         val valueFiledName = "${element.id}Text"
 
-        logicCode.add(ITEM_SPACE+"val $valueFiledName = remember { mutableStateOf(\"${element.text}\") }")
+        logicCodeList.add("val $valueFiledName = remember { mutableStateOf(\"${element.text}\") }")
 
         return """
             HintTextFiled(
@@ -30,7 +30,7 @@ class TextFieldCreator(element: TextFieldElement) : ElementCreator<TextFieldElem
             )
         """.toCodeString(space).format(
             getFontSize(space + ITEM_SPACE + ITEM_SPACE) +
-            getColor(space + ITEM_SPACE + ITEM_SPACE, element.textColor) +
+            getColor(element.textColor) +
             getFontWeight(space + ITEM_SPACE + ITEM_SPACE) +
             getTextAlign(space + ITEM_SPACE + ITEM_SPACE)
         )
@@ -57,7 +57,7 @@ class TextFieldCreator(element: TextFieldElement) : ElementCreator<TextFieldElem
         } ?: ""
     }
 
-    override fun createLogicCode(space: String): String = logicCode.toCodeString()
+    override fun createLogicCode() = logicCodeList
 
     override fun createImportCode(): HashSet<String> = importSets
 }
