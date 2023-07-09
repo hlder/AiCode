@@ -11,6 +11,14 @@ class RowCreator(element: RowElement, space: String) : LayoutCreator<RowElement>
             val itemContent = it.getCreator(space + ITEM_SPACE).createUiCode()
             childContent.append(itemContent)
         }
+
+        addImportCode("import androidx.compose.foundation.layout.Row")
+        element.childs?.forEach { item ->
+            item.getCreator(space + ITEM_SPACE).getImportCode().forEach {
+                addImportCode(it)
+            }
+        }
+
         return """
             Row(
                 %s
@@ -26,14 +34,4 @@ class RowCreator(element: RowElement, space: String) : LayoutCreator<RowElement>
     }
 
     override fun createLogicCode() = mutableListOf<String>()
-
-    override fun createImportCode(): HashSet<String> {
-        val set = hashSetOf("import androidx.compose.foundation.layout.Row")
-        element.childs?.forEach { item ->
-            item.getCreator(space + ITEM_SPACE).getImportCode().forEach {
-                set.add(it)
-            }
-        }
-        return set
-    }
 }

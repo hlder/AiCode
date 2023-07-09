@@ -8,8 +8,4 @@ class EmptyCreator(element: Element, space: String) : ElementCreator<Element>(el
     }
 
     override fun createLogicCode() = mutableListOf<String>()
-
-    override fun createImportCode(): HashSet<String> {
-        return hashSetOf()
-    }
 }

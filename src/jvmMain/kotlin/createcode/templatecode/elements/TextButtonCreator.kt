@@ -5,6 +5,7 @@ import pcui.beans.elements.TextButtonElement
 
 class TextButtonCreator(element: TextButtonElement, space: String) : ElementCreator<TextButtonElement>(element, space) {
     override fun createUiCode(): String {
+        addImportCode("import androidx.compose.material.TextButton")
         return """
             TextButton(onClick = { /*TODO*/ }) {
                 Text(text = "${element.text}")
@@ -13,8 +14,4 @@ class TextButtonCreator(element: TextButtonElement, space: String) : ElementCrea
     }
 
     override fun createLogicCode() = mutableListOf<String>()
-
-    override fun createImportCode(): HashSet<String> {
-        return hashSetOf("import androidx.compose.material.TextButton")
-    }
 }

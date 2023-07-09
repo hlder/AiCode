@@ -6,7 +6,7 @@ import pcui.beans.elements.SpaceElement
 class SpaceCreator(element: SpaceElement, space: String) : ElementCreator<SpaceElement>(element, space) {
     private val importSets = HashSet<String>()
     override fun createUiCode(): String {
-        importSets.add("import androidx.compose.foundation.layout.Spacer")
+        addImportCode("import androidx.compose.foundation.layout.Spacer")
         return """
             Spacer(
                 %s
@@ -17,6 +17,4 @@ class SpaceCreator(element: SpaceElement, space: String) : ElementCreator<SpaceE
     }
 
     override fun createLogicCode() = mutableListOf<String>()
-
-    override fun createImportCode(): HashSet<String> = importSets
 }

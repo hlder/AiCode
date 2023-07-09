@@ -4,9 +4,8 @@ import createcode.util.toCodeString
 import pcui.beans.elements.DividerElement
 
 class DividerCreator(element: DividerElement, space: String) : ElementCreator<DividerElement>(element, space) {
-    private val importSets = HashSet<String>()
     override fun createUiCode(): String {
-        importSets.add("import androidx.compose.material.Divider")
+        addImportCode("import androidx.compose.material.Divider")
         return """
             Divider(
                 %s
@@ -17,6 +16,4 @@ class DividerCreator(element: DividerElement, space: String) : ElementCreator<Di
     }
 
     override fun createLogicCode() = mutableListOf<String>()
-
-    override fun createImportCode(): HashSet<String> = importSets
 }

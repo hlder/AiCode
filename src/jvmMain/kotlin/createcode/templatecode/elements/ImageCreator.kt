@@ -6,13 +6,12 @@ import pcui.beans.elements.ImageElement
 import pcui.beans.elements.ImageFrom
 
 class ImageCreator(element: ImageElement, space: String) : ElementCreator<ImageElement>(element, space) {
-    private val importSet = hashSetOf<String>()
 
     override fun createUiCode(): String {
         val codeStr = if (element.imageFrom == ImageFrom.LOCAL) {
-            importSet.add("import androidx.compose.foundation.Image")
-            importSet.add("import androidx.compose.ui.res.painterResource")
-            importSet.add("import ${projectInfo.packageName}.R")
+            addImportCode("import androidx.compose.foundation.Image")
+            addImportCode("import androidx.compose.ui.res.painterResource")
+            addImportCode("import ${projectInfo.packageName}.R")
             """
                 Image(
                     painter = painterResource(id = R.mipmap.${element.image}),
@@ -21,7 +20,7 @@ class ImageCreator(element: ImageElement, space: String) : ElementCreator<ImageE
                 )
             """.toCodeString(space)
         } else {
-            importSet.add("import com.bumptech.glide.integration.compose.GlideImage")
+            addImportCode("import com.bumptech.glide.integration.compose.GlideImage")
             """
                 GlideImage(
                     model = "${element.image}",
@@ -36,8 +35,4 @@ class ImageCreator(element: ImageElement, space: String) : ElementCreator<ImageE
     }
 
     override fun createLogicCode() = mutableListOf<String>()
-
-    override fun createImportCode(): HashSet<String> {
-        return importSet
-    }
 }

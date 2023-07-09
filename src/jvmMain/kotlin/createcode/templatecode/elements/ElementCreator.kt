@@ -33,7 +33,7 @@ abstract class ElementCreator<T : Element>(val element: T, val space: String) {
      * 获取import的代码
      */
     fun getImportCode(): HashSet<String> {
-        val newSet = createImportCode()
+        val newSet = hashSetOf<String>()
         importSets.forEach { newSet.add(it) }
         modifierCreator.getImportSets().forEach { newSet.add(it) }
         return newSet
@@ -52,6 +52,10 @@ abstract class ElementCreator<T : Element>(val element: T, val space: String) {
         importSets.add(importCode)
     }
 
+    protected fun addImportCode(imports:HashSet<String>){
+        importSets.addAll(imports)
+    }
+
     /**
      * 创建元素代码
      */
@@ -61,9 +65,4 @@ abstract class ElementCreator<T : Element>(val element: T, val space: String) {
      * 创建元素相关的逻辑代码
      */
     protected abstract fun createLogicCode(): MutableList<String>
-
-    /**
-     * 创建该元素代码中需要的import代码
-     */
-    protected abstract fun createImportCode(): HashSet<String>
 }
