@@ -1,6 +1,7 @@
 package createcode.templatecode.elements
 
 import createcode.projectInfo
+import createcode.util.ConstantValues.ITEM_SPACE
 import createcode.util.toCodeString
 import pcui.beans.elements.ImageElement
 import pcui.beans.elements.ImageFrom
@@ -31,7 +32,7 @@ class ImageCreator(element: ImageElement) : ElementCreator<ImageElement>(element
             """.toCodeString(space)
         }
         return codeStr.format(
-            getModifier(space)
+            getModifier(space + ITEM_SPACE)
         )
     }
 

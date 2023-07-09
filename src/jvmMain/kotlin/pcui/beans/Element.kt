@@ -13,6 +13,7 @@ abstract class Element(
     val paddingStart: Int?,
     val paddingEnd: Int?,
     val backgroundColor: Color?, // 背景颜色
+    val backgroundRounded:Int?, // 背景的圆角
     val weight: Float?, // 权重，可以设置平均分配
 ) {
     private var elementCreator: ElementCreator<out Element>? = null

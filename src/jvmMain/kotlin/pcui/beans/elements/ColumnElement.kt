@@ -14,9 +14,10 @@ class ColumnElement(
     paddingStart: Int? = null,
     paddingEnd: Int? = null,
     backgroundColor: Color? = null, // 背景颜色
+    backgroundRounded: Int? = null, // 背景的圆角
     weight: Float? = null,
     align: LayoutAlignment? = null,
     childs: List<Element>? = null, // 如果是row，column则会有子元素
-) : LayoutElement(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, weight, align, childs) {
+) : LayoutElement(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, backgroundRounded, weight, align, childs) {
     override fun createElementCreator(): ElementCreator<out Element> = ColumnCreator(this)
 }

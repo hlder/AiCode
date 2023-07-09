@@ -38,7 +38,11 @@ class ModifierCreator(private val element: Element) {
         element.backgroundColor?.let {
             importSets.add("import androidx.compose.foundation.background")
             importSets.add("import androidx.compose.ui.graphics.Color")
-            modifierSb.append("\n${space}${ITEM_SPACE}.background(color = ${getColorCodeStr(it)})")
+            importSets.add("import androidx.compose.foundation.shape.RoundedCornerShape")
+            val shapeStr = element.backgroundRounded?.let { rounded ->
+                "RoundedCornerShape($rounded.dp)"
+            } ?: ""
+            modifierSb.append("\n${space}${ITEM_SPACE}.background(color = ${getColorCodeStr(it)}, ${shapeStr})")
         }
         element.weight?.let {
             modifierSb.append("\n${space}${ITEM_SPACE}.weight(${it}f)")
@@ -49,13 +53,13 @@ class ModifierCreator(private val element: Element) {
             paddingSb.append("top = ${it}.dp,")
         }
         element.paddingBottom?.let {
-            paddingSb.append("bottom = ${it}.dp")
+            paddingSb.append("bottom = ${it}.dp,")
         }
         element.paddingStart?.let {
-            paddingSb.append("start = ${it}.dp")
+            paddingSb.append("start = ${it}.dp,")
         }
         element.paddingEnd?.let {
-            paddingSb.append("end = ${it}.dp")
+            paddingSb.append("end = ${it}.dp,")
         }
         val paddingStr = paddingSb.toString()
         if (paddingStr.isNotEmpty()) {
@@ -70,5 +74,9 @@ class ModifierCreator(private val element: Element) {
             ""
         }
         return Pair(contentStr, importSets)
+    }
+
+    fun createPaddingCode(){
+
     }
 }

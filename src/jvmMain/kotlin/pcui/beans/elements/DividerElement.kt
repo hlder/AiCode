@@ -14,8 +14,9 @@ class DividerElement(
     paddingStart: Int? = null,
     paddingEnd: Int? = null,
     backgroundColor: Color? = null, // 背景颜色
+    backgroundRounded: Int? = null, // 背景的圆角
     weight: Float? = null,
     val dividerColor: Color? = null, // 分割线的颜色
-) : Element(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, weight) {
+) : Element(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, backgroundRounded, weight) {
     override fun createElementCreator(): ElementCreator<out Element> = DividerCreator(this)
 }

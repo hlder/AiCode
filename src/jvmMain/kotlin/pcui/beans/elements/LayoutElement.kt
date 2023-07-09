@@ -12,10 +12,11 @@ abstract class LayoutElement(
     paddingStart: Int? = null,
     paddingEnd: Int? = null,
     backgroundColor: Color? = null, // 背景颜色
+    backgroundRounded: Int? = null, // 背景的圆角
     weight: Float? = null,
     val align: LayoutAlignment? = null,
     val childs: List<Element>? = null, // 如果是row，column则会有子元素
-) : Element(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, weight)
+) : Element(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, backgroundRounded, weight)
 
 /**
  * 布局的对齐方式

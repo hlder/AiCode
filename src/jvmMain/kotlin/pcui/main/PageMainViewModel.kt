@@ -13,118 +13,154 @@ class PageMainViewModel {
                 pageName = "HomePage",
                 title = "主页",
                 backgroundColor = Color(0xFFf4f4f4),
-                element = RowElement(
-                    id = "topActionLayout",
-                    backgroundColor = Color.White,
-                    paddingTop = 10,
-                    paddingBottom = 10,
+                element = ColumnElement(
+                    id = "homeContentLayout",
+                    paddingStart = 10,
+                    paddingEnd = 10,
                     childs = listOf(
+                        SpaceElement(
+                            id = "home_space1",
+                            height = 10
+                        ),
                         ColumnElement(
-                            id = "actionItemLayout1",
-                            weight = 1f,
-                            align = LayoutAlignment.CENTER,
+                            id = "homeTopLayout1",
+                            backgroundColor = Color.White,
+                            backgroundRounded = 10,
+                            paddingTop = 10,
+                            paddingBottom = 10,
                             childs = listOf(
-                                ImageElement(
-                                    id = "imageElement1",
-                                    image = "icon_home_waimai",
-                                    imageFrom = ImageFrom.LOCAL,
-                                    contentDescription = "外卖",
-                                    filePath = "G:\\temp\\icons\\icon_home_waimai.png",
-                                    width = 50,
-                                    height = 50
-                                ),
                                 TextElement(
-                                    id = "actionItemText1",
-                                    textColor = Color(0xFF353535),
-                                    text = "外卖"
+                                    id = "top1Text",
+                                    text = "美食百货，随叫随到",
+                                    paddingStart = 20,
+                                    textColor = Color(0xFF333333),
+                                    textWeight = TextWeight.Bold,
+                                    textSize = 14
+                                ),
+                                RowElement(
+                                    id = "topActionLayout",
+                                    paddingTop = 10,
+                                    paddingBottom = 10,
+                                    childs = listOf(
+                                        ColumnElement(
+                                            id = "actionItemLayout1",
+                                            weight = 1f,
+                                            align = LayoutAlignment.CENTER,
+                                            childs = listOf(
+                                                ImageElement(
+                                                    id = "imageElement1",
+                                                    image = "icon_home_waimai",
+                                                    imageFrom = ImageFrom.LOCAL,
+                                                    contentDescription = "外卖",
+                                                    filePath = "G:\\temp\\icons\\icon_home_waimai.png",
+                                                    width = 50,
+                                                    height = 50
+                                                ),
+                                                TextElement(
+                                                    id = "actionItemText1",
+                                                    textColor = Color(0xFF353535),
+                                                    text = "外卖",
+                                                    textSize = 14,
+                                                    paddingTop = 5
+                                                )
+                                            )
+                                        ),
+                                        ColumnElement(
+                                            id = "actionItemLayout2",
+                                            weight = 1f,
+                                            align = LayoutAlignment.CENTER,
+                                            childs = listOf(
+                                                ImageElement(
+                                                    id = "imageElement2",
+                                                    image = "icon_home_maicai",
+                                                    imageFrom = ImageFrom.LOCAL,
+                                                    contentDescription = "美团买菜",
+                                                    filePath = "G:\\temp\\icons\\icon_home_maicai.png",
+                                                    width = 50,
+                                                    height = 50,
+                                                ),
+                                                TextElement(
+                                                    id = "actionItemText2",
+                                                    textColor = Color(0xFF353535),
+                                                    text = "美团买菜",
+                                                    textSize = 14,
+                                                    paddingTop = 5,
+                                                )
+                                            )
+                                        ),
+                                        ColumnElement(
+                                            id = "actionItemLayout3",
+                                            weight = 1f,
+                                            align = LayoutAlignment.CENTER,
+                                            childs = listOf(
+                                                ImageElement(
+                                                    id = "imageElement3",
+                                                    image = "icon_home_chaoshi",
+                                                    imageFrom = ImageFrom.LOCAL,
+                                                    contentDescription = "超市便利",
+                                                    filePath = "G:\\temp\\icons\\icon_home_chaoshi.png",
+                                                    width = 50,
+                                                    height = 50
+                                                ),
+                                                TextElement(
+                                                    id = "actionItemText3",
+                                                    textColor = Color(0xFF353535),
+                                                    text = "超市便利",
+                                                    textSize = 14,
+                                                    paddingTop = 5
+                                                )
+                                            )
+                                        ),
+                                        ColumnElement(
+                                            id = "actionItemLayout4",
+                                            weight = 1f,
+                                            align = LayoutAlignment.CENTER,
+                                            childs = listOf(
+                                                ImageElement(
+                                                    id = "imageElement4",
+                                                    image = "icon_home_baihuo",
+                                                    imageFrom = ImageFrom.LOCAL,
+                                                    contentDescription = "品质百货",
+                                                    filePath = "G:\\temp\\icons\\icon_home_baihuo.png",
+                                                    width = 50,
+                                                    height = 50
+                                                ),
+                                                TextElement(
+                                                    id = "actionItemText4",
+                                                    textColor = Color(0xFF353535),
+                                                    text = "品质百货",
+                                                    textSize = 14,
+                                                    paddingTop = 5
+                                                )
+                                            )
+                                        ),
+                                        ColumnElement(
+                                            id = "actionItemLayout5",
+                                            weight = 1f,
+                                            align = LayoutAlignment.CENTER,
+                                            childs = listOf(
+                                                ImageElement(
+                                                    id = "imageElement5",
+                                                    image = "icon_home_buy_yao",
+                                                    imageFrom = ImageFrom.LOCAL,
+                                                    contentDescription = "看病买药",
+                                                    filePath = "G:\\temp\\icons\\icon_home_buy_yao.png",
+                                                    width = 50,
+                                                    height = 50
+                                                ),
+                                                TextElement(
+                                                    id = "actionItemText5",
+                                                    text = "看病买药",
+                                                    textColor = Color(0xFF353535),
+                                                    textSize = 14,
+                                                    paddingTop = 5
+                                                )
+                                            )
+                                        )
+                                    )
                                 )
                             )
                         ),
-                        ColumnElement(
-                            id = "actionItemLayout2",
-                            weight = 1f,
-                            align = LayoutAlignment.CENTER,
-                            childs = listOf(
-                                ImageElement(
-                                    id = "imageElement2",
-                                    image = "icon_home_maicai",
-                                    imageFrom = ImageFrom.LOCAL,
-                                    contentDescription = "美团买菜",
-                                    filePath = "G:\\temp\\icons\\icon_home_maicai.png",
-                                    width = 50,
-                                    height = 50
-                                ),
-                                TextElement(
-                                    id = "actionItemText2",
-                                    textColor = Color(0xFF353535),
-                                    text = "美团买菜"
-                                )
-                            )
-                        ),
-                        ColumnElement(
-                            id = "actionItemLayout3",
-                            weight = 1f,
-                            align = LayoutAlignment.CENTER,
-                            childs = listOf(
-                                ImageElement(
-                                    id = "imageElement3",
-                                    image = "icon_home_chaoshi",
-                                    imageFrom = ImageFrom.LOCAL,
-                                    contentDescription = "超市便利",
-                                    filePath = "G:\\temp\\icons\\icon_home_chaoshi.png",
-                                    width = 50,
-                                    height = 50
-                                ),
-                                TextElement(
-                                    id = "actionItemText3",
-                                    textColor = Color(0xFF353535),
-                                    text = "超市便利"
-                                )
-                            )
-                        ),
-                        ColumnElement(
-                            id = "actionItemLayout4",
-                            weight = 1f,
-                            align = LayoutAlignment.CENTER,
-                            childs = listOf(
-                                ImageElement(
-                                    id = "imageElement4",
-                                    image = "icon_home_baihuo",
-                                    imageFrom = ImageFrom.LOCAL,
-                                    contentDescription = "品质百货",
-                                    filePath = "G:\\temp\\icons\\icon_home_baihuo.png",
-                                    width = 50,
-                                    height = 50
-                                ),
-                                TextElement(
-                                    id = "actionItemText4",
-                                    textColor = Color(0xFF353535),
-                                    text = "品质百货"
-                                )
-                            )
-                        ),
-                        ColumnElement(
-                            id = "actionItemLayout5",
-                            weight = 1f,
-                            align = LayoutAlignment.CENTER,
-                            childs = listOf(
-                                ImageElement(
-                                    id = "imageElement5",
-                                    image = "icon_home_buy_yao",
-                                    imageFrom = ImageFrom.LOCAL,
-                                    contentDescription = "看病买药",
-                                    filePath = "G:\\temp\\icons\\icon_home_buy_yao.png",
-                                    width = 50,
-                                    height = 50
-                                ),
-                                TextElement(
-                                    id = "actionItemText5",
-                                    text = "看病买药",
-                                    textColor = Color(0xFF353535),
-                                    textWeight = TextWeight.Bold
-                                )
-                            )
-                        )
                     )
                 )
             )

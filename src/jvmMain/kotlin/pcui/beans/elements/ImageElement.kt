@@ -14,12 +14,13 @@ class ImageElement(
     paddingStart: Int? = null,
     paddingEnd: Int? = null,
     backgroundColor: Color? = null, // 背景颜色
+    backgroundRounded: Int? = null, // 背景的圆角
     weight: Float? = null,
     val contentDescription: String, // 无障碍的播报内容
     val imageFrom: ImageFrom, // 图片的来源（本地图片还是远程图片）
     val image: String, // 图片,本地图片为图片的id，远程图片则为图片的url
     val filePath: String, // 本地图片的位置
-    ) : Element(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, weight) {
+    ) : Element(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, backgroundRounded, weight) {
     override fun createElementCreator(): ElementCreator<out Element> = ImageCreator(this)
 }
 
