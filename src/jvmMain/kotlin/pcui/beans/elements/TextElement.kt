@@ -7,6 +7,7 @@ import pcui.beans.Element
 import pcui.beans.TextAlign
 import pcui.beans.TextWeight
 import pcui.previews.ElementPreview
+import pcui.previews.TextPreview
 
 open class TextElement(
     id: String,
@@ -26,7 +27,5 @@ open class TextElement(
     val textAlign: TextAlign? = null // 文字的对齐方式
 ) : Element(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor,backgroundRounded, weight) {
     override fun createElementCreator(space: String): ElementCreator<out Element> = TextCreator(this, space)
-    override fun createElementPreview(): ElementPreview<out Element> {
-        TODO("Not yet implemented")
-    }
+    override fun createElementPreview(): ElementPreview<out Element> = TextPreview(this)
 }
