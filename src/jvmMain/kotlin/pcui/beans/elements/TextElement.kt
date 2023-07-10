@@ -4,7 +4,7 @@ import androidx.compose.ui.graphics.Color
 import createcode.templatecode.elements.ElementCreator
 import createcode.templatecode.elements.TextCreator
 import pcui.beans.Element
-import pcui.beans.TextAlign
+import androidx.compose.ui.text.style.TextAlign
 import pcui.beans.TextWeight
 import pcui.previews.ElementPreview
 import pcui.previews.TextPreview

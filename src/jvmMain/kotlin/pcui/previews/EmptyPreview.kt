@@ -7,6 +7,5 @@ import pcui.beans.Element
 class EmptyPreview(element: Element) : ElementPreview<Element>(element) {
     @Composable
     override fun preview(modifier: Modifier) {
-
     }
 }

@@ -1,11 +1,11 @@
 package pcui.beans.elements
 
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import createcode.templatecode.elements.ButtonCreator
 import createcode.templatecode.elements.ElementCreator
 import createcode.util.toCodeString
 import pcui.beans.Element
-import pcui.beans.TextAlign
 import pcui.beans.TextWeight
 import pcui.previews.ButtonPreview
 import pcui.previews.ElementPreview

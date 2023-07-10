@@ -2,7 +2,7 @@ package pcui.main
 
 import androidx.compose.ui.graphics.Color
 import pcui.beans.Page
-import pcui.beans.TextAlign
+import androidx.compose.ui.text.style.TextAlign
 import pcui.beans.TextWeight
 import pcui.beans.elements.*
 
@@ -181,7 +181,7 @@ class PageMainViewModel {
                             textSize = 20,
                             width = 10000,
                             height = 50,
-                            backgroundColor = Color.Gray,
+                            backgroundColor = Color.Cyan,
                             textWeight = TextWeight.Bold,
                             textAlign = TextAlign.Center
                         ),
@@ -253,7 +253,7 @@ class PageMainViewModel {
         )
         add(
             Page(
-                pageName = "TestPage",
+                pageName = "TestPage2",
                 title = "测试页",
                 element = TextElement(
                     id = "text4",

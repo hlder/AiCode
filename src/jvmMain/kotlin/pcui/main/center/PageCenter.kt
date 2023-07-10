@@ -13,7 +13,7 @@ fun PageCenter(viewModel: PageMainViewModel) {
     Row() {
         Spacer(modifier = Modifier.fillMaxWidth().weight(1f))
         Column(modifier = Modifier.width(480.dp).fillMaxHeight().background(color = Color.Black)) {
-            PhonePreview(viewModel.listPage[0])
+            PhonePreview(viewModel.listPage[1])
         }
         Spacer(modifier = Modifier.fillMaxWidth().weight(1f))
     }

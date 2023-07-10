@@ -12,52 +12,52 @@ import androidx.compose.ui.Modifier
 class ColumnPreview(element: ColumnElement): ElementPreview<ColumnElement>(element) {
     @Composable
     override fun preview(modifier: Modifier) {
-        var horizontalAlignment: Alignment.Horizontal = Alignment.Start
-        var verticalArrangement: Arrangement.Vertical = Arrangement.Top
+        var horizontal: Alignment.Horizontal = Alignment.Start
+        var vertical: Arrangement.Vertical = Arrangement.Top
         when (element.align) {
             LayoutAlignment.START -> {
-                horizontalAlignment = Alignment.Start
+                horizontal = Alignment.Start
             }
             LayoutAlignment.END -> {
-                horizontalAlignment = Alignment.End
+                horizontal = Alignment.End
             }
             LayoutAlignment.TOP -> {
-                verticalArrangement = Arrangement.Top
+                vertical = Arrangement.Top
             }
             LayoutAlignment.BOTTOM -> {
-                verticalArrangement = Arrangement.Bottom
+                vertical = Arrangement.Bottom
             }
             LayoutAlignment.CENTER_HORIZONTAL -> {
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontal = Alignment.CenterHorizontally
             }
             LayoutAlignment.CENTER_VERTICAL -> {
-                verticalArrangement = Arrangement.Center
+                vertical = Arrangement.Center
             }
             LayoutAlignment.CENTER -> {
-                horizontalAlignment = Alignment.CenterHorizontally
-                verticalArrangement = Arrangement.Center
+                horizontal = Alignment.CenterHorizontally
+                vertical = Arrangement.Center
             }
             LayoutAlignment.TOP_START -> {
-                horizontalAlignment = Alignment.Start
-                verticalArrangement = Arrangement.Top
+                horizontal = Alignment.Start
+                vertical = Arrangement.Top
             }
             LayoutAlignment.TOP_END -> {
-                horizontalAlignment = Alignment.End
-                verticalArrangement = Arrangement.Top
+                horizontal = Alignment.End
+                vertical = Arrangement.Top
             }
             LayoutAlignment.BOTTOM_START -> {
-                horizontalAlignment = Alignment.Start
-                verticalArrangement = Arrangement.Bottom
+                horizontal = Alignment.Start
+                vertical = Arrangement.Bottom
             }
             LayoutAlignment.BOTTOM_END -> {
-                horizontalAlignment = Alignment.End
-                verticalArrangement = Arrangement.Bottom
+                horizontal = Alignment.End
+                vertical = Arrangement.Bottom
             }
         }
         Column(
             modifier = ModifierPreview(element).getModifier().then(modifier),
-            horizontalAlignment = horizontalAlignment,
-            verticalArrangement = verticalArrangement,
+            horizontalAlignment = horizontal,
+            verticalArrangement = vertical,
         ) {
             element.childs?.forEach { item->
                 val itemModifier = item.weight?.let { Modifier.weight(it) }?:Modifier

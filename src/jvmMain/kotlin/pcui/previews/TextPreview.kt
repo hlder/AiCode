@@ -18,7 +18,7 @@ class TextPreview(element: TextElement) : ElementPreview<TextElement>(element) {
             text = "${element.text}",
             fontSize = element.textSize?.sp ?: TextUnit.Unspecified,
             color = element.textColor?: Color.Unspecified,
-            fontWeight = FontWeight.Bold,
+            fontWeight = element.textWeight?.getFontWeight(),
             textAlign = TextAlign.Center,
             modifier = ModifierPreview(element).getModifier().then(modifier)
         )

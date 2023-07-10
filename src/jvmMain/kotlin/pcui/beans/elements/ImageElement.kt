@@ -5,6 +5,7 @@ import createcode.templatecode.elements.ElementCreator
 import createcode.templatecode.elements.ImageCreator
 import pcui.beans.Element
 import pcui.previews.ElementPreview
+import pcui.previews.ImagePreview
 
 class ImageElement(
     id: String,
@@ -23,9 +24,7 @@ class ImageElement(
     val filePath: String, // 本地图片的位置
     ) : Element(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, backgroundRounded, weight) {
     override fun createElementCreator(space: String): ElementCreator<out Element> = ImageCreator(this, space)
-    override fun createElementPreview(): ElementPreview<out Element> {
-        TODO("Not yet implemented")
-    }
+    override fun createElementPreview(): ElementPreview<out Element> = ImagePreview(this)
 }
 
 enum class ImageFrom {

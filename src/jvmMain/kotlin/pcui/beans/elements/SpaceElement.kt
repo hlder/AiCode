@@ -5,6 +5,7 @@ import createcode.templatecode.elements.ElementCreator
 import createcode.templatecode.elements.SpaceCreator
 import pcui.beans.Element
 import pcui.previews.ElementPreview
+import pcui.previews.SpacePreview
 
 class SpaceElement(
     id: String,
@@ -19,7 +20,5 @@ class SpaceElement(
     weight: Float? = null,
 ) : Element(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, backgroundRounded, weight) {
     override fun createElementCreator(space: String): ElementCreator<out Element> = SpaceCreator(this, space)
-    override fun createElementPreview(): ElementPreview<out Element> {
-        TODO("Not yet implemented")
-    }
+    override fun createElementPreview(): ElementPreview<out Element> = SpacePreview(this)
 }

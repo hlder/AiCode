@@ -1,6 +1,8 @@
 package pcui.beans
 
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import createcode.templatecode.elements.ElementCreator
 import pcui.beans.elements.LayoutElement
 import pcui.previews.ElementPreview
@@ -63,9 +65,47 @@ fun Element.foreach(block: (element: Element) -> Unit) {
 }
 
 enum class TextWeight {
-    W100, W200, W300, W400, W500, W600, W700, W800, W900, Thin, ExtraLight, Light, Normal, Medium, SemiBold, Bold, ExtraBold, Black
-}
+    W100, W200, W300, W400, W500, W600, W700, W800, W900, Thin, ExtraLight, Light, Normal, Medium, SemiBold, Bold, ExtraBold, Black;
 
-enum class TextAlign {
-    Left, Right, Center, Start, End
+    fun getFontWeight(): FontWeight {
+        return if (this == W100) {
+            FontWeight.W100
+        } else if (this == W200) {
+            FontWeight.W100
+        } else if (this == W300) {
+            FontWeight.W300
+        } else if (this == W400) {
+            FontWeight.W400
+        } else if (this == W500) {
+            FontWeight.W500
+        } else if (this == W600) {
+            FontWeight.W600
+        } else if (this == W700) {
+            FontWeight.W700
+        } else if (this == W800) {
+            FontWeight.W800
+        } else if (this == W900) {
+            FontWeight.W900
+        } else if (this == Thin) {
+            FontWeight.Thin
+        } else if (this == ExtraLight) {
+            FontWeight.ExtraLight
+        } else if (this == Light) {
+            FontWeight.Normal
+        } else if (this == Normal) {
+            FontWeight.Normal
+        } else if (this == Medium) {
+            FontWeight.Medium
+        } else if (this == SemiBold) {
+            FontWeight.SemiBold
+        } else if (this == Bold) {
+            FontWeight.Bold
+        } else if (this == ExtraBold) {
+            FontWeight.ExtraBold
+        } else if (this == Black) {
+            FontWeight.Black
+        } else {
+            FontWeight.W100
+        }
+    }
 }
