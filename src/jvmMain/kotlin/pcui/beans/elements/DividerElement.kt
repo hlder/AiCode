@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 import createcode.templatecode.elements.DividerCreator
 import createcode.templatecode.elements.ElementCreator
 import pcui.beans.Element
+import pcui.previews.ElementPreview
 
 class DividerElement(
     id: String,
@@ -19,4 +20,7 @@ class DividerElement(
     val dividerColor: Color? = null, // 分割线的颜色
 ) : Element(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, backgroundRounded, weight) {
     override fun createElementCreator(space: String): ElementCreator<out Element> = DividerCreator(this, space)
+    override fun createElementPreview(): ElementPreview<out Element> {
+        TODO("Not yet implemented")
+    }
 }

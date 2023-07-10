@@ -6,6 +6,7 @@ import createcode.templatecode.elements.TextFieldCreator
 import pcui.beans.Element
 import pcui.beans.TextAlign
 import pcui.beans.TextWeight
+import pcui.previews.ElementPreview
 
 open class TextFieldElement(
     id: String,
@@ -25,4 +26,7 @@ open class TextFieldElement(
     val textAlign: TextAlign? = null // 文字的对齐方式
 ) : Element(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, backgroundRounded, weight) {
     override fun createElementCreator(space: String): ElementCreator<out Element> = TextFieldCreator(this, space)
+    override fun createElementPreview(): ElementPreview<out Element> {
+        TODO("Not yet implemented")
+    }
 }

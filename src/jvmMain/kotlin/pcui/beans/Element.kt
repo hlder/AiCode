@@ -3,6 +3,7 @@ package pcui.beans
 import androidx.compose.ui.graphics.Color
 import createcode.templatecode.elements.ElementCreator
 import pcui.beans.elements.LayoutElement
+import pcui.previews.ElementPreview
 
 abstract class Element(
     val id: String, // element的id
@@ -28,10 +29,25 @@ abstract class Element(
         return elementCreator as ElementCreator<out Element>
     }
 
+    private var elementPreview: ElementPreview<out Element>? = null
+
+    /**
+     * 获取预览
+     */
+    fun getPreview(): ElementPreview<out Element> {
+        if(elementPreview==null){
+            elementPreview = createElementPreview()
+
+        }
+        return elementPreview as ElementPreview<out Element>
+    }
+
     /**
      * 模板方法，创建creator
      */
     protected abstract fun createElementCreator(space: String): ElementCreator<out Element>
+
+    protected abstract fun createElementPreview(): ElementPreview<out Element>
 }
 
 /**

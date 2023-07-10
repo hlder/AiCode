@@ -19,16 +19,6 @@ import pcui.main.PageMain
 import java.awt.Dimension
 import java.awt.Toolkit
 
-@Composable
-@Preview
-fun App() {
-    var text by remember { mutableStateOf("Hello, World!") }
-
-    MaterialTheme {
-        PageMain()
-    }
-}
-
 fun main() = application {
     Window(
         onCloseRequest = ::exitApplication,
@@ -38,6 +28,14 @@ fun main() = application {
         ),
     ) {
         App()
+    }
+}
+
+@Composable
+@Preview
+fun App() {
+    MaterialTheme {
+        PageMain()
     }
 }
 

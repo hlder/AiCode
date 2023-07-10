@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 import createcode.templatecode.elements.ElementCreator
 import createcode.templatecode.elements.RowCreator
 import pcui.beans.Element
+import pcui.previews.ElementPreview
 
 class RowElement(
     id: String,
@@ -21,4 +22,7 @@ class RowElement(
     childs: List<Element>? = null, // 如果是row，column则会有子元素
 ) : LayoutElement(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, backgroundRounded, weight, isNeedScroll, align, childs) {
     override fun createElementCreator(space: String): ElementCreator<out Element> = RowCreator(this, space)
+    override fun createElementPreview(): ElementPreview<out Element> {
+        TODO("Not yet implemented")
+    }
 }
