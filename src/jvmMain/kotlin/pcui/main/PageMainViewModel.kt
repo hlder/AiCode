@@ -173,6 +173,8 @@ class PageMainViewModel {
                 element =  ColumnElement(
                     id = "column1",
                     backgroundColor = Color.Yellow,
+                    width = Int.MAX_VALUE,
+                    height = Int.MAX_VALUE,
                     childs = listOf(
                         TextElement(
                             id = "text1",
@@ -242,9 +244,15 @@ class PageMainViewModel {
                         ),
                         TextFieldElement(
                             id = "textField1",
-                            text = "测试输入框",
+                            text = "",
+                            hintText = "测试输入框",
                             textColor = Color.Red,
-                            textSize = 20,
+                            paddingTop = 10,
+                            paddingBottom = 10,
+                            paddingStart = 10,
+                            paddingEnd = 10,
+                            width = Int.MAX_VALUE,
+                            backgroundColor = Color.White,
                             textWeight = TextWeight.Bold,
                         )
                     ),

@@ -21,16 +21,19 @@ class TextFieldCreator(element: TextFieldElement, space: String) : ElementCreato
                 textStyle = TextStyle(
                     %s
                 ),
+                hint = "${element.hintText?:""}",
                 value = ${valueFiledName}.value, 
                 onValueChange = {
                     ${valueFiledName}.value = it
-                }
+                },
+                %s
             )
         """.toCodeString(space).format(
             getFontSize(space + ITEM_SPACE + ITEM_SPACE) +
             getColor(element.textColor) +
             getFontWeight(space + ITEM_SPACE + ITEM_SPACE) +
-            getTextAlign(space + ITEM_SPACE + ITEM_SPACE)
+            getTextAlign(space + ITEM_SPACE + ITEM_SPACE),
+            getModifier()
         )
     }
 

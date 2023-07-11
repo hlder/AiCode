@@ -16,7 +16,7 @@ class ModifierPreview(private val element: Element) {
     @Composable
     fun getModifier(): Modifier {
         val widthModifier = element.width?.let {
-            if (it >= 9999) {
+            if (it >= Int.MAX_VALUE) {
                 Modifier.fillMaxWidth()
             } else {
                 Modifier.width(it.dp)
@@ -24,7 +24,7 @@ class ModifierPreview(private val element: Element) {
         } ?: Modifier
 
         val heightModifier = element.height?.let {
-            if (it >= 9999) {
+            if (it >= Int.MAX_VALUE) {
                 Modifier.fillMaxHeight()
             } else {
                 Modifier.height(it.dp)

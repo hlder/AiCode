@@ -54,7 +54,7 @@ class ModifierCreator(private val element: Element, private val space: String) {
      */
     private fun addSizeCode() {
         element.width?.let {
-            val widthStr = if (it >= 9999) {
+            val widthStr = if (it >= Int.MAX_VALUE) {
                 importSets.add("import androidx.compose.foundation.layout.fillMaxWidth")
                 ".fillMaxWidth()"
             } else {
@@ -65,7 +65,7 @@ class ModifierCreator(private val element: Element, private val space: String) {
             modifierSb.append("\n${space}${ITEM_SPACE}${widthStr}")
         }
         element.height?.let {
-            val heightStr = if (it >= 9999) {
+            val heightStr = if (it >= Int.MAX_VALUE) {
                 importSets.add("import androidx.compose.foundation.layout.fillMaxHeight")
                 ".fillMaxHeight()"
             } else {
