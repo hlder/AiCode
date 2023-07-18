@@ -20,7 +20,7 @@ class RowElement(
     weight: Float? = null,
     isNeedScroll: Boolean? = false, // 是否需要滚动
     align: LayoutAlignment? = null,
-    childs: List<Element>? = null, // 如果是row，column则会有子元素
+    childs: MutableList<Element>? = null, // 如果是row，column则会有子元素
 ) : LayoutElement(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, backgroundRounded, weight, isNeedScroll, align, childs) {
     override fun createElementCreator(space: String): ElementCreator<out Element> = RowCreator(this, space)
     override fun createElementPreview(): ElementPreview<out Element> = RowPreview(this)

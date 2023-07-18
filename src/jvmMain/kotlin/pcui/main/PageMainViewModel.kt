@@ -1,5 +1,6 @@
 package pcui.main
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
 import pcui.beans.Page
 import androidx.compose.ui.text.style.TextAlign
@@ -7,6 +8,7 @@ import pcui.beans.TextWeight
 import pcui.beans.elements.*
 
 class PageMainViewModel {
+    val version = mutableStateOf(0)
     val listPage: List<Page> = ArrayList<Page>().apply {
         add(
             Page(
@@ -18,7 +20,7 @@ class PageMainViewModel {
                     paddingStart = 10,
                     paddingEnd = 10,
                     isNeedScroll = true,
-                    childs = listOf(
+                    childs = mutableListOf(
                         SpaceElement(
                             id = "home_space1",
                             height = 10
@@ -29,7 +31,7 @@ class PageMainViewModel {
                             backgroundRounded = 10,
                             paddingTop = 10,
                             paddingBottom = 10,
-                            childs = listOf(
+                            childs = mutableListOf(
                                 TextElement(
                                     id = "top1Text",
                                     text = "美食百货，随叫随到",
@@ -42,12 +44,12 @@ class PageMainViewModel {
                                     id = "topActionLayout",
                                     paddingTop = 10,
                                     paddingBottom = 10,
-                                    childs = listOf(
+                                    childs = mutableListOf(
                                         ColumnElement(
                                             id = "actionItemLayout1",
                                             weight = 1f,
                                             align = LayoutAlignment.CENTER,
-                                            childs = listOf(
+                                            childs = mutableListOf(
                                                 ImageElement(
                                                     id = "imageElement1",
                                                     image = "icon_home_waimai",
@@ -70,7 +72,7 @@ class PageMainViewModel {
                                             id = "actionItemLayout2",
                                             weight = 1f,
                                             align = LayoutAlignment.CENTER,
-                                            childs = listOf(
+                                            childs = mutableListOf(
                                                 ImageElement(
                                                     id = "imageElement2",
                                                     image = "icon_home_maicai",
@@ -93,7 +95,7 @@ class PageMainViewModel {
                                             id = "actionItemLayout3",
                                             weight = 1f,
                                             align = LayoutAlignment.CENTER,
-                                            childs = listOf(
+                                            childs = mutableListOf(
                                                 ImageElement(
                                                     id = "imageElement3",
                                                     image = "icon_home_chaoshi",
@@ -116,7 +118,7 @@ class PageMainViewModel {
                                             id = "actionItemLayout4",
                                             weight = 1f,
                                             align = LayoutAlignment.CENTER,
-                                            childs = listOf(
+                                            childs = mutableListOf(
                                                 ImageElement(
                                                     id = "imageElement4",
                                                     image = "icon_home_baihuo",
@@ -139,7 +141,7 @@ class PageMainViewModel {
                                             id = "actionItemLayout5",
                                             weight = 1f,
                                             align = LayoutAlignment.CENTER,
-                                            childs = listOf(
+                                            childs = mutableListOf(
                                                 ImageElement(
                                                     id = "imageElement5",
                                                     image = "icon_home_buy_yao",
@@ -175,7 +177,7 @@ class PageMainViewModel {
                     backgroundColor = Color.Yellow,
                     width = Int.MAX_VALUE,
                     height = Int.MAX_VALUE,
-                    childs = listOf(
+                    childs = mutableListOf(
                         TextElement(
                             id = "text1",
                             text = "aaaaa1",
@@ -220,7 +222,7 @@ class PageMainViewModel {
                             width = 250,
                             height = 80,
                             backgroundColor = Color.Green,
-                            childs = listOf(
+                            childs = mutableListOf(
                                 TextElement(
                                     id = "text5",
                                     text = "text1"

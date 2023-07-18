@@ -31,15 +31,16 @@ import java.awt.event.MouseEvent.MOUSE_DRAGGED
 
 @Composable
 fun PageLeft(viewModel: PageMainViewModel) {
-    val pageLeftViewModel = remember { PageLeftViewModel() }
     val page = viewModel.listPage[1]
+    val pageLeftViewModel = remember { PageLeftViewModel(page) }
 
     val isNeedDrag = remember { mutableStateOf(false) }
 
     val canvasDrawItem = remember { mutableStateOf<Triple<Element, Offset, Rect>?>(null) }
 
     // canvas绘制框的位置改变
-    val moveCanvasPosition = remember { mutableStateOf(Offset(0f, 0f)) }
+    val moveCanvasPosition = remember { pageLeftViewModel.dragEvent }
+    val moveCanvasSelectedLinePositionY = remember { pageLeftViewModel.dragSelectPositionY }
     Column(
         modifier = Modifier
             .onGloballyPositioned {
@@ -50,20 +51,21 @@ fun PageLeft(viewModel: PageMainViewModel) {
                 onEvent = {
                     val event = it.awtEventOrNull
                     if (MOUSE_DRAGGED == event?.id && isNeedDrag.value) {
-                        println("================base:(${pageLeftViewModel.contentPosition?.x},${pageLeftViewModel.contentPosition?.y}) " +
-                                "now:(${event.x},${event.y}) touchDown:(${pageLeftViewModel.downPosition.x},${pageLeftViewModel.downPosition.y})")
                         canvasDrawItem.value?.let {
                             moveCanvasPosition.value = Offset(
                                 event.x - pageLeftViewModel.downPosition.x - (pageLeftViewModel.contentPosition?.x ?: 0f),
                                 event.y - pageLeftViewModel.downPosition.y - (pageLeftViewModel.contentPosition?.y ?: 0f)
                             )
                         }
+                        pageLeftViewModel.scanDragOnElement()
                     }
                 },
             ).onPointerEvent(
                 eventType = PointerEventType.Release,
                 onEvent = {
                     val event = it.awtEventOrNull
+                    pageLeftViewModel.doMoveElement()
+                    viewModel.version.value++
                     isNeedDrag.value = false
                 },
             )
@@ -72,7 +74,7 @@ fun PageLeft(viewModel: PageMainViewModel) {
                     onPress = {
                         isNeedDrag.value = false
                         moveCanvasPosition.value = Offset(0f,0f)
-                    }, onLongPress = {
+
                         val item = pageLeftViewModel.onTouchDown(it.x, it.y)
                         item?.let {
                             canvasDrawItem.value = item
@@ -83,7 +85,7 @@ fun PageLeft(viewModel: PageMainViewModel) {
             }
     ) {
         pageLeftViewModel.childPosition.clear()
-        bl(pageLeftViewModel, page.element, 0)
+        showLayers(isNeedDrag.value, pageLeftViewModel, page.element, 0)
     }
 
     Canvas(modifier = Modifier.fillMaxSize()) {
@@ -108,18 +110,27 @@ fun PageLeft(viewModel: PageMainViewModel) {
                     colorFilter = null,
                     blendMode = DefaultBlendMode
                 )
+                this.drawLine(
+                    color = Color.Black,
+                    start = Offset(0f, moveCanvasSelectedLinePositionY.value),
+                    end = Offset(viewRect.width, moveCanvasSelectedLinePositionY.value),
+                )
             }
         }
     }
 }
 
 @Composable
-fun bl(pageLeftViewModel: PageLeftViewModel, element: Element, indentCount: Int) {
+fun showLayers(isNeedDrag:Boolean, pageLeftViewModel: PageLeftViewModel, element: Element, indentCount: Int) {
     val viewText = "${element.javaClass.simpleName.replace("Element", "")}（id=\"${element.id}\"）"
-    val color = if (element is LayoutElement) {
+    var color = if (element is LayoutElement) {
         Color.Red
     } else {
         Color.Green
+    }
+
+    if (isNeedDrag && pageLeftViewModel.dragDrownInfo?.first == element) {
+        color = Color.Blue
     }
     Row(
         modifier = Modifier.background(color = color).padding(start = (20 * indentCount).dp)
@@ -145,7 +156,7 @@ fun bl(pageLeftViewModel: PageLeftViewModel, element: Element, indentCount: Int)
     }
     if (element is LayoutElement) {
         element.childs?.forEach {
-            bl(pageLeftViewModel, it, indentCount + 1)
+            showLayers(isNeedDrag, pageLeftViewModel, it, indentCount + 1)
         }
     }
 }

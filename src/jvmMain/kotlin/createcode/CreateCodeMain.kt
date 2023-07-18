@@ -9,7 +9,7 @@ import pcui.main.PageMainViewModel
 
 fun main() {
     val viewModel = PageMainViewModel()
-    testCreateAndroidProject(viewModel.listPage)
+    createAndroidProject(viewModel.listPage)
 }
 
 class ProjectInfo {
@@ -21,7 +21,7 @@ class ProjectInfo {
 
 var projectInfo: ProjectInfo = ProjectInfo()
 
-private fun testCreateAndroidProject(listPage: List<Page>) {
+private fun createAndroidProject(listPage: List<Page>) {
     val filePath = projectInfo.filePath
     val appName = projectInfo.appName
     val packageName = projectInfo.packageName
