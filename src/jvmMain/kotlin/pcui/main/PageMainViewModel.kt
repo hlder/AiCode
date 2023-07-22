@@ -10,7 +10,9 @@ import pcui.beans.elements.*
 class PageMainViewModel {
     // 元素移动位置的版本号
     val movePositionVersion = mutableStateOf(0)
+    // 当前选择的element
     val nowSelectedElement = mutableStateOf<Element?>(null)
+    // page的列表
     val listPage: List<Page> = ArrayList<Page>().apply {
         add(
             Page(

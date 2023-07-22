@@ -13,7 +13,7 @@ fun HintTextFiled(
     hint: String? = null,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
-    textStyle: TextStyle
+    textStyle: TextStyle = TextStyle()
 ) {
     BasicTextField(textStyle = textStyle,
         modifier = modifier,
@@ -25,5 +25,6 @@ fun HintTextFiled(
                 Text(text = hint, color = Color.Gray, fontSize = textStyle.fontSize)
             }
             innerTextField()
-        })
+        },
+    )
 }
