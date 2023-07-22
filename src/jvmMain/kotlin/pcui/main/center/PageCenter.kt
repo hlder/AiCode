@@ -16,7 +16,7 @@ fun PageCenter(viewModel: PageMainViewModel) {
     Row() {
         Spacer(modifier = Modifier.fillMaxWidth().weight(1f))
         Column(modifier = Modifier.width(480.dp).fillMaxHeight().background(color = Color.Black)) {
-            PhonePreview(viewModel.listPage[1])
+            PhonePreview(viewModel.listPage[1], viewModel)
         }
         Column(modifier = Modifier.fillMaxWidth().weight(1f)) {
             Text("版本:${listVersion.value}")

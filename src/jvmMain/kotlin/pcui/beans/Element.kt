@@ -5,6 +5,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import createcode.templatecode.elements.ElementCreator
 import pcui.beans.elements.LayoutElement
+import pcui.main.PageMainViewModel
 import pcui.previews.ElementPreview
 
 abstract class Element(
@@ -36,9 +37,9 @@ abstract class Element(
     /**
      * 获取预览
      */
-    fun getPreview(): ElementPreview<out Element> {
+    fun getPreview(viewModel: PageMainViewModel): ElementPreview<out Element> {
         if(elementPreview==null){
-            elementPreview = createElementPreview()
+            elementPreview = createElementPreview(viewModel)
 
         }
         return elementPreview as ElementPreview<out Element>
@@ -49,7 +50,7 @@ abstract class Element(
      */
     protected abstract fun createElementCreator(space: String): ElementCreator<out Element>
 
-    protected abstract fun createElementPreview(): ElementPreview<out Element>
+    protected abstract fun createElementPreview(viewModel: PageMainViewModel): ElementPreview<out Element>
 }
 
 /**

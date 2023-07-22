@@ -7,10 +7,11 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import pcui.beans.elements.TextFieldElement
+import pcui.main.PageMainViewModel
 import pcui.previews.propertys.ModifierPreview
 import widgets.HintTextFiled
 
-class TextFieldPreview(element: TextFieldElement) : ElementPreview<TextFieldElement>(element) {
+class TextFieldPreview(element: TextFieldElement, viewModel: PageMainViewModel) : ElementPreview<TextFieldElement>(element, viewModel) {
     @Composable
     override fun preview(modifier: Modifier) {
         HintTextFiled(

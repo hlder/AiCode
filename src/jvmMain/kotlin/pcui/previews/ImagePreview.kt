@@ -8,10 +8,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.res.loadImageBitmap
+import pcui.main.PageMainViewModel
 import pcui.previews.propertys.ModifierPreview
 import java.io.FileInputStream
 
-class ImagePreview(element: ImageElement) : ElementPreview<ImageElement>(element) {
+class ImagePreview(element: ImageElement, viewModel: PageMainViewModel) : ElementPreview<ImageElement>(element, viewModel) {
     @Composable
     override fun preview(modifier: Modifier) {
         val bitmap: ImageBitmap = remember { loadImageBitmap(FileInputStream(element.filePath)) }

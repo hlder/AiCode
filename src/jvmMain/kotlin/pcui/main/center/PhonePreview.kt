@@ -2,13 +2,11 @@ package pcui.main.center
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import pcui.beans.Page
-import androidx.compose.ui.text.style.TextAlign
-import pcui.beans.elements.*
+import pcui.main.PageMainViewModel
 
 @Composable
-fun PhonePreview(page: Page) {
+fun PhonePreview(page: Page, viewModel: PageMainViewModel) {
 //    val element = ColumnElement(
 //        id = "actionItemLayout1",
 //        weight = 1f,
@@ -37,5 +35,5 @@ fun PhonePreview(page: Page) {
 //        )
 //    )
 //    element.getPreview().preview(Modifier)
-    page.element.getPreview().preview(Modifier)
+    page.element.getPreview(viewModel).preview(Modifier)
 }

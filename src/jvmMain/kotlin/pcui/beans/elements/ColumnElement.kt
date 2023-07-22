@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 import createcode.templatecode.elements.ColumnCreator
 import createcode.templatecode.elements.ElementCreator
 import pcui.beans.Element
+import pcui.main.PageMainViewModel
 import pcui.previews.ColumnPreview
 import pcui.previews.ElementPreview
 
@@ -23,5 +24,5 @@ class ColumnElement(
     childs: MutableList<Element>? = null, // 如果是row，column则会有子元素
 ) : LayoutElement(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, backgroundRounded, weight, isNeedScroll, align, childs) {
     override fun createElementCreator(space: String): ElementCreator<out Element> = ColumnCreator(this, space)
-    override fun createElementPreview(): ElementPreview<out Element> = ColumnPreview(this)
+    override fun createElementPreview(viewModel: PageMainViewModel): ElementPreview<out Element> = ColumnPreview(this, viewModel)
 }

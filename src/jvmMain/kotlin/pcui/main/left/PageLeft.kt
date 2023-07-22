@@ -2,10 +2,13 @@
 
 package pcui.main.left
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -53,8 +56,10 @@ fun PageLeft(viewModel: PageMainViewModel) {
                     if (MOUSE_DRAGGED == event?.id && isNeedDrag.value) {
                         canvasDrawItem.value?.let {
                             moveCanvasPosition.value = Offset(
-                                event.x - pageLeftViewModel.downPosition.x - (pageLeftViewModel.contentPosition?.x ?: 0f),
-                                event.y - pageLeftViewModel.downPosition.y - (pageLeftViewModel.contentPosition?.y ?: 0f)
+                                event.x - pageLeftViewModel.downPosition.x - (pageLeftViewModel.contentPosition?.x
+                                    ?: 0f),
+                                event.y - pageLeftViewModel.downPosition.y - (pageLeftViewModel.contentPosition?.y
+                                    ?: 0f)
                             )
                         }
                         pageLeftViewModel.scanDragOnElement()
@@ -73,10 +78,11 @@ fun PageLeft(viewModel: PageMainViewModel) {
                 detectTapGestures(
                     onPress = {
                         isNeedDrag.value = false
-                        moveCanvasPosition.value = Offset(0f,0f)
+                        moveCanvasPosition.value = Offset(0f, 0f)
 
                         val item = pageLeftViewModel.onTouchDown(it.x, it.y)
                         item?.let {
+                            viewModel.nowSelectedElement.value = item.first
                             canvasDrawItem.value = item
                             isNeedDrag.value = true
                         }
@@ -85,7 +91,8 @@ fun PageLeft(viewModel: PageMainViewModel) {
             }
     ) {
         pageLeftViewModel.childPosition.clear()
-        showLayers(isNeedDrag.value, pageLeftViewModel, page.element, 0)
+
+        showLayers(canvasDrawItem.value?.first, isNeedDrag.value, pageLeftViewModel, page.element, 0)
     }
 
     Canvas(modifier = Modifier.fillMaxSize()) {
@@ -121,7 +128,13 @@ fun PageLeft(viewModel: PageMainViewModel) {
 }
 
 @Composable
-fun showLayers(isNeedDrag:Boolean, pageLeftViewModel: PageLeftViewModel, element: Element, indentCount: Int) {
+fun showLayers(
+    nowSelectedElement: Element?,
+    isNeedDrag: Boolean,
+    pageLeftViewModel: PageLeftViewModel,
+    element: Element,
+    indentCount: Int
+) {
     val viewText = "${element.javaClass.simpleName.replace("Element", "")}（id=\"${element.id}\"）"
     var color = if (element is LayoutElement) {
         Color.Red
@@ -132,31 +145,40 @@ fun showLayers(isNeedDrag:Boolean, pageLeftViewModel: PageLeftViewModel, element
     if (isNeedDrag && pageLeftViewModel.dragDrownInfo?.first == element) {
         color = Color.Blue
     }
-    Row(
-        modifier = Modifier.background(color = color).padding(start = (20 * indentCount).dp)
-            .fillMaxWidth()
-            .onGloballyPositioned {
-                val position = it.positionInRoot()
-                pageLeftViewModel.childPosition.add(
-                    Triple(
-                        element,
-                        it.positionInRoot(),
-                        Rect(
-                            position.x,
-                            position.y,
-                            position.x + it.size.width,
-                            position.y + it.size.height
+    val borderModifier = if (element == nowSelectedElement) {
+        Modifier.border(border = BorderStroke(1.dp, Color.Blue), shape = MaterialTheme.shapes.medium)
+    } else {
+        Modifier
+    }
+    Box(
+        modifier = Modifier.then(borderModifier)
+    ) {
+        Row(
+            modifier = Modifier.background(color = color).padding(start = (20 * indentCount).dp)
+                .fillMaxWidth()
+                .onGloballyPositioned {
+                    val position = it.positionInRoot()
+                    pageLeftViewModel.childPosition.add(
+                        Triple(
+                            element,
+                            it.positionInRoot(),
+                            Rect(
+                                position.x,
+                                position.y,
+                                position.x + it.size.width,
+                                position.y + it.size.height
+                            )
                         )
                     )
-                )
-                println("================it.size:${it.positionInRoot()} text:${viewText}  boundsInRoot:${it.boundsInParent()}")
-            }
-    ) {
-        Text(viewText, modifier = Modifier)
+                    println("================it.size:${it.positionInRoot()} text:${viewText}  boundsInRoot:${it.boundsInParent()}")
+                }
+        ) {
+            Text(viewText, modifier = Modifier)
+        }
     }
     if (element is LayoutElement) {
         element.childs?.forEach {
-            showLayers(isNeedDrag, pageLeftViewModel, it, indentCount + 1)
+            showLayers(nowSelectedElement, isNeedDrag, pageLeftViewModel, it, indentCount + 1)
         }
     }
 }

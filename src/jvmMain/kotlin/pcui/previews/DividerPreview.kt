@@ -5,9 +5,10 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import pcui.beans.elements.DividerElement
+import pcui.main.PageMainViewModel
 import pcui.previews.propertys.ModifierPreview
 
-class DividerPreview(element: DividerElement) : ElementPreview<DividerElement>(element) {
+class DividerPreview(element: DividerElement, viewModel: PageMainViewModel) : ElementPreview<DividerElement>(element, viewModel) {
     @Composable
     override fun preview(modifier: Modifier) {
         Divider(

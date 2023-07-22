@@ -5,6 +5,7 @@ import createcode.templatecode.elements.ElementCreator
 import createcode.templatecode.elements.TextButtonCreator
 import pcui.beans.Element
 import pcui.beans.TextWeight
+import pcui.main.PageMainViewModel
 import pcui.previews.ElementPreview
 import pcui.previews.TextButtonPreview
 
@@ -25,5 +26,5 @@ open class TextButtonElement(
     val textWeight: TextWeight? = null, // 字体的粗细
 ) : Element(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, backgroundRounded, weight) {
     override fun createElementCreator(space: String): ElementCreator<out Element> = TextButtonCreator(this, space)
-    override fun createElementPreview(): ElementPreview<out Element> = TextButtonPreview(this)
+    override fun createElementPreview(viewModel: PageMainViewModel): ElementPreview<out Element> = TextButtonPreview(this, viewModel)
 }

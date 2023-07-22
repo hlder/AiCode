@@ -6,6 +6,7 @@ import createcode.templatecode.elements.TextFieldCreator
 import pcui.beans.Element
 import androidx.compose.ui.text.style.TextAlign
 import pcui.beans.TextWeight
+import pcui.main.PageMainViewModel
 import pcui.previews.ElementPreview
 import pcui.previews.TextFieldPreview
 
@@ -28,5 +29,5 @@ open class TextFieldElement(
     val textAlign: TextAlign? = null // 文字的对齐方式
 ) : Element(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, backgroundRounded, weight) {
     override fun createElementCreator(space: String): ElementCreator<out Element> = TextFieldCreator(this, space)
-    override fun createElementPreview(): ElementPreview<out Element> = TextFieldPreview(this)
+    override fun createElementPreview(viewModel: PageMainViewModel): ElementPreview<out Element> = TextFieldPreview(this, viewModel)
 }

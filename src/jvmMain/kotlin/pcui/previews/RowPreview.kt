@@ -7,9 +7,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import pcui.beans.elements.LayoutAlignment
 import pcui.beans.elements.RowElement
+import pcui.main.PageMainViewModel
 import pcui.previews.propertys.ModifierPreview
 
-class RowPreview(element: RowElement) : ElementPreview<RowElement>(element) {
+class RowPreview(element: RowElement, viewModel: PageMainViewModel) : ElementPreview<RowElement>(element, viewModel) {
     @Composable
     override fun preview(modifier: Modifier) {
         var horizontal: Arrangement.Horizontal = Arrangement.Start
@@ -61,7 +62,7 @@ class RowPreview(element: RowElement) : ElementPreview<RowElement>(element) {
         ) {
             element.childs?.forEach { item->
                 val itemModifier = item.weight?.let { Modifier.weight(it) }?:Modifier
-                item.getPreview().preview(itemModifier)
+                item.getPreview(viewModel).preview(itemModifier)
             }
         }
     }

@@ -4,11 +4,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
 import pcui.beans.Page
 import androidx.compose.ui.text.style.TextAlign
+import pcui.beans.Element
 import pcui.beans.TextWeight
 import pcui.beans.elements.*
 
 class PageMainViewModel {
     val version = mutableStateOf(0)
+    val nowSelectedElement = mutableStateOf<Element?>(null)
     val listPage: List<Page> = ArrayList<Page>().apply {
         add(
             Page(
@@ -274,5 +276,4 @@ class PageMainViewModel {
             )
         )
     }
-
 }

@@ -7,6 +7,7 @@ import createcode.templatecode.elements.ElementCreator
 import createcode.util.toCodeString
 import pcui.beans.Element
 import pcui.beans.TextWeight
+import pcui.main.PageMainViewModel
 import pcui.previews.ButtonPreview
 import pcui.previews.ElementPreview
 
@@ -29,7 +30,7 @@ open class ButtonElement(
     val buttonAction: ButtonAction // 按钮的行为（点击事件跳转）
 ) : TextElement(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, backgroundRounded, weight, text, textColor, textSize, textWeight, textAlign) {
     override fun createElementCreator(space: String): ElementCreator<out Element> = ButtonCreator(this, space)
-    override fun createElementPreview(): ElementPreview<out Element> = ButtonPreview(this)
+    override fun createElementPreview(viewModel: PageMainViewModel): ElementPreview<out Element> = ButtonPreview(this, viewModel)
 }
 
 data class Action(

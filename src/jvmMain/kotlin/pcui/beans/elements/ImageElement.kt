@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 import createcode.templatecode.elements.ElementCreator
 import createcode.templatecode.elements.ImageCreator
 import pcui.beans.Element
+import pcui.main.PageMainViewModel
 import pcui.previews.ElementPreview
 import pcui.previews.ImagePreview
 
@@ -24,7 +25,7 @@ class ImageElement(
     val filePath: String, // 本地图片的位置
     ) : Element(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, backgroundRounded, weight) {
     override fun createElementCreator(space: String): ElementCreator<out Element> = ImageCreator(this, space)
-    override fun createElementPreview(): ElementPreview<out Element> = ImagePreview(this)
+    override fun createElementPreview(viewModel: PageMainViewModel): ElementPreview<out Element> = ImagePreview(this, viewModel)
 }
 
 enum class ImageFrom {

@@ -9,9 +9,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import pcui.beans.elements.TextElement
+import pcui.main.PageMainViewModel
 import pcui.previews.propertys.ModifierPreview
 
-class TextPreview(element: TextElement) : ElementPreview<TextElement>(element) {
+class TextPreview(element: TextElement, viewModel: PageMainViewModel) : ElementPreview<TextElement>(element, viewModel) {
     @Composable
     override fun preview(modifier: Modifier) {
         Text(
