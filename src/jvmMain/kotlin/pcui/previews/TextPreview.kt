@@ -14,7 +14,7 @@ import pcui.previews.propertys.ModifierPreview
 
 class TextPreview(element: TextElement, viewModel: PageMainViewModel) : ElementPreview<TextElement>(element, viewModel) {
     @Composable
-    override fun preview(modifier: Modifier) {
+    override fun previewImpl(modifier: Modifier) {
         Text(
             text = "${element.text}",
             fontSize = element.textSize?.sp ?: TextUnit.Unspecified,

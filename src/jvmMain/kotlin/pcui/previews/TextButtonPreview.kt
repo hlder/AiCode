@@ -9,7 +9,7 @@ import pcui.main.PageMainViewModel
 
 class TextButtonPreview(element: TextButtonElement, viewModel: PageMainViewModel) : ElementPreview<TextButtonElement>(element, viewModel) {
     @Composable
-    override fun preview(modifier: Modifier) {
+    override fun previewImpl(modifier: Modifier) {
         TextButton(onClick = {}) {
             Text(text = "${element.text}")
         }

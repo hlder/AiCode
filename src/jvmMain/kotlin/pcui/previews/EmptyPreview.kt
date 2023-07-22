@@ -7,6 +7,6 @@ import pcui.main.PageMainViewModel
 
 class EmptyPreview(element: Element, viewModel: PageMainViewModel) : ElementPreview<Element>(element, viewModel) {
     @Composable
-    override fun preview(modifier: Modifier) {
+    override fun previewImpl(modifier: Modifier) {
     }
 }

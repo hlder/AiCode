@@ -12,7 +12,7 @@ import pcui.previews.propertys.ModifierPreview
 
 class RowPreview(element: RowElement, viewModel: PageMainViewModel) : ElementPreview<RowElement>(element, viewModel) {
     @Composable
-    override fun preview(modifier: Modifier) {
+    override fun previewImpl(modifier: Modifier) {
         var horizontal: Arrangement.Horizontal = Arrangement.Start
         var vertical: Alignment.Vertical = Alignment.Top
         when (element.align) {

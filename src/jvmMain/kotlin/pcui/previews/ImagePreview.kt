@@ -14,7 +14,7 @@ import java.io.FileInputStream
 
 class ImagePreview(element: ImageElement, viewModel: PageMainViewModel) : ElementPreview<ImageElement>(element, viewModel) {
     @Composable
-    override fun preview(modifier: Modifier) {
+    override fun previewImpl(modifier: Modifier) {
         val bitmap: ImageBitmap = remember { loadImageBitmap(FileInputStream(element.filePath)) }
         Image(
             painter = BitmapPainter(bitmap),

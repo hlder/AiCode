@@ -9,7 +9,7 @@ import pcui.previews.propertys.ModifierPreview
 
 class SpacePreview(element: SpaceElement, viewModel: PageMainViewModel) : ElementPreview<SpaceElement>(element, viewModel) {
     @Composable
-    override fun preview(modifier: Modifier) {
+    override fun previewImpl(modifier: Modifier) {
         Spacer(
             modifier = modifier.then(ModifierPreview(element).getModifier())
         )

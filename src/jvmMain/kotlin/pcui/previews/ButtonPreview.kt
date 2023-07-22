@@ -8,7 +8,7 @@ import pcui.main.PageMainViewModel
 
 class ButtonPreview(element: ButtonElement, viewModel: PageMainViewModel) : ElementPreview<ButtonElement>(element, viewModel) {
     @Composable
-    override fun preview(modifier: Modifier) {
+    override fun previewImpl(modifier: Modifier) {
         Button(
             modifier = modifier,
             onClick = {}

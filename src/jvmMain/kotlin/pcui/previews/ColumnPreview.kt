@@ -12,7 +12,7 @@ import pcui.main.PageMainViewModel
 
 class ColumnPreview(element: ColumnElement, viewModel: PageMainViewModel): ElementPreview<ColumnElement>(element, viewModel) {
     @Composable
-    override fun preview(modifier: Modifier) {
+    override fun previewImpl(modifier: Modifier) {
         var horizontal: Alignment.Horizontal = Alignment.Start
         var vertical: Arrangement.Vertical = Arrangement.Top
         when (element.align) {

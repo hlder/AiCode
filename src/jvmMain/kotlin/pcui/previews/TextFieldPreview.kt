@@ -13,7 +13,7 @@ import widgets.HintTextFiled
 
 class TextFieldPreview(element: TextFieldElement, viewModel: PageMainViewModel) : ElementPreview<TextFieldElement>(element, viewModel) {
     @Composable
-    override fun preview(modifier: Modifier) {
+    override fun previewImpl(modifier: Modifier) {
         HintTextFiled(
             textStyle = TextStyle(
                 fontSize = element.textSize?.sp?:TextUnit.Unspecified,
