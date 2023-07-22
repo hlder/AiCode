@@ -5,7 +5,6 @@ import createcode.templatecode.elements.ElementCreator
 import createcode.templatecode.elements.TextFieldCreator
 import pcui.beans.Element
 import androidx.compose.ui.text.style.TextAlign
-import pcui.beans.TextWeight
 import pcui.main.PageMainViewModel
 import pcui.previews.ElementPreview
 import pcui.previews.TextFieldPreview

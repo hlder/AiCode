@@ -12,7 +12,7 @@ import pcui.main.PageMainViewModel
 
 @Composable
 fun PageCenter(viewModel: PageMainViewModel) {
-    val listVersion = remember { viewModel.version }
+    val listVersion = remember { viewModel.movePositionVersion }
     Row() {
         Spacer(modifier = Modifier.fillMaxWidth().weight(1f))
         Column(modifier = Modifier.width(480.dp).fillMaxHeight().background(color = Color.Black)) {

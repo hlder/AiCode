@@ -103,10 +103,10 @@ class PageLeftViewModel(private val page: Page) {
     /**
      * 松开时，移动元素的位置
      */
-    fun doMoveElement() {
+    fun doMoveElement(): Boolean {
         val downElement = dragDrownInfo?.first
         val movedElement = dragMovedInfo?.first
-        if (
+        return if (
             downElement != null
             && movedElement != null
             && downElement != movedElement
@@ -122,6 +122,9 @@ class PageLeftViewModel(private val page: Page) {
                 println("elementId:${it.id}")
             }
             println("-----------------------------------------------------------------------------------")
+            true
+        } else {
+            false
         }
     }
 

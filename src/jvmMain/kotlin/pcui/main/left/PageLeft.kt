@@ -65,8 +65,9 @@ fun PageLeft(viewModel: PageMainViewModel) {
             eventType = PointerEventType.Release,
             onEvent = {
                 val event = it.awtEventOrNull
-                pageLeftViewModel.doMoveElement()
-                viewModel.version.value++
+                if (pageLeftViewModel.doMoveElement()) {
+                    viewModel.movePositionVersion.value++
+                }
                 isNeedDrag.value = false
             },
         ).pointerInput(Unit) {

@@ -5,11 +5,11 @@ import androidx.compose.ui.graphics.Color
 import pcui.beans.Page
 import androidx.compose.ui.text.style.TextAlign
 import pcui.beans.Element
-import pcui.beans.TextWeight
 import pcui.beans.elements.*
 
 class PageMainViewModel {
-    val version = mutableStateOf(0)
+    // 元素移动位置的版本号
+    val movePositionVersion = mutableStateOf(0)
     val nowSelectedElement = mutableStateOf<Element?>(null)
     val listPage: List<Page> = ArrayList<Page>().apply {
         add(

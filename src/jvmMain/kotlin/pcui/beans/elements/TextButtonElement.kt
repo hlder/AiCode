@@ -4,7 +4,6 @@ import androidx.compose.ui.graphics.Color
 import createcode.templatecode.elements.ElementCreator
 import createcode.templatecode.elements.TextButtonCreator
 import pcui.beans.Element
-import pcui.beans.TextWeight
 import pcui.main.PageMainViewModel
 import pcui.previews.ElementPreview
 import pcui.previews.TextButtonPreview

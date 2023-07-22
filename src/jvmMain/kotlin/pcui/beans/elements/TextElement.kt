@@ -1,11 +1,11 @@
 package pcui.beans.elements
 
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import createcode.templatecode.elements.ElementCreator
 import createcode.templatecode.elements.TextCreator
 import pcui.beans.Element
 import androidx.compose.ui.text.style.TextAlign
-import pcui.beans.TextWeight
 import pcui.main.PageMainViewModel
 import pcui.previews.ElementPreview
 import pcui.previews.TextPreview
@@ -29,4 +29,50 @@ open class TextElement(
 ) : Element(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor,backgroundRounded, weight) {
     override fun createElementCreator(space: String): ElementCreator<out Element> = TextCreator(this, space)
     override fun createElementPreview(viewModel: PageMainViewModel): ElementPreview<out Element> = TextPreview(this, viewModel)
+}
+
+enum class TextWeight {
+    W100, W200, W300, W400, W500, W600, W700, W800, W900, Thin, ExtraLight, Light, Normal, Medium, SemiBold, Bold, ExtraBold, Black;
+
+    fun getFontWeight(): FontWeight {
+        return if (this == W100) {
+            FontWeight.W100
+        } else if (this == W200) {
+            FontWeight.W100
+        } else if (this == W300) {
+            FontWeight.W300
+        } else if (this == W400) {
+            FontWeight.W400
+        } else if (this == W500) {
+            FontWeight.W500
+        } else if (this == W600) {
+            FontWeight.W600
+        } else if (this == W700) {
+            FontWeight.W700
+        } else if (this == W800) {
+            FontWeight.W800
+        } else if (this == W900) {
+            FontWeight.W900
+        } else if (this == Thin) {
+            FontWeight.Thin
+        } else if (this == ExtraLight) {
+            FontWeight.ExtraLight
+        } else if (this == Light) {
+            FontWeight.Normal
+        } else if (this == Normal) {
+            FontWeight.Normal
+        } else if (this == Medium) {
+            FontWeight.Medium
+        } else if (this == SemiBold) {
+            FontWeight.SemiBold
+        } else if (this == Bold) {
+            FontWeight.Bold
+        } else if (this == ExtraBold) {
+            FontWeight.ExtraBold
+        } else if (this == Black) {
+            FontWeight.Black
+        } else {
+            FontWeight.W100
+        }
+    }
 }

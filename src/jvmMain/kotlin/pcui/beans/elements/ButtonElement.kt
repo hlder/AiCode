@@ -6,7 +6,6 @@ import createcode.templatecode.elements.ButtonCreator
 import createcode.templatecode.elements.ElementCreator
 import createcode.util.toCodeString
 import pcui.beans.Element
-import pcui.beans.TextWeight
 import pcui.main.PageMainViewModel
 import pcui.previews.ButtonPreview
 import pcui.previews.ElementPreview
