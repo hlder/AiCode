@@ -84,7 +84,7 @@ class PageRightView(private val viewModel: PageMainViewModel) {
                 Row(modifier = Modifier.padding(top = 5.dp)) {
                     ItemHintTextFiled(
                         viewModel,
-                        hint = "topLeft",
+                        hint = "左上角",
                         text = "${nowSelectedElement?.backgroundRoundTopLeft ?: ""}",
                         modifier = Modifier.weight(2f).padding(start = 10.dp)
                     ) { text ->
@@ -92,7 +92,7 @@ class PageRightView(private val viewModel: PageMainViewModel) {
                     }
                     ItemHintTextFiled(
                         viewModel,
-                        hint = "bottomLeft",
+                        hint = "左下角",
                         text = "${nowSelectedElement?.backgroundRoundBottomLeft ?: ""}",
                         modifier = Modifier.weight(2f).padding(start = 10.dp)
                     ) { text ->
@@ -100,7 +100,7 @@ class PageRightView(private val viewModel: PageMainViewModel) {
                     }
                     ItemHintTextFiled(
                         viewModel,
-                        hint = "topRight",
+                        hint = "右上角",
                         text = "${nowSelectedElement?.backgroundRoundTopRight ?: ""}",
                         modifier = Modifier.weight(2f).padding(start = 10.dp)
                     ) { text ->
@@ -108,7 +108,7 @@ class PageRightView(private val viewModel: PageMainViewModel) {
                     }
                     ItemHintTextFiled(
                         viewModel,
-                        hint = "bottomRight",
+                        hint = "右下角",
                         text = "${nowSelectedElement?.backgroundRoundBottomRight ?: ""}",
                         modifier = Modifier.weight(2f).padding(start = 10.dp)
                     ) { text ->
@@ -191,27 +191,5 @@ class PageRightView(private val viewModel: PageMainViewModel) {
                 fontSize = 12.sp,
             )
         )
-//        val changeParamVersion = remember { viewModel.changeParamVersion }
-//
-//        val inputText = remember { mutableStateOf("") }
-//
-//        val lastText = remember { mutableStateOf(text) }
-//        if (lastText.value != text) {
-//            inputText.value = text ?: ""
-//            lastText.value = text
-//        }
-//        HintTextFiled(
-//            value = inputText.value, hint = hint, onValueChange = {
-//                inputText.value = it
-//                onValueChange?.invoke(it)
-//                viewModel.changeParamVersion.value++
-//            },
-//            modifier = Modifier.then(modifier).background(color = Color.White),
-//            textStyle = TextStyle(
-//                color = Color.Black,
-//                lineHeight = 14.sp,
-//                fontSize = 12.sp,
-//            )
-//        )
     }
 }
