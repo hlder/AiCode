@@ -22,37 +22,98 @@ class PageRightView(private val viewModel: PageMainViewModel) {
     @Composable
     fun BaseConfig() {
         val nowSelectedElement = remember { viewModel.nowSelectedElement }.value
+        viewModel.changeParamVersion.value
         println("-----------baseConfig id:${nowSelectedElement?.id}")
         Column {
             Text("基础配置", modifier = Modifier.fillMaxWidth().padding(10.dp))
-            ItemConfig("设置ID:", "(全局唯一)", nowSelectedElement?.id ?: "")
-            ItemConfig("宽度:", "", "${nowSelectedElement?.width ?: ""}")
-            ItemConfig("高度:", text = "${nowSelectedElement?.height ?: ""}")
+            ItemConfig(viewModel, "设置ID:", "(全局唯一)", nowSelectedElement?.id ?: "") {
+                nowSelectedElement?.id = it
+            }
+            ItemConfig(viewModel, "宽度:", "", "${nowSelectedElement?.width ?: ""}") { text ->
+                nowSelectedElement?.width = getIntValue(text,nowSelectedElement?.width)
+            }
+            ItemConfig(viewModel, "高度:", text = "${nowSelectedElement?.height ?: ""}") { text ->
+                nowSelectedElement?.height = getIntValue(text,nowSelectedElement?.height)
+            }
             Column(
                 modifier = Modifier.fillMaxWidth().padding(top = 5.dp, bottom = 5.dp, start = 20.dp, end = 10.dp)
             ) {
                 ItemLabel("内间距(padding)")
                 Row(modifier = Modifier.padding(top = 5.dp)) {
-                    ItemHintTextFiled("top", modifier = Modifier.weight(2f).padding(start = 10.dp))
-                    ItemHintTextFiled("bottom", modifier = Modifier.weight(2f).padding(start = 10.dp))
-                    ItemHintTextFiled("left", modifier = Modifier.weight(2f).padding(start = 10.dp))
-                    ItemHintTextFiled("right", modifier = Modifier.weight(2f).padding(start = 10.dp))
+                    ItemHintTextFiled(
+                        viewModel,
+                        hint = "top",
+                        text = "${nowSelectedElement?.paddingTop ?: ""}",
+                        modifier = Modifier.weight(2f).padding(start = 10.dp)
+                    ) { text ->
+                        nowSelectedElement?.paddingTop = getIntValue(text,nowSelectedElement?.paddingTop)
+                    }
+                    ItemHintTextFiled(
+                        viewModel,
+                        hint = "bottom",
+                        text = "${nowSelectedElement?.paddingBottom ?: ""}",
+                        modifier = Modifier.weight(2f).padding(start = 10.dp)
+                    ) { text ->
+                        nowSelectedElement?.paddingBottom = getIntValue(text,nowSelectedElement?.paddingBottom)
+                    }
+                    ItemHintTextFiled(
+                        viewModel,
+                        hint = "start",
+                        text = "${nowSelectedElement?.paddingStart ?: ""}",
+                        modifier = Modifier.weight(2f).padding(start = 10.dp)
+                    ) { text ->
+                        nowSelectedElement?.paddingStart = getIntValue(text,nowSelectedElement?.paddingStart)
+                    }
+                    ItemHintTextFiled(
+                        viewModel,
+                        hint = "end",
+                        text = "${nowSelectedElement?.paddingEnd ?: ""}",
+                        modifier = Modifier.weight(2f).padding(start = 10.dp)
+                    ) { text ->
+                        nowSelectedElement?.paddingEnd = getIntValue(text,nowSelectedElement?.paddingEnd)
+                    }
                 }
             }
-            ItemConfig("背景颜色:", text = "${nowSelectedElement?.backgroundColor ?: ""}")
-            ItemConfig("背景圆角弧度:", text = "${nowSelectedElement?.backgroundRounded ?: ""}")
-            ItemConfig("设置权重:", "（权重越大占位越多）", "${nowSelectedElement?.weight ?: ""}")
+            ItemConfig(viewModel, "背景颜色:", text = "${nowSelectedElement?.backgroundColor ?: ""}") {
+            }
+            ItemConfig(viewModel, "背景圆角弧度:", text = "${nowSelectedElement?.backgroundRounded ?: ""}") {
+                nowSelectedElement?.backgroundRounded = it.toIntOrNull()
+            }
+            ItemConfig(viewModel, "设置权重:", "（权重越大占位越多）", "${nowSelectedElement?.weight ?: ""}") {
+            }
+        }
+    }
+
+    // 转int，如果转不了则返回原本的值
+    private fun getIntValue(text: String, def: Int?): Int? {
+        return if (text.isNotEmpty()) {
+            text.toIntOrNull() ?: def
+        } else {
+            null
         }
     }
 
     @Composable
-    private fun ItemConfig(label: String, hint: String = "", text: String = "", modifier: Modifier = Modifier) {
+    private fun ItemConfig(
+        viewModel: PageMainViewModel,
+        label: String,
+        hint: String = "",
+        text: String? = null,
+        modifier: Modifier = Modifier,
+        onValueChange: ((String) -> Unit)? = null
+    ) {
         Row(
             modifier = Modifier.then(modifier).fillMaxWidth()
                 .padding(top = 5.dp, bottom = 5.dp, start = 20.dp, end = 10.dp)
         ) {
             ItemLabel(label, Modifier.weight(1f).align(Alignment.CenterVertically))
-            ItemHintTextFiled(hint, text, Modifier.weight(2f).align(Alignment.CenterVertically))
+            ItemHintTextFiled(
+                viewModel,
+                hint,
+                text,
+                onValueChange = onValueChange,
+                modifier = Modifier.weight(2f).align(Alignment.CenterVertically)
+            )
         }
     }
 
@@ -64,12 +125,17 @@ class PageRightView(private val viewModel: PageMainViewModel) {
     }
 
     @Composable
-    private fun ItemHintTextFiled(hint: String, text: String = "", modifier: Modifier = Modifier) {
-        val inputText = remember { mutableStateOf("") }
-        inputText.value = text
+    private fun ItemHintTextFiled(
+        viewModel: PageMainViewModel,
+        hint: String,
+        text: String? = null,
+        modifier: Modifier = Modifier,
+        onValueChange: ((String) -> Unit)? = null
+    ) {
         HintTextFiled(
-            value = inputText.value, hint = hint, onValueChange = {
-                inputText.value = it
+            value = text ?: "", hint = hint, onValueChange = {
+                onValueChange?.invoke(it)
+                viewModel.changeParamVersion.value++
             },
             modifier = Modifier.then(modifier).background(color = Color.White),
             textStyle = TextStyle(
@@ -78,5 +144,27 @@ class PageRightView(private val viewModel: PageMainViewModel) {
                 fontSize = 12.sp,
             )
         )
+//        val changeParamVersion = remember { viewModel.changeParamVersion }
+//
+//        val inputText = remember { mutableStateOf("") }
+//
+//        val lastText = remember { mutableStateOf(text) }
+//        if (lastText.value != text) {
+//            inputText.value = text ?: ""
+//            lastText.value = text
+//        }
+//        HintTextFiled(
+//            value = inputText.value, hint = hint, onValueChange = {
+//                inputText.value = it
+//                onValueChange?.invoke(it)
+//                viewModel.changeParamVersion.value++
+//            },
+//            modifier = Modifier.then(modifier).background(color = Color.White),
+//            textStyle = TextStyle(
+//                color = Color.Black,
+//                lineHeight = 14.sp,
+//                fontSize = 12.sp,
+//            )
+//        )
     }
 }

@@ -38,12 +38,12 @@ abstract class ElementPreview<T : Element>(val element: T, val viewModel: PageMa
                 val boxModifierWidth = if (element.width == null || element.width == 0) {
                     Modifier.fillMaxWidth()
                 } else {
-                    Modifier.width(element.width.dp)
+                    Modifier.width((element.width?:0).dp)
                 }
                 val boxModifierHeight = if (element.height == null || element.height == 0) {
                     Modifier.fillMaxHeight()
                 } else {
-                    Modifier.height(element.height.dp)
+                    Modifier.height((element.height?:0).dp)
                 }
                 Spacer(modifier = Modifier.then(boxModifierWidth).then(boxModifierHeight))
             }

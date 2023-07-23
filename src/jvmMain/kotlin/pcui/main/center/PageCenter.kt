@@ -12,14 +12,17 @@ import pcui.main.PageMainViewModel
 
 @Composable
 fun PageCenter(viewModel: PageMainViewModel) {
-    val listVersion = remember { viewModel.movePositionVersion }
+    val movePositionVersion = remember { viewModel.movePositionVersion }.value
+    val changeParamVersion = remember { viewModel.changeParamVersion }.value
+
     Row() {
         Spacer(modifier = Modifier.fillMaxWidth().weight(1f))
-        Column(modifier = Modifier.width(480.dp).fillMaxHeight().background(color = Color.Black)) {
+        Column(modifier = Modifier.width(410.dp).fillMaxHeight().background(color = Color.Black)) {
             PhonePreview(viewModel.listPage[1], viewModel)
         }
         Column(modifier = Modifier.fillMaxWidth().weight(1f)) {
-            Text("版本:${listVersion.value}")
+            Text("位置版本:${movePositionVersion}")
+            Text("参数版本:${changeParamVersion}")
         }
 //        Spacer(modifier = Modifier.fillMaxWidth().weight(1f))
     }

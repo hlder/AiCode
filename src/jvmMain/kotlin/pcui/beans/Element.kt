@@ -9,16 +9,16 @@ import pcui.main.PageMainViewModel
 import pcui.previews.ElementPreview
 
 abstract class Element(
-    val id: String, // element的id
-    val width: Int?, // 大于等于Int.MAX_VALUE表示充满，其他则直接设置
-    val height: Int?, // 大于等于Int.MAX_VALUE表示充满，其他则直接设置
-    val paddingTop: Int?,
-    val paddingBottom: Int?,
-    val paddingStart: Int?,
-    val paddingEnd: Int?,
-    val backgroundColor: Color?, // 背景颜色
-    val backgroundRounded:Int?, // 背景的圆角
-    val weight: Float?, // 权重，可以设置平均分配
+    var id: String, // element的id
+    var width: Int?, // 大于等于Int.MAX_VALUE表示充满，其他则直接设置
+    var height: Int?, // 大于等于Int.MAX_VALUE表示充满，其他则直接设置
+    var paddingTop: Int?,
+    var paddingBottom: Int?,
+    var paddingStart: Int?,
+    var paddingEnd: Int?,
+    var backgroundColor: Color?, // 背景颜色
+    var backgroundRounded:Int?, // 背景的圆角
+    var weight: Float?, // 权重，可以设置平均分配
 ) {
     private var elementCreator: ElementCreator<out Element>? = null
 

@@ -8,6 +8,8 @@ import pcui.beans.Element
 import pcui.beans.elements.*
 
 class PageMainViewModel {
+    // 元素参数修改的版本号
+    val changeParamVersion = mutableStateOf(0)
     // 元素移动位置的版本号
     val movePositionVersion = mutableStateOf(0)
     // 当前选择的element
