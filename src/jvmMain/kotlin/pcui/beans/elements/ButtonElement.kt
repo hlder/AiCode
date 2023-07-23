@@ -19,7 +19,10 @@ open class ButtonElement(
     paddingStart: Int? = null,
     paddingEnd: Int? = null,
     backgroundColor: Color? = null, // 背景颜色
-    backgroundRounded: Int? = null, // 背景的圆角
+    backgroundRoundTopLeft: Int? = null, // 背景的圆角左上角
+    backgroundRoundTopRight: Int? = null, // 背景的圆角右上角
+    backgroundRoundBottomLeft: Int? = null, // 背景的圆角左下角
+    backgroundRoundBottomRight: Int? = null, // 背景的圆角右下角
     text: String? = null, // 文本内容
     textColor: Color? = null, //字体颜色
     textSize: Int? = null, // 字体大小，dp
@@ -27,9 +30,29 @@ open class ButtonElement(
     textAlign: TextAlign? = null, // 文字的对齐方式
     weight: Float? = null,
     val buttonAction: ButtonAction // 按钮的行为（点击事件跳转）
-) : TextElement(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, backgroundRounded, weight, text, textColor, textSize, textWeight, textAlign) {
+) : TextElement(
+    id,
+    width,
+    height,
+    paddingTop,
+    paddingBottom,
+    paddingStart,
+    paddingEnd,
+    backgroundColor,
+    backgroundRoundTopLeft,
+    backgroundRoundTopRight,
+    backgroundRoundBottomLeft,
+    backgroundRoundBottomRight,
+    weight,
+    text,
+    textColor,
+    textSize,
+    textWeight,
+    textAlign
+) {
     override fun createElementCreator(space: String): ElementCreator<out Element> = ButtonCreator(this, space)
-    override fun createElementPreview(viewModel: PageMainViewModel): ElementPreview<out Element> = ButtonPreview(this, viewModel)
+    override fun createElementPreview(viewModel: PageMainViewModel): ElementPreview<out Element> =
+        ButtonPreview(this, viewModel)
 }
 
 data class Action(

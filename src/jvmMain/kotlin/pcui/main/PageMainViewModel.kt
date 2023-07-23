@@ -34,7 +34,10 @@ class PageMainViewModel {
                         ColumnElement(
                             id = "homeTopLayout1",
                             backgroundColor = Color.White,
-                            backgroundRounded = 10,
+                            backgroundRoundBottomLeft = 10,
+                            backgroundRoundBottomRight = 10,
+                            backgroundRoundTopLeft = 10,
+                            backgroundRoundTopRight = 10,
                             paddingTop = 10,
                             paddingBottom = 10,
                             childs = mutableListOf(
@@ -249,6 +252,27 @@ class PageMainViewModel {
                             text = "aaaaa2",
                             backgroundColor = Color.Blue,
                             width = 100
+                        ),
+                        ColumnElement(
+                            id = "row1",
+                            width = 250,
+                            height = 80,
+                            backgroundColor = Color.White,
+                            childs = mutableListOf(
+                                TextElement(
+                                    id = "text5",
+                                    text = "text1"
+                                ),
+                                SpaceElement(
+                                    id = "space3",
+                                    height = 10
+                                ),
+                                TextElement(
+                                    id = "text6",
+                                    text = "text2",
+                                    textColor = Color.Red
+                                )
+                            )
                         ),
                         TextFieldElement(
                             id = "textField1",

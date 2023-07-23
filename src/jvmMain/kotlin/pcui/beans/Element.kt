@@ -1,8 +1,6 @@
 package pcui.beans
 
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import createcode.templatecode.elements.ElementCreator
 import pcui.beans.elements.LayoutElement
 import pcui.main.PageMainViewModel
@@ -17,7 +15,10 @@ abstract class Element(
     var paddingStart: Int?,
     var paddingEnd: Int?,
     var backgroundColor: Color?, // 背景颜色
-    var backgroundRounded:Int?, // 背景的圆角
+    var backgroundRoundTopLeft:Int?, // 背景的圆角左上角
+    var backgroundRoundTopRight:Int?, // 背景的圆角右上角
+    var backgroundRoundBottomLeft:Int?, // 背景的圆角左下角
+    var backgroundRoundBottomRight:Int?, // 背景的圆角右下角
     var weight: Float?, // 权重，可以设置平均分配
 ) {
     private var elementCreator: ElementCreator<out Element>? = null

@@ -8,10 +8,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.unit.dp
 import pcui.beans.Element
 import pcui.beans.elements.LayoutElement
-import pcui.beans.elements.SpaceElement
 import pcui.main.PageMainViewModel
 
 abstract class ElementPreview<T : Element>(val element: T, val viewModel: PageMainViewModel) {
@@ -34,20 +32,19 @@ abstract class ElementPreview<T : Element>(val element: T, val viewModel: PageMa
         }
 
         Box(modifier = Modifier.then(boxClickModifier)) {
-            if (element is SpaceElement) {
-                val boxModifierWidth = if (element.width == null || element.width == 0) {
-                    Modifier.fillMaxWidth()
-                } else {
-                    Modifier.width((element.width?:0).dp)
-                }
-                val boxModifierHeight = if (element.height == null || element.height == 0) {
-                    Modifier.fillMaxHeight()
-                } else {
-                    Modifier.height((element.height?:0).dp)
-                }
-                Spacer(modifier = Modifier.then(boxModifierWidth).then(boxModifierHeight))
-            }
-
+//            if (element is SpaceElement) {
+//                val boxModifierWidth = if (element.width == null || element.width == 0) {
+//                    Modifier.fillMaxWidth()
+//                } else {
+//                    Modifier.width((element.width ?: 0).dp)
+//                }
+//                val boxModifierHeight = if (element.height == null || element.height == 0) {
+//                    Modifier.fillMaxHeight()
+//                } else {
+//                    Modifier.height((element.height ?: 0).dp)
+//                }
+//                Spacer(modifier = Modifier.then(boxModifierWidth).then(boxModifierHeight))
+//            }
             if (nowSelectedElement.value == element) {
                 previewImpl(Modifier.then(modifier))
                 Spacer(modifier = Modifier.matchParentSize().background(color = Color(0x66000000)))

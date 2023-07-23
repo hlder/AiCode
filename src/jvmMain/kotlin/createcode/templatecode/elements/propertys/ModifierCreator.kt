@@ -78,21 +78,6 @@ class ModifierCreator(private val element: Element, private val space: String) {
     }
 
     /**
-     * 添加背景颜色的代码
-     */
-    private fun addBackgroundColorCode() {
-        element.backgroundColor?.let {
-            importSets.add("import androidx.compose.foundation.background")
-            importSets.add("import androidx.compose.ui.graphics.Color")
-            importSets.add("import androidx.compose.foundation.shape.RoundedCornerShape")
-            val shapeStr = element.backgroundRounded?.let { rounded ->
-                "RoundedCornerShape($rounded.dp)"
-            } ?: ""
-            modifierSb.append("\n${space}${ITEM_SPACE}.background(color = ${getColorCodeStr(it)}, ${shapeStr})")
-        }
-    }
-
-    /**
      * 添加权重的代码(运用于弹性布局)
      */
     private fun addWeightCode() {
@@ -117,6 +102,42 @@ class ModifierCreator(private val element: Element, private val space: String) {
 
             importSets.add("import androidx.compose.foundation.rememberScrollState")
             importSets.add("import androidx.compose.foundation.verticalScroll")
+        }
+    }
+
+    /**
+     * 添加背景颜色的代码
+     */
+    private fun addBackgroundColorCode() {
+        element.backgroundColor?.let { color->
+            importSets.add("import androidx.compose.foundation.background")
+            importSets.add("import androidx.compose.ui.graphics.Color")
+            importSets.add("import androidx.compose.ui.unit.dp")
+            importSets.add("import androidx.compose.foundation.shape.RoundedCornerShape")
+            val shapeSb = StringBuffer()
+            element.backgroundRoundTopLeft?.let {
+                shapeSb.append("topStart = ${it}.dp,")
+            }
+            element.backgroundRoundTopRight?.let {
+                shapeSb.append("topEnd = ${it}.dp,")
+            }
+            element.backgroundRoundBottomLeft?.let {
+                shapeSb.append("bottomStart = ${it}.dp,")
+            }
+            element.backgroundRoundBottomRight?.let {
+                shapeSb.append("bottomEnd = ${it}.dp,")
+            }
+
+            val shapeStr = if (shapeSb.isNotEmpty()) {
+                shapeSb.replace(shapeSb.length - 1, shapeSb.length, "")
+                "RoundedCornerShape(${shapeSb.toString()})"
+            }else{
+                ""
+            }
+//            val shapeStr = element.backgroundRounded?.let { rounded ->
+//                "RoundedCornerShape($rounded.dp)"
+//            } ?: ""
+            modifierSb.append("\n${space}${ITEM_SPACE}.background(color = ${getColorCodeStr(color)}, ${shapeStr})")
         }
     }
 

@@ -76,10 +76,48 @@ class PageRightView(private val viewModel: PageMainViewModel) {
             }
             ItemConfig(viewModel, "背景颜色:", text = "${nowSelectedElement?.backgroundColor ?: ""}") {
             }
-            ItemConfig(viewModel, "背景圆角弧度:", text = "${nowSelectedElement?.backgroundRounded ?: ""}") {
-                nowSelectedElement?.backgroundRounded = it.toIntOrNull()
+
+            Column(
+                modifier = Modifier.fillMaxWidth().padding(top = 5.dp, bottom = 5.dp, start = 20.dp, end = 10.dp)
+            ) {
+                ItemLabel("背景圆角弧度")
+                Row(modifier = Modifier.padding(top = 5.dp)) {
+                    ItemHintTextFiled(
+                        viewModel,
+                        hint = "topLeft",
+                        text = "${nowSelectedElement?.backgroundRoundTopLeft ?: ""}",
+                        modifier = Modifier.weight(2f).padding(start = 10.dp)
+                    ) { text ->
+                        nowSelectedElement?.backgroundRoundTopLeft = getIntValue(text,nowSelectedElement?.backgroundRoundTopLeft)
+                    }
+                    ItemHintTextFiled(
+                        viewModel,
+                        hint = "bottomLeft",
+                        text = "${nowSelectedElement?.backgroundRoundBottomLeft ?: ""}",
+                        modifier = Modifier.weight(2f).padding(start = 10.dp)
+                    ) { text ->
+                        nowSelectedElement?.backgroundRoundBottomLeft = getIntValue(text,nowSelectedElement?.backgroundRoundBottomLeft)
+                    }
+                    ItemHintTextFiled(
+                        viewModel,
+                        hint = "topRight",
+                        text = "${nowSelectedElement?.backgroundRoundTopRight ?: ""}",
+                        modifier = Modifier.weight(2f).padding(start = 10.dp)
+                    ) { text ->
+                        nowSelectedElement?.backgroundRoundTopRight = getIntValue(text,nowSelectedElement?.backgroundRoundTopRight)
+                    }
+                    ItemHintTextFiled(
+                        viewModel,
+                        hint = "bottomRight",
+                        text = "${nowSelectedElement?.backgroundRoundBottomRight ?: ""}",
+                        modifier = Modifier.weight(2f).padding(start = 10.dp)
+                    ) { text ->
+                        nowSelectedElement?.backgroundRoundBottomRight = getIntValue(text,nowSelectedElement?.backgroundRoundBottomRight)
+                    }
+                }
             }
-            ItemConfig(viewModel, "设置权重:", "（权重越大占位越多）", "${nowSelectedElement?.weight ?: ""}") {
+            ItemConfig(viewModel, "设置权重:", "（权重越大占位越多）", "${nowSelectedElement?.weight ?: ""}") {text ->
+                nowSelectedElement?.weight = getFloatValue(text,nowSelectedElement?.weight)
             }
         }
     }
@@ -88,6 +126,15 @@ class PageRightView(private val viewModel: PageMainViewModel) {
     private fun getIntValue(text: String, def: Int?): Int? {
         return if (text.isNotEmpty()) {
             text.toIntOrNull() ?: def
+        } else {
+            null
+        }
+    }
+
+    // 转float，如果转不了则返回原本的值
+    private fun getFloatValue(text: String, def: Float?): Float? {
+        return if (text.isNotEmpty()) {
+            text.toFloatOrNull() ?: def
         } else {
             null
         }

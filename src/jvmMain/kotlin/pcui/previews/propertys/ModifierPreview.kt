@@ -32,11 +32,13 @@ class ModifierPreview(private val element: Element) {
         } ?: Modifier.wrapContentHeight()
 
         val backGroundModifier = element.backgroundColor?.let {
-            if (element.backgroundRounded != null) {
-                Modifier.background(color = it, RoundedCornerShape((element.backgroundRounded?:0).dp))
-            } else {
-                Modifier.background(color = it)
-            }
+            val roundedCornerShape = RoundedCornerShape(
+                topStart = element.backgroundRoundTopLeft?.dp?:0.dp,
+                topEnd = element.backgroundRoundTopRight?.dp?:0.dp,
+                bottomStart = element.backgroundRoundBottomLeft?.dp?:0.dp,
+                bottomEnd = element.backgroundRoundBottomRight?.dp?:0.dp,
+            )
+            Modifier.background(color = it, roundedCornerShape)
         } ?: Modifier
 
         val paddingModifier = Modifier.padding(

@@ -18,7 +18,10 @@ open class TextFieldElement(
     paddingStart: Int? = null,
     paddingEnd: Int? = null,
     backgroundColor: Color? = null, // 背景颜色
-    backgroundRounded: Int? = null, // 背景的圆角
+    backgroundRoundTopLeft: Int? = null, // 背景的圆角左上角
+    backgroundRoundTopRight: Int? = null, // 背景的圆角右上角
+    backgroundRoundBottomLeft: Int? = null, // 背景的圆角左下角
+    backgroundRoundBottomRight: Int? = null, // 背景的圆角右下角
     weight: Float? = null,
     val text: String? = null, // 文本内容
     val hintText: String? = null, // 提示文字
@@ -26,7 +29,22 @@ open class TextFieldElement(
     val textSize: Int? = null, // 字体大小，dp
     val textWeight: TextWeight? = null, // 字体的粗细
     val textAlign: TextAlign? = null // 文字的对齐方式
-) : Element(id, width, height, paddingTop, paddingBottom, paddingStart, paddingEnd, backgroundColor, backgroundRounded, weight) {
+) : Element(
+    id,
+    width,
+    height,
+    paddingTop,
+    paddingBottom,
+    paddingStart,
+    paddingEnd,
+    backgroundColor,
+    backgroundRoundTopLeft,
+    backgroundRoundTopRight,
+    backgroundRoundBottomLeft,
+    backgroundRoundBottomRight,
+    weight
+) {
     override fun createElementCreator(space: String): ElementCreator<out Element> = TextFieldCreator(this, space)
-    override fun createElementPreview(viewModel: PageMainViewModel): ElementPreview<out Element> = TextFieldPreview(this, viewModel)
+    override fun createElementPreview(viewModel: PageMainViewModel): ElementPreview<out Element> =
+        TextFieldPreview(this, viewModel)
 }

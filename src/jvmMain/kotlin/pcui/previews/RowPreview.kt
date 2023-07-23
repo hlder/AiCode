@@ -54,6 +54,7 @@ class RowPreview(element: RowElement, viewModel: PageMainViewModel) : ElementPre
                 horizontal = Arrangement.End
                 vertical = Alignment.Bottom
             }
+            else -> {}
         }
         Row(
             modifier = ModifierPreview(element).getModifier().then(modifier),
