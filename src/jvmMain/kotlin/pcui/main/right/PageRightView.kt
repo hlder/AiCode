@@ -74,7 +74,30 @@ class PageRightView(private val viewModel: PageMainViewModel) {
                     }
                 }
             }
-            ItemConfig(viewModel, "背景颜色:", text = "${nowSelectedElement?.backgroundColor ?: ""}") {
+
+            val colorStr = nowSelectedElement?.backgroundColor?.run {
+                val alphaStr = (alpha * 255).toInt().toColorHexString()
+                val redStr = (red * 255).toInt().toColorHexString()
+                val greenStr = (green * 255).toInt().toColorHexString()
+                val blueStr = (blue * 255).toInt().toColorHexString()
+                println("a:${alphaStr} r:${redStr} g:${greenStr} b:${blueStr}")
+                "#${alphaStr}${redStr}${greenStr}${blueStr}"
+            } ?: ""
+            InputBackgroundColor(colorStr) {
+                if (it.length == 6) {
+                    val red = it.substring(0, 1).toColorInt() / 255f
+                    val green = it.substring(2, 3).toColorInt() / 255f
+                    val blue = it.substring(4, 5).toColorInt() / 255f
+                    nowSelectedElement?.backgroundColor = Color(red, green, blue)
+                    viewModel.changeParamVersion.value++
+                } else if (it.length == 8) {
+                    val alpha = it.substring(0, 1).toColorInt() / 255f
+                    val red = it.substring(2, 3).toColorInt() / 255f
+                    val green = it.substring(4, 5).toColorInt() / 255f
+                    val blue = it.substring(6, 7).toColorInt() / 255f
+                    nowSelectedElement?.backgroundColor = Color(alpha, red, green, blue)
+                    viewModel.changeParamVersion.value++
+                }
             }
 
             Column(
@@ -137,6 +160,35 @@ class PageRightView(private val viewModel: PageMainViewModel) {
             text.toFloatOrNull() ?: def
         } else {
             null
+        }
+    }
+
+    /**
+     * 背景颜色输入框
+     */
+    @Composable
+    private fun InputBackgroundColor(text: String, onValueChange: ((String) -> Unit)) {
+        val lastText = remember { mutableStateOf(text) }
+        val inputBackgroundColor = remember { mutableStateOf("") }
+        if(lastText.value != text){
+            lastText.value = text
+            inputBackgroundColor.value = text
+        }
+        Row(
+            modifier = Modifier.fillMaxWidth()
+                .padding(top = 5.dp, bottom = 5.dp, start = 20.dp, end = 10.dp)
+        ) {
+            ItemLabel("背景颜色:", Modifier.weight(1f).align(Alignment.CenterVertically))
+            ItemHintTextFiled(
+                viewModel,
+                "",
+                inputBackgroundColor.value,
+                onValueChange = {
+                    inputBackgroundColor.value = it
+                    onValueChange.invoke(it)
+                },
+                modifier = Modifier.weight(2f).align(Alignment.CenterVertically)
+            )
         }
     }
 
