@@ -14,11 +14,13 @@ import pcui.main.PageMainViewModel
 fun PageCenter(viewModel: PageMainViewModel) {
     val movePositionVersion = remember { viewModel.movePositionVersion }.value
     val changeParamVersion = remember { viewModel.changeParamVersion }.value
+    val nowSelectPage = remember { viewModel.nowSelectPage }.value
+    val selectedPage = viewModel.listPage[nowSelectPage]
 
     Row() {
         Spacer(modifier = Modifier.fillMaxWidth().weight(1f))
         Column(modifier = Modifier.width(410.dp).fillMaxHeight().background(color = Color.Black)) {
-            PhonePreview(viewModel.listPage[1], viewModel)
+            PhonePreview(selectedPage, viewModel)
         }
         Column(modifier = Modifier.fillMaxWidth().weight(1f)) {
             Text("位置版本:${movePositionVersion}")

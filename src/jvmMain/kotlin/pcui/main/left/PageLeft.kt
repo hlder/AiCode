@@ -31,15 +31,15 @@ import java.awt.event.MouseEvent.MOUSE_DRAGGED
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun PageLeft(viewModel: PageMainViewModel) {
-    val page = viewModel.listPage[1]
-    val pageLeftViewModel = remember { PageLeftViewModel(page) }
+    val nowSelectPage = remember { viewModel.nowSelectPage }.value
+    val selectedPage = viewModel.listPage[nowSelectPage]
+    val pageLeftViewModel = remember { PageLeftViewModel(selectedPage) }
 
     val isNeedDrag = remember { mutableStateOf(false) }
 
     val nowSelectedElement = remember { viewModel.nowSelectedElement }
 
     val canvasDrawItem = pageLeftViewModel.findPosition(nowSelectedElement.value)
-//    val canvasDrawItem = remember { mutableStateOf<Triple<Element, Offset, Rect>?>(null) }
 
     // canvas绘制框的位置改变
     val moveCanvasPosition = remember { pageLeftViewModel.dragEvent }
@@ -87,7 +87,7 @@ fun PageLeft(viewModel: PageMainViewModel) {
     ) {
         pageLeftViewModel.clearListPosition()
 
-        showLayers(nowSelectedElement.value, isNeedDrag.value, pageLeftViewModel, page.element, 0)
+        showLayers(nowSelectedElement.value, isNeedDrag.value, pageLeftViewModel, selectedPage.element, 0)
     }
 
     Canvas(modifier = Modifier.fillMaxSize()) {

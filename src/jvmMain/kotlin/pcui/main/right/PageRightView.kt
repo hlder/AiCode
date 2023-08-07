@@ -3,7 +3,9 @@ package pcui.main.right
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -16,6 +18,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import pcui.main.PageMainViewModel
+import pcui.main.right.params.ParamIdSetting
+import pcui.main.right.params.ParamSizeSetting
 import widgets.HintTextFiled
 
 class PageRightView(private val viewModel: PageMainViewModel) {
@@ -26,14 +30,12 @@ class PageRightView(private val viewModel: PageMainViewModel) {
         println("-----------baseConfig id:${nowSelectedElement?.id}")
         Column {
             Text("基础配置", modifier = Modifier.fillMaxWidth().padding(10.dp))
-            ItemConfig(viewModel, "设置ID:", "(全局唯一)", nowSelectedElement?.id ?: "") {
-                nowSelectedElement?.id = it
-            }
-            ItemConfig(viewModel, "宽度:", "", "${nowSelectedElement?.width ?: ""}") { text ->
-                nowSelectedElement?.width = getIntValue(text,nowSelectedElement?.width)
-            }
-            ItemConfig(viewModel, "高度:", text = "${nowSelectedElement?.height ?: ""}") { text ->
-                nowSelectedElement?.height = getIntValue(text,nowSelectedElement?.height)
+            nowSelectedElement?.let {
+                // 设置控件id
+                ParamIdSetting(it) { viewModel.changeParamVersion.value++ }
+                Spacer(modifier = Modifier.height(10.dp))
+                // 控件的大小设置
+                ParamSizeSetting(it) { viewModel.changeParamVersion.value++ }
             }
             Column(
                 modifier = Modifier.fillMaxWidth().padding(top = 5.dp, bottom = 5.dp, start = 20.dp, end = 10.dp)

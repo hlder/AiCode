@@ -11,18 +11,25 @@ import androidx.compose.ui.text.TextStyle
 fun HintTextFiled(
     value: String,
     hint: String? = null,
+    hintColor: Color = Color.Gray,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
     textStyle: TextStyle = TextStyle()
 ) {
-    BasicTextField(textStyle = textStyle,
+    BasicTextField(
+        textStyle = textStyle,
         modifier = modifier,
         value = value,
         singleLine = true,
         onValueChange = onValueChange,
         decorationBox = { innerTextField ->
             if (value.isEmpty() && hint != null) {
-                Text(text = hint, color = Color.Gray, fontSize = textStyle.fontSize)
+                Text(
+                    text = hint,
+                    color = hintColor,
+                    fontSize = textStyle.fontSize,
+                    lineHeight = textStyle.lineHeight
+                )
             }
             innerTextField()
         },

@@ -12,6 +12,7 @@ import pcui.main.center.PageCenter
 import pcui.main.left.PageLeft
 import pcui.main.right.PageRight
 import pcui.main.top.PageTop
+import pcui.theme.WindowColors
 
 @Composable
 fun PageMain() {
@@ -19,15 +20,24 @@ fun PageMain() {
     Column {
         PageTop(viewModel)
         Row {
-            Box(modifier = Modifier.fillMaxHeight().width(300.dp).background(color = Color.Gray)) {
+            Box(
+                modifier = Modifier.fillMaxHeight().width(300.dp)
+                    .background(color = WindowColors.baseBackgroundColor)
+            ) {
                 PageLeft(viewModel)
             }
             Divider(modifier = Modifier.width(1.dp).fillMaxHeight(), color = Color.Black)
-            Box(modifier = Modifier.fillMaxHeight().fillMaxWidth().weight(1f).background(color = Color.Gray)) {
+            Box(
+                modifier = Modifier.fillMaxHeight().fillMaxWidth().weight(1f)
+                    .background(color = WindowColors.baseBackgroundColor)
+            ) {
                 PageCenter(viewModel)
             }
             Divider(modifier = Modifier.width(1.dp).fillMaxHeight(), color = Color.Black)
-            Box(modifier = Modifier.fillMaxHeight().width(300.dp).background(color = Color.Gray)) {
+            Box(
+                modifier = Modifier.fillMaxHeight().width(300.dp)
+                    .background(color = WindowColors.baseBackgroundColor)
+            ) {
                 PageRight(viewModel)
             }
         }

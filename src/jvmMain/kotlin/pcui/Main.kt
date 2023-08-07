@@ -3,8 +3,13 @@ package pcui
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.desktop.ui.tooling.preview.Preview
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material.DropdownMenu
+import androidx.compose.material.DropdownMenuItem
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
@@ -19,7 +24,8 @@ fun main() = application {
     Window(
         onCloseRequest = ::exitApplication,
         state = WindowState(
-            position = WindowPosition.Aligned(Alignment.Center),
+//            position = WindowPosition.Aligned(Alignment.Center),
+//            position = WindowPosition.Aligned(Alignment.Center),
             size = getPreferredWindowSize(1500, 857)
         ),
     ) {
@@ -32,7 +38,6 @@ fun main() = application {
 fun App() {
     MaterialTheme {
         PageMain()
-//        Test()
     }
 }
 
