@@ -11,7 +11,6 @@ import androidx.compose.ui.input.pointer.pointerInput
 import pcui.beans.Element
 import pcui.beans.elements.LayoutElement
 import pcui.main.PageMainViewModel
-import pcui.previews.propertys.ModifierPreview
 
 abstract class ElementPreview<T : Element>(val element: T, val viewModel: PageMainViewModel) {
     @Composable

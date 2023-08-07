@@ -1,26 +1,21 @@
 package pcui.main.right
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import pcui.main.PageMainViewModel
+import pcui.main.right.params.ParamBackGroundColorSetting
 import pcui.main.right.params.ParamIdSetting
+import pcui.main.right.params.ParamPaddingSetting
 import pcui.main.right.params.ParamSizeSetting
-import widgets.HintTextFiled
+import pcui.main.right.params.ParamWeightSetting
 
 class PageRightView(private val viewModel: PageMainViewModel) {
     @Composable
@@ -31,219 +26,24 @@ class PageRightView(private val viewModel: PageMainViewModel) {
         Column {
             Text("基础配置", modifier = Modifier.fillMaxWidth().padding(10.dp))
             nowSelectedElement?.let {
+                val notifyChange: () -> Unit = {
+                    viewModel.changeParamVersion.value++
+                }
                 // 设置控件id
-                ParamIdSetting(it) { viewModel.changeParamVersion.value++ }
+                ParamIdSetting(it, notifyChange)
                 Spacer(modifier = Modifier.height(10.dp))
                 // 控件的大小设置
-                ParamSizeSetting(it) { viewModel.changeParamVersion.value++ }
-            }
-            Column(
-                modifier = Modifier.fillMaxWidth().padding(top = 5.dp, bottom = 5.dp, start = 20.dp, end = 10.dp)
-            ) {
-                ItemLabel("内间距(padding)")
-                Row(modifier = Modifier.padding(top = 5.dp)) {
-                    ItemHintTextFiled(
-                        viewModel,
-                        hint = "top",
-                        text = "${nowSelectedElement?.paddingTop ?: ""}",
-                        modifier = Modifier.weight(2f).padding(start = 10.dp)
-                    ) { text ->
-                        nowSelectedElement?.paddingTop = getIntValue(text,nowSelectedElement?.paddingTop)
-                    }
-                    ItemHintTextFiled(
-                        viewModel,
-                        hint = "bottom",
-                        text = "${nowSelectedElement?.paddingBottom ?: ""}",
-                        modifier = Modifier.weight(2f).padding(start = 10.dp)
-                    ) { text ->
-                        nowSelectedElement?.paddingBottom = getIntValue(text,nowSelectedElement?.paddingBottom)
-                    }
-                    ItemHintTextFiled(
-                        viewModel,
-                        hint = "start",
-                        text = "${nowSelectedElement?.paddingStart ?: ""}",
-                        modifier = Modifier.weight(2f).padding(start = 10.dp)
-                    ) { text ->
-                        nowSelectedElement?.paddingStart = getIntValue(text,nowSelectedElement?.paddingStart)
-                    }
-                    ItemHintTextFiled(
-                        viewModel,
-                        hint = "end",
-                        text = "${nowSelectedElement?.paddingEnd ?: ""}",
-                        modifier = Modifier.weight(2f).padding(start = 10.dp)
-                    ) { text ->
-                        nowSelectedElement?.paddingEnd = getIntValue(text,nowSelectedElement?.paddingEnd)
-                    }
-                }
-            }
-
-            val colorStr = nowSelectedElement?.backgroundColor?.run {
-                val alphaStr = (alpha * 255).toInt().toColorHexString()
-                val redStr = (red * 255).toInt().toColorHexString()
-                val greenStr = (green * 255).toInt().toColorHexString()
-                val blueStr = (blue * 255).toInt().toColorHexString()
-                println("a:${alphaStr} r:${redStr} g:${greenStr} b:${blueStr}")
-                "#${alphaStr}${redStr}${greenStr}${blueStr}"
-            } ?: ""
-            InputBackgroundColor(colorStr) {
-                if (it.length == 6) {
-                    val red = it.substring(0, 1).toColorInt() / 255f
-                    val green = it.substring(2, 3).toColorInt() / 255f
-                    val blue = it.substring(4, 5).toColorInt() / 255f
-                    nowSelectedElement?.backgroundColor = Color(red, green, blue)
-                    viewModel.changeParamVersion.value++
-                } else if (it.length == 8) {
-                    val alpha = it.substring(0, 1).toColorInt() / 255f
-                    val red = it.substring(2, 3).toColorInt() / 255f
-                    val green = it.substring(4, 5).toColorInt() / 255f
-                    val blue = it.substring(6, 7).toColorInt() / 255f
-                    nowSelectedElement?.backgroundColor = Color(alpha, red, green, blue)
-                    viewModel.changeParamVersion.value++
-                }
-            }
-
-            Column(
-                modifier = Modifier.fillMaxWidth().padding(top = 5.dp, bottom = 5.dp, start = 20.dp, end = 10.dp)
-            ) {
-                ItemLabel("背景圆角弧度")
-                Row(modifier = Modifier.padding(top = 5.dp)) {
-                    ItemHintTextFiled(
-                        viewModel,
-                        hint = "左上角",
-                        text = "${nowSelectedElement?.backgroundRoundTopLeft ?: ""}",
-                        modifier = Modifier.weight(2f).padding(start = 10.dp)
-                    ) { text ->
-                        nowSelectedElement?.backgroundRoundTopLeft = getIntValue(text,nowSelectedElement?.backgroundRoundTopLeft)
-                    }
-                    ItemHintTextFiled(
-                        viewModel,
-                        hint = "左下角",
-                        text = "${nowSelectedElement?.backgroundRoundBottomLeft ?: ""}",
-                        modifier = Modifier.weight(2f).padding(start = 10.dp)
-                    ) { text ->
-                        nowSelectedElement?.backgroundRoundBottomLeft = getIntValue(text,nowSelectedElement?.backgroundRoundBottomLeft)
-                    }
-                    ItemHintTextFiled(
-                        viewModel,
-                        hint = "右上角",
-                        text = "${nowSelectedElement?.backgroundRoundTopRight ?: ""}",
-                        modifier = Modifier.weight(2f).padding(start = 10.dp)
-                    ) { text ->
-                        nowSelectedElement?.backgroundRoundTopRight = getIntValue(text,nowSelectedElement?.backgroundRoundTopRight)
-                    }
-                    ItemHintTextFiled(
-                        viewModel,
-                        hint = "右下角",
-                        text = "${nowSelectedElement?.backgroundRoundBottomRight ?: ""}",
-                        modifier = Modifier.weight(2f).padding(start = 10.dp)
-                    ) { text ->
-                        nowSelectedElement?.backgroundRoundBottomRight = getIntValue(text,nowSelectedElement?.backgroundRoundBottomRight)
-                    }
-                }
-            }
-            ItemConfig(viewModel, "设置权重:", "（权重越大占位越多）", "${nowSelectedElement?.weight ?: ""}") {text ->
-                nowSelectedElement?.weight = getFloatValue(text,nowSelectedElement?.weight)
+                ParamSizeSetting(it, notifyChange)
+                Spacer(modifier = Modifier.height(10.dp))
+                // 内间距设置
+                ParamPaddingSetting(it, notifyChange)
+                Spacer(modifier = Modifier.height(10.dp))
+                // 设置背景颜色
+                ParamBackGroundColorSetting(it, notifyChange)
+                Spacer(modifier = Modifier.height(10.dp))
+                // 设置权重
+                ParamWeightSetting(it, notifyChange)
             }
         }
-    }
-
-    // 转int，如果转不了则返回原本的值
-    private fun getIntValue(text: String, def: Int?): Int? {
-        return if (text.isNotEmpty()) {
-            text.toIntOrNull() ?: def
-        } else {
-            null
-        }
-    }
-
-    // 转float，如果转不了则返回原本的值
-    private fun getFloatValue(text: String, def: Float?): Float? {
-        return if (text.isNotEmpty()) {
-            text.toFloatOrNull() ?: def
-        } else {
-            null
-        }
-    }
-
-    /**
-     * 背景颜色输入框
-     */
-    @Composable
-    private fun InputBackgroundColor(text: String, onValueChange: ((String) -> Unit)) {
-        val lastText = remember { mutableStateOf(text) }
-        val inputBackgroundColor = remember { mutableStateOf("") }
-        if(lastText.value != text){
-            lastText.value = text
-            inputBackgroundColor.value = text
-        }
-        Row(
-            modifier = Modifier.fillMaxWidth()
-                .padding(top = 5.dp, bottom = 5.dp, start = 20.dp, end = 10.dp)
-        ) {
-            ItemLabel("背景颜色:", Modifier.weight(1f).align(Alignment.CenterVertically))
-            ItemHintTextFiled(
-                viewModel,
-                "",
-                inputBackgroundColor.value,
-                onValueChange = {
-                    inputBackgroundColor.value = it
-                    onValueChange.invoke(it)
-                },
-                modifier = Modifier.weight(2f).align(Alignment.CenterVertically)
-            )
-        }
-    }
-
-    @Composable
-    private fun ItemConfig(
-        viewModel: PageMainViewModel,
-        label: String,
-        hint: String = "",
-        text: String? = null,
-        modifier: Modifier = Modifier,
-        onValueChange: ((String) -> Unit)? = null
-    ) {
-        Row(
-            modifier = Modifier.then(modifier).fillMaxWidth()
-                .padding(top = 5.dp, bottom = 5.dp, start = 20.dp, end = 10.dp)
-        ) {
-            ItemLabel(label, Modifier.weight(1f).align(Alignment.CenterVertically))
-            ItemHintTextFiled(
-                viewModel,
-                hint,
-                text,
-                onValueChange = onValueChange,
-                modifier = Modifier.weight(2f).align(Alignment.CenterVertically)
-            )
-        }
-    }
-
-    @Composable
-    private fun ItemLabel(label: String, modifier: Modifier = Modifier) {
-        Text(
-            text = label, color = Color.White, fontSize = 12.sp, modifier = Modifier.then(modifier)
-        )
-    }
-
-    @Composable
-    private fun ItemHintTextFiled(
-        viewModel: PageMainViewModel,
-        hint: String,
-        text: String? = null,
-        modifier: Modifier = Modifier,
-        onValueChange: ((String) -> Unit)? = null
-    ) {
-        HintTextFiled(
-            value = text ?: "", hint = hint, onValueChange = {
-                onValueChange?.invoke(it)
-                viewModel.changeParamVersion.value++
-            },
-            modifier = Modifier.then(modifier).background(color = Color.White),
-            textStyle = TextStyle(
-                color = Color.Black,
-                lineHeight = 14.sp,
-                fontSize = 12.sp,
-            )
-        )
     }
 }

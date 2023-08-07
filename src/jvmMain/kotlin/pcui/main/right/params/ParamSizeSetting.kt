@@ -53,8 +53,8 @@ fun ItemParamSizeSetting(
         hint = label,
         showInput = isShowInput.value,
         onValueChange = {
-            it.toIntOrNull()?.apply {
-                notifyChange.invoke(this)
+            if (it.toIntOrNull() != null || it.isEmpty()) {
+                notifyChange.invoke(it.toIntOrNull())
             }
         },
     ) { close ->

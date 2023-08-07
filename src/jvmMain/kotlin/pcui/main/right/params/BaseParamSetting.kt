@@ -22,6 +22,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.key.KeyEvent
+import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -33,9 +35,12 @@ import widgets.HintTextFiled
 // 总行的padding
 const val contentPaddingStart = 20
 const val contentPaddingEnd = 10
+
 // label的大小
 const val labelWidth = 80
 const val labelFontSize = 14
+val labelColor: Color = Color.White
+
 // 输入框的设置
 const val inputPaddingTopBottom = 5
 const val inputPaddingStartEnd = 10
@@ -49,6 +54,40 @@ val inputTextStyle = TextStyle(
     lineHeight = 14.sp,
     fontSize = inputFontSize.sp,
 )
+
+@Composable
+fun ParamSettingTextField(
+    text: String,
+    hint: String = "",
+    modifier: Modifier = Modifier,
+    onKeyEvent: ((KeyEvent) -> Boolean) = { _ -> false },
+    onValueChange: ((String) -> Unit)? = null
+) {
+    Box(
+        modifier = Modifier.then(modifier)
+            .border(1.dp, Color.White, shape = RoundedCornerShape(2.dp))
+            .padding(
+                start = inputPaddingStartEnd.dp,
+                end = inputPaddingStartEnd.dp,
+                top = inputPaddingTopBottom.dp,
+                bottom = inputPaddingTopBottom.dp
+            )
+    ) {
+        HintTextFiled(
+            value = text,
+            hint = hint,
+            onValueChange = {
+                onValueChange?.invoke(it)
+            },
+            modifier = Modifier.fillMaxWidth().onKeyEvent(onKeyEvent),
+            textStyle = LocalTextStyle.current.copy(
+                color = inputTextStyle.color,
+                lineHeight = inputTextStyle.lineHeight,
+                fontSize = inputTextStyle.fontSize,
+            )
+        )
+    }
+}
 
 /**
  * 参数设置，输入框设置
@@ -70,8 +109,7 @@ fun ParamSettingInputItem(
             Box(modifier = Modifier.width(labelWidth.dp)) {
                 Text(
                     text = label,
-                    modifier = Modifier.width(50.dp),
-                    color = Color.White,
+                    color = labelColor,
                     fontSize = labelFontSize.sp
                 )
             }
