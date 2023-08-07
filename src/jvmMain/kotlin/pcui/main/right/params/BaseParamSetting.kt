@@ -39,7 +39,7 @@ const val contentPaddingEnd = 10
 // label的大小
 const val labelWidth = 80
 const val labelFontSize = 14
-val labelColor: Color = Color.White
+val inputColor: Color = Color(0xffbbbbbb)
 
 // 输入框的设置
 const val inputPaddingTopBottom = 5
@@ -50,7 +50,7 @@ const val inputFontSize = 12
  * 输入框的样式
  */
 val inputTextStyle = TextStyle(
-    color = Color.White,
+    color = inputColor,
     lineHeight = 14.sp,
     fontSize = inputFontSize.sp,
 )
@@ -65,7 +65,7 @@ fun ParamSettingTextField(
 ) {
     Box(
         modifier = Modifier.then(modifier)
-            .border(1.dp, Color.White, shape = RoundedCornerShape(2.dp))
+            .border(1.dp, inputColor, shape = RoundedCornerShape(2.dp))
             .padding(
                 start = inputPaddingStartEnd.dp,
                 end = inputPaddingStartEnd.dp,
@@ -76,6 +76,7 @@ fun ParamSettingTextField(
         HintTextFiled(
             value = text,
             hint = hint,
+            cursorColor = inputColor,
             onValueChange = {
                 onValueChange?.invoke(it)
             },
@@ -109,7 +110,7 @@ fun ParamSettingInputItem(
             Box(modifier = Modifier.width(labelWidth.dp)) {
                 Text(
                     text = label,
-                    color = labelColor,
+                    color = inputColor,
                     fontSize = labelFontSize.sp
                 )
             }
@@ -117,7 +118,7 @@ fun ParamSettingInputItem(
             val dropdownMenuWidth = remember { mutableStateOf(0) }
             Box(
                 modifier = Modifier.weight(1f)
-                    .border(1.dp, Color.White, shape = RoundedCornerShape(2.dp))
+                    .border(1.dp, inputColor, shape = RoundedCornerShape(2.dp))
                     .onGloballyPositioned {
                         rightArrowHeight.value = it.size.height
                         dropdownMenuWidth.value = it.size.width
@@ -151,6 +152,7 @@ fun ParamSettingInputItem(
                             HintTextFiled(
                                 value = textFiled.value,
                                 hint = hint,
+                                cursorColor = inputColor,
                                 onValueChange = {
                                     onValueChange?.invoke(it)
                                 },
@@ -174,7 +176,7 @@ fun ParamSettingInputItem(
                         val dropdownMenuExpanded = remember { mutableStateOf(false) }
                         Spacer(
                             modifier = Modifier.width(1.dp).height(rightArrowHeight.value.dp)
-                                .background(Color.White)
+                                .background(inputColor)
                         )
                         Box(
                             modifier = Modifier.width(rightArrowHeight.value.dp)

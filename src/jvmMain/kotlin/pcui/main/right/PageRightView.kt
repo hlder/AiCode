@@ -16,6 +16,7 @@ import pcui.main.right.params.ParamIdSetting
 import pcui.main.right.params.ParamPaddingSetting
 import pcui.main.right.params.ParamSizeSetting
 import pcui.main.right.params.ParamWeightSetting
+import pcui.main.right.params.inputColor
 
 class PageRightView(private val viewModel: PageMainViewModel) {
     @Composable
@@ -24,8 +25,8 @@ class PageRightView(private val viewModel: PageMainViewModel) {
         viewModel.changeParamVersion.value
         println("-----------baseConfig id:${nowSelectedElement?.id}")
         Column {
-            Text("基础配置", modifier = Modifier.fillMaxWidth().padding(10.dp))
             nowSelectedElement?.let {
+                Text("基础配置", modifier = Modifier.fillMaxWidth().padding(10.dp), color = inputColor)
                 val notifyChange: () -> Unit = {
                     viewModel.changeParamVersion.value++
                 }

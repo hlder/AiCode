@@ -21,7 +21,7 @@ fun ParamPaddingSetting(element: Element, notifyChange: () -> Unit) {
     ) {
         Text(
             text = "内间距(Padding):",
-            color = labelColor,
+            color = inputColor,
             fontSize = labelFontSize.sp
         )
         Spacer(modifier = Modifier.height(5.dp))

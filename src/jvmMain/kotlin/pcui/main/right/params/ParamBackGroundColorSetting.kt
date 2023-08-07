@@ -93,7 +93,7 @@ private fun MenuContent(colorStr: String, notifyChange: (color: Color) -> Unit) 
             ) {
                 Text(
                     text = "色值:",
-                    color = labelColor,
+                    color = inputColor,
                     fontSize = labelFontSize.sp
                 )
                 Spacer(modifier = Modifier.width(2.dp))
