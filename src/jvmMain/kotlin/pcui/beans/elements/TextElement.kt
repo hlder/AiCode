@@ -47,6 +47,7 @@ open class TextElement(
     override fun createElementCreator(space: String): ElementCreator<out Element> = TextCreator(this, space)
     override fun createElementPreview(viewModel: PageMainViewModel): ElementPreview<out Element> =
         TextPreview(this, viewModel)
+    override fun getElementName(): String = "文本"
 }
 
 enum class TextWeight {

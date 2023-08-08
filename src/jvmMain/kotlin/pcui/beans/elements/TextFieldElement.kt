@@ -47,4 +47,5 @@ open class TextFieldElement(
     override fun createElementCreator(space: String): ElementCreator<out Element> = TextFieldCreator(this, space)
     override fun createElementPreview(viewModel: PageMainViewModel): ElementPreview<out Element> =
         TextFieldPreview(this, viewModel)
+    override fun getElementName(): String = "输入框"
 }

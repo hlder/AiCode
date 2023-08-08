@@ -53,6 +53,8 @@ open class ButtonElement(
     override fun createElementCreator(space: String): ElementCreator<out Element> = ButtonCreator(this, space)
     override fun createElementPreview(viewModel: PageMainViewModel): ElementPreview<out Element> =
         ButtonPreview(this, viewModel)
+
+    override fun getElementName(): String = "按钮"
 }
 
 data class Action(

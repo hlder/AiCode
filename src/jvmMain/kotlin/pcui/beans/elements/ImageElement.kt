@@ -44,6 +44,7 @@ class ImageElement(
     override fun createElementCreator(space: String): ElementCreator<out Element> = ImageCreator(this, space)
     override fun createElementPreview(viewModel: PageMainViewModel): ElementPreview<out Element> =
         ImagePreview(this, viewModel)
+    override fun getElementName(): String = "图片"
 }
 
 enum class ImageFrom {

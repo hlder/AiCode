@@ -61,11 +61,27 @@ class PageLeftViewModel(private val page: Page) {
         val item = listChildPosition.find {
             it.third.contains(Offset(x + contentPosition.x, y + contentPosition.y))
         }
-        println("==============onTouchDown:(${x},${y})")
         dragSelectPositionY.value = 0f
         scanDragOnElement()
         dragDrownInfo = item
         return item
+    }
+
+    /**
+     * touchDown的时候初始化dragEvent。
+     */
+    fun initDragEvent() {
+        dragEvent.value = Offset(0f, 0f)
+    }
+
+    /**
+     * touchMove的时候修改dragEvent
+     */
+    fun changeDragEvent(x: Int?, y: Int?) {
+        dragEvent.value = Offset(
+            (x ?: 0) - downPosition.x - (contentPosition?.x ?: 0f),
+            (y ?: 0) - downPosition.y - (contentPosition?.y ?: 0f)
+        )
     }
 
     /**

@@ -46,4 +46,5 @@ class ColumnElement(
     override fun createElementCreator(space: String): ElementCreator<out Element> = ColumnCreator(this, space)
     override fun createElementPreview(viewModel: PageMainViewModel): ElementPreview<out Element> =
         ColumnPreview(this, viewModel)
+    override fun getElementName(): String = "竖布局"
 }

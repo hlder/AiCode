@@ -52,6 +52,11 @@ abstract class Element(
     protected abstract fun createElementCreator(space: String): ElementCreator<out Element>
 
     protected abstract fun createElementPreview(viewModel: PageMainViewModel): ElementPreview<out Element>
+
+    /**
+     * 获取元素的名称
+     */
+    abstract fun getElementName(): String
 }
 
 /**

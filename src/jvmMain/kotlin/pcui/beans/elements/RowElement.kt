@@ -46,4 +46,5 @@ class RowElement(
     override fun createElementCreator(space: String): ElementCreator<out Element> = RowCreator(this, space)
     override fun createElementPreview(viewModel: PageMainViewModel): ElementPreview<out Element> =
         RowPreview(this, viewModel)
+    override fun getElementName(): String = "横布局"
 }

@@ -44,4 +44,5 @@ open class TextButtonElement(
     override fun createElementCreator(space: String): ElementCreator<out Element> = TextButtonCreator(this, space)
     override fun createElementPreview(viewModel: PageMainViewModel): ElementPreview<out Element> =
         TextButtonPreview(this, viewModel)
+    override fun getElementName(): String = "文本按钮"
 }

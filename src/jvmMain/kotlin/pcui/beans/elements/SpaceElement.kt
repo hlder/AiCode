@@ -40,4 +40,5 @@ class SpaceElement(
     override fun createElementCreator(space: String): ElementCreator<out Element> = SpaceCreator(this, space)
     override fun createElementPreview(viewModel: PageMainViewModel): ElementPreview<out Element> =
         SpacePreview(this, viewModel)
+    override fun getElementName(): String = "占位"
 }
