@@ -1,10 +1,15 @@
+@file:OptIn(ExperimentalFoundationApi::class)
+
 package pcui.main.left
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.mouseClickable
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.awt.awtEventOrNull
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.isSecondaryPressed
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInRoot
 import pcui.main.PageMainViewModel
@@ -31,10 +36,11 @@ fun PageLeft(viewModel: PageMainViewModel) {
             pageLeftViewModel.contentPosition = it.positionInRoot()
         }.touchListener(
             onTouchDown = { // touchDown
+                val event = it.awtEventOrNull
                 isNeedDrag.value = false
                 pageLeftViewModel.initDragEvent()
 
-                val item = pageLeftViewModel.onTouchDown(it.x, it.y)
+                val item = pageLeftViewModel.onTouchDown(event?.x?.toFloat()?:0f, event?.y?.toFloat()?:0f)
                 item?.let {
                     viewModel.nowSelectedElement.value = item.first
                     isNeedDrag.value = true
@@ -48,13 +54,16 @@ fun PageLeft(viewModel: PageMainViewModel) {
                 }
             },
             onTouchUp = { // touchUp
-                val event = it.awtEventOrNull
                 if (pageLeftViewModel.doMoveElement()) {
                     viewModel.movePositionVersion.value++
                 }
                 isNeedDrag.value = false
             }
-        )
+        ).mouseClickable {
+            if (this.buttons.isSecondaryPressed) { // 点击了鼠标右键
+                println("==============点击右键，显示菜单")
+            }
+        }
     ) {
         // 显示所有层级
         showLayers(

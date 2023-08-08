@@ -16,7 +16,7 @@ import pcui.beans.Element
 @Composable
 fun ShowDrag(nowSelectedElement: Element, pageLeftViewModel:PageLeftViewModel){
     val canvasDrawItem = pageLeftViewModel.findPosition(nowSelectedElement)
-    println("=======================ShowDrag:${canvasDrawItem}  nowSelectedElement:${nowSelectedElement}")
+//    println("=======================ShowDrag:${canvasDrawItem}  nowSelectedElement:${nowSelectedElement}")
 
     // canvas绘制框的位置改变
     val moveCanvasPosition = remember { pageLeftViewModel.dragEvent }

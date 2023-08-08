@@ -55,7 +55,11 @@ class PageLeftViewModel(private val page: Page) {
     /**
      * 鼠标长按触发时初始化。
      */
-    fun onTouchDown(x: Float, y: Float): Triple<Element, Offset, Rect>? {
+    fun onTouchDown(ix: Float, iy: Float): Triple<Element, Offset, Rect>? {
+        val x = ix - (contentPosition?.x ?: 0f)
+        val y = iy - (contentPosition?.y ?: 0f)
+        println("--------------------onTouchDown:(${x},${y})")
+
         downPosition = Offset(x, y)
         val contentPosition = this.contentPosition ?: return null
         val item = listChildPosition.find {
