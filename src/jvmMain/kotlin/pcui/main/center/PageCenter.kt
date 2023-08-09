@@ -14,7 +14,7 @@ import pcui.main.PageMainViewModel
 fun PageCenter(viewModel: PageMainViewModel) {
     val movePositionVersion = remember { viewModel.movePositionVersion }.value
     val changeParamVersion = remember { viewModel.changeParamVersion }.value
-    val nowSelectPage = remember { viewModel.nowSelectPage }.value
+    val nowSelectPage = remember { viewModel.nowSelectPageIndex }.value
     val selectedPage = viewModel.listPage[nowSelectPage]
 
     Row() {

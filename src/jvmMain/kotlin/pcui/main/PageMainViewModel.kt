@@ -15,7 +15,7 @@ class PageMainViewModel {
     // 当前选择的element
     val nowSelectedElement = mutableStateOf<Element?>(null)
 
-    val nowSelectPage = mutableStateOf(0)
+    val nowSelectPageIndex = mutableStateOf(0)
     // page的列表
     val listPage: List<Page> = ArrayList<Page>().apply {
         add(

@@ -24,8 +24,7 @@ fun main() = application {
     Window(
         onCloseRequest = ::exitApplication,
         state = WindowState(
-//            position = WindowPosition.Aligned(Alignment.Center),
-//            position = WindowPosition.Aligned(Alignment.Center),
+            position = WindowPosition.Aligned(Alignment.Center),
             size = getPreferredWindowSize(1500, 857)
         ),
     ) {
