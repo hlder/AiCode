@@ -47,7 +47,7 @@ class SpaceElement(
 
     companion object {
         fun new(): SpaceElement {
-            return SpaceElement("space")
+            return SpaceElement("space" + getBaseId())
         }
     }
 }

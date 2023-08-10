@@ -52,7 +52,7 @@ class ImageElement(
     companion object {
         fun new(): ImageElement {
             return ImageElement(
-                id = "image",
+                id = "image" + getBaseId(),
                 contentDescription = "image",
                 imageFrom = ImageFrom.LOCAL,
                 image = "",

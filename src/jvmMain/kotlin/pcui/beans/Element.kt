@@ -5,6 +5,8 @@ import createcode.templatecode.elements.ElementCreator
 import pcui.beans.elements.LayoutElement
 import pcui.main.PageMainViewModel
 import pcui.previews.ElementPreview
+import java.text.SimpleDateFormat
+import java.util.Calendar
 
 abstract class Element(
     var id: String, // element的id
@@ -57,6 +59,17 @@ abstract class Element(
      * 获取元素的名称
      */
     abstract fun getElementName(): String
+
+    companion object{
+        private var index = 1
+
+        /**
+         * 获取id的公共部分
+         */
+        fun getBaseId(): String {
+            return SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().timeInMillis) + (index++)
+        }
+    }
 }
 
 /**

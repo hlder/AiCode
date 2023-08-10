@@ -9,6 +9,8 @@ import pcui.beans.Element
 import pcui.main.PageMainViewModel
 import pcui.previews.ButtonPreview
 import pcui.previews.ElementPreview
+import java.text.SimpleDateFormat
+import java.util.Calendar
 
 open class ButtonElement(
     id: String,
@@ -60,7 +62,7 @@ open class ButtonElement(
 
     companion object {
         fun new(): ButtonElement {
-            return ButtonElement( id = "button1", text = "", buttonAction = ButtonActionSkipPage(Action("TestPage")))
+            return ButtonElement( id = "button"+ getBaseId(), text = "", buttonAction = ButtonActionSkipPage(Action("TestPage")))
         }
     }
 }

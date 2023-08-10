@@ -51,7 +51,7 @@ open class TextElement(
 
     companion object{
         fun new():TextElement{
-            return TextElement("text")
+            return TextElement("text" + getBaseId())
         }
     }
 }

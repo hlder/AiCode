@@ -50,7 +50,7 @@ class ColumnElement(
 
     companion object {
         fun new(): ColumnElement {
-            return ColumnElement("")
+            return ColumnElement("Column"+ getBaseId())
         }
     }
 }

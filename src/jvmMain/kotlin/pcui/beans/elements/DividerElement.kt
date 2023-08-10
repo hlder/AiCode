@@ -48,7 +48,7 @@ class DividerElement(
 
     companion object {
         fun new(): DividerElement {
-            return DividerElement("divider")
+            return DividerElement("divider" + getBaseId())
         }
     }
 }

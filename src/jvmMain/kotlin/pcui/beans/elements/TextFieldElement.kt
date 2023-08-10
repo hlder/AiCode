@@ -54,7 +54,7 @@ open class TextFieldElement(
 
     companion object {
         fun new(): TextFieldElement {
-            return TextFieldElement("TextField");
+            return TextFieldElement("TextField" + getBaseId())
         }
     }
 }
