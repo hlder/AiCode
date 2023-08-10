@@ -15,10 +15,10 @@ abstract class Element(
     var paddingStart: Int?,
     var paddingEnd: Int?,
     var backgroundColor: Color?, // 背景颜色
-    var backgroundRoundTopLeft:Int?, // 背景的圆角左上角
-    var backgroundRoundTopRight:Int?, // 背景的圆角右上角
-    var backgroundRoundBottomLeft:Int?, // 背景的圆角左下角
-    var backgroundRoundBottomRight:Int?, // 背景的圆角右下角
+    var backgroundRoundTopLeft: Int?, // 背景的圆角左上角
+    var backgroundRoundTopRight: Int?, // 背景的圆角右上角
+    var backgroundRoundBottomLeft: Int?, // 背景的圆角左下角
+    var backgroundRoundBottomRight: Int?, // 背景的圆角右下角
     var weight: Float?, // 权重，可以设置平均分配
 ) {
     private var elementCreator: ElementCreator<out Element>? = null
@@ -39,7 +39,7 @@ abstract class Element(
      * 获取预览
      */
     fun getPreview(viewModel: PageMainViewModel): ElementPreview<out Element> {
-        if(elementPreview==null){
+        if (elementPreview == null) {
             elementPreview = createElementPreview(viewModel)
 
         }
@@ -64,9 +64,30 @@ abstract class Element(
  */
 fun Element.foreach(block: (element: Element) -> Unit) {
     if (this is LayoutElement) {
-        this.childs?.forEach {
+        this.childs.forEach {
             it.foreach(block)
         }
     }
     block(this)
+}
+
+/**
+ * 获取持有它的元素
+ */
+fun Element.getParent(rootElement: Element): LayoutElement? {
+    if (rootElement is LayoutElement) {
+        var layoutElement: LayoutElement? = null
+        rootElement.childs.forEach {
+            if (it == this) {
+                layoutElement = rootElement
+                return rootElement
+            }
+            if (it is LayoutElement && layoutElement == null) {
+                layoutElement = getParent(it)
+            }
+        }
+        return layoutElement
+    } else {
+        return null
+    }
 }

@@ -23,6 +23,7 @@ import pcui.theme.WindowColors
 @Composable
 fun PageMain() {
     val viewModel = remember { PageMainViewModel() }
+    val movePositionVersion = remember { viewModel.movePositionVersion }.value
     Column {
         PageTop(viewModel)
         Row {

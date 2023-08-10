@@ -41,10 +41,25 @@ class ImageElement(
     backgroundRoundBottomRight,
     weight
 ) {
-    override fun createElementCreator(space: String): ElementCreator<out Element> = ImageCreator(this, space)
+    override fun createElementCreator(space: String): ElementCreator<out Element> =
+        ImageCreator(this, space)
+
     override fun createElementPreview(viewModel: PageMainViewModel): ElementPreview<out Element> =
         ImagePreview(this, viewModel)
+
     override fun getElementName(): String = "图片"
+
+    companion object {
+        fun new(): ImageElement {
+            return ImageElement(
+                id = "image",
+                contentDescription = "image",
+                imageFrom = ImageFrom.LOCAL,
+                image = "",
+                filePath = ""
+            )
+        }
+    }
 }
 
 enum class ImageFrom {

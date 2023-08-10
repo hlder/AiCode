@@ -6,16 +6,21 @@ import pcui.beans.Page
 import androidx.compose.ui.text.style.TextAlign
 import pcui.beans.Element
 import pcui.beans.elements.*
+import pcui.beans.foreach
+import pcui.beans.getParent
 
 class PageMainViewModel {
     // 元素参数修改的版本号
     val changeParamVersion = mutableStateOf(0)
+
     // 元素移动位置的版本号
     val movePositionVersion = mutableStateOf(0)
+
     // 当前选择的element
     val nowSelectedElement = mutableStateOf<Element?>(null)
 
     val nowSelectPageIndex = mutableStateOf(0)
+
     // page的列表
     val listPage: List<Page> = ArrayList<Page>().apply {
         add(
@@ -183,7 +188,7 @@ class PageMainViewModel {
             Page(
                 pageName = "TestPage",
                 title = "测试",
-                element =  ColumnElement(
+                element = ColumnElement(
                     id = "column1",
                     backgroundColor = Color.Yellow,
                     width = Int.MAX_VALUE,
@@ -305,5 +310,20 @@ class PageMainViewModel {
                 )
             )
         )
+    }
+
+    /**
+     * 获取持有该element的元素
+     */
+    fun getParentElement(element: Element?): LayoutElement? {
+        val page = listPage[nowSelectPageIndex.value]
+        return element?.getParent(page.element)
+    }
+
+    /**
+     * 删除该element
+     */
+    fun deleteElement(element: Element?){
+        getParentElement(element)?.childs?.remove(element)
     }
 }

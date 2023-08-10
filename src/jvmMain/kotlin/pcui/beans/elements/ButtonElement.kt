@@ -50,11 +50,19 @@ open class ButtonElement(
     textWeight,
     textAlign
 ) {
-    override fun createElementCreator(space: String): ElementCreator<out Element> = ButtonCreator(this, space)
+    override fun createElementCreator(space: String): ElementCreator<out Element> =
+        ButtonCreator(this, space)
+
     override fun createElementPreview(viewModel: PageMainViewModel): ElementPreview<out Element> =
         ButtonPreview(this, viewModel)
 
     override fun getElementName(): String = "按钮"
+
+    companion object {
+        fun new(): ButtonElement {
+            return ButtonElement( id = "button1", text = "", buttonAction = ButtonActionSkipPage(Action("TestPage")))
+        }
+    }
 }
 
 data class Action(

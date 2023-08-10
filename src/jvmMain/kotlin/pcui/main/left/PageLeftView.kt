@@ -25,6 +25,17 @@ import androidx.compose.ui.input.pointer.isSecondaryPressed
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.unit.dp
+import pcui.beans.Element
+import pcui.beans.elements.ButtonElement
+import pcui.beans.elements.ColumnElement
+import pcui.beans.elements.DividerElement
+import pcui.beans.elements.ImageElement
+import pcui.beans.elements.LayoutElement
+import pcui.beans.elements.RowElement
+import pcui.beans.elements.SpaceElement
+import pcui.beans.elements.TextElement
+import pcui.beans.elements.TextFieldElement
+import pcui.beans.foreach
 import pcui.main.PageMainViewModel
 import pcui.main.PageOverLayer
 import java.awt.event.MouseEvent
@@ -100,7 +111,6 @@ class PageLeftView(private val viewModel: PageMainViewModel) {
                 selectedPage.element,
                 0
             )
-
         }
 
         // 是否拖动，拖动的时候显示touch的框框
@@ -116,6 +126,7 @@ class PageLeftView(private val viewModel: PageMainViewModel) {
 
     private fun showRightMenu() {
         PageOverLayer.showOverPop {
+            val isShowChildMenu = remember { mutableStateOf(false) }
             Box(
                 modifier = Modifier.offset(x = (touchEvent?.x ?: 0).dp, y = (touchEvent?.y ?: 0).dp)
             ) {
@@ -124,19 +135,99 @@ class PageLeftView(private val viewModel: PageMainViewModel) {
                         .width(100.dp)
                         .border(1.dp, color = Color(0xff515151))
                 ) {
-                    rightMenuItem(listOf("新建","上移","下移","删除")) {
-
+                    rightMenuItem(listOf("新建", "上移", "下移", "删除")) {
+                        when (it) {
+                            0 -> { // 显示新建的控件
+                                isShowChildMenu.value = true
+                            }
+                            1 -> { // 上移
+                                val nowElement = viewModel.nowSelectedElement.value
+                                nowElement?.let {
+                                    val parentElement = viewModel.getParentElement(nowElement)
+                                    val index = parentElement?.childs?.indexOf(nowElement) ?: 0
+                                    if (index > 0) {
+                                        parentElement?.childs?.remove(nowElement)
+                                        parentElement?.childs?.add(index - 1, nowElement)
+                                    } else {
+                                        val parentParentElement = viewModel.getParentElement(parentElement)
+                                        parentElement?.childs?.remove(nowElement)
+                                        val parentIndex = parentParentElement?.childs?.indexOf(parentElement as Element)?:0
+                                        parentParentElement?.childs?.add(parentIndex, nowElement)
+                                    }
+                                    viewModel.movePositionVersion.value++
+                                    PageOverLayer.hideOverPop()
+                                }
+                            }
+                            2 -> { // 下移
+                                val nowElement = viewModel.nowSelectedElement.value
+                                nowElement?.let {
+                                    val parentElement = viewModel.getParentElement(nowElement)
+                                    val index = parentElement?.childs?.indexOf(nowElement) ?: 0
+                                    if (index < (parentElement?.childs?.size?:0)-1) {
+                                        parentElement?.childs?.remove(nowElement)
+                                        parentElement?.childs?.add(index + 1, nowElement)
+                                    } else {
+                                        val parentParentElement = viewModel.getParentElement(parentElement)
+                                        parentElement?.childs?.remove(nowElement)
+                                        val parentIndex = parentParentElement?.childs?.indexOf(parentElement as Element)?:0
+                                        parentParentElement?.childs?.add(parentIndex+1, nowElement)
+                                    }
+                                    viewModel.movePositionVersion.value++
+                                    PageOverLayer.hideOverPop()
+                                }
+                            }
+                            3 -> { // 删除
+                                viewModel.deleteElement(viewModel.nowSelectedElement.value)
+                                viewModel.movePositionVersion.value++
+                                PageOverLayer.hideOverPop()
+                            }
+                        }
                     }
                 }
 
-                Box(modifier = Modifier.offset(x = 90.dp)) {
-                    Column(
-                        modifier = Modifier.background(Color(0xff3c3f41))
-                            .width(100.dp)
-                            .border(1.dp, color = Color(0xff515151))
-                    ) {
-                        rightMenuItem(listOf("竖布局","横布局","文本","输入框","按钮","图片","占位", "分割线")) {
-
+                if (isShowChildMenu.value) {
+                    Box(modifier = Modifier.offset(x = 90.dp)) {
+                        Column(
+                            modifier = Modifier.background(Color(0xff3c3f41))
+                                .width(100.dp)
+                                .border(1.dp, color = Color(0xff515151))
+                        ) {
+                            rightMenuItem(
+                                listOf(
+                                    "竖布局",
+                                    "横布局",
+                                    "文本",
+                                    "输入框",
+                                    "按钮",
+                                    "图片",
+                                    "占位",
+                                    "分割线"
+                                )
+                            ) {
+                                val layoutElement: LayoutElement? =
+                                    if (viewModel.nowSelectedElement.value is LayoutElement) { // 如果是布局，则在它里面添加
+                                        viewModel.nowSelectedElement.value as LayoutElement
+                                    } else { // 不是布局，那么添加到该控件下面一个
+                                        viewModel.getParentElement(viewModel.nowSelectedElement.value)
+                                    }
+                                val addIndex =if (layoutElement == viewModel.nowSelectedElement.value) {
+                                        layoutElement?.childs?.size ?: 0
+                                    } else {
+                                        (layoutElement?.childs?.indexOf(viewModel.nowSelectedElement.value)?: 0) + 1
+                                    }
+                                when (it) {
+                                    0 -> layoutElement?.childs?.add(addIndex, ColumnElement.new())
+                                    1 -> layoutElement?.childs?.add(addIndex, RowElement.new())
+                                    2 -> layoutElement?.childs?.add(addIndex, TextElement.new())
+                                    3 -> layoutElement?.childs?.add(addIndex, TextFieldElement.new())
+                                    4 -> layoutElement?.childs?.add(addIndex, ButtonElement.new())
+                                    5 -> layoutElement?.childs?.add(addIndex, ImageElement.new())
+                                    6 -> layoutElement?.childs?.add(addIndex, SpaceElement.new())
+                                    7 -> layoutElement?.childs?.add(addIndex, DividerElement.new())
+                                }
+                                viewModel.movePositionVersion.value++
+                                PageOverLayer.hideOverPop()
+                            }
                         }
                     }
                 }
@@ -153,11 +244,7 @@ class PageLeftView(private val viewModel: PageMainViewModel) {
         for ((index, item) in list.withIndex()) {
             Row(
                 modifier = Modifier
-                    .clickable { onclick(index) }.touchListener(
-                        onTouchMove = {
-                            println("========================it:${item}")
-                        }
-                    )
+                    .clickable { onclick(index) }
             ) {
                 Text(
                     text = item,

@@ -19,7 +19,7 @@ abstract class LayoutElement(
     weight: Float? = null,
     val isNeedScroll: Boolean? = false, // 是否需要滚动
     val align: LayoutAlignment? = null,
-    val childs: MutableList<Element>? = null, // 如果是row，column则会有子元素
+    val childs: MutableList<Element> = mutableListOf(), // 如果是row，column则会有子元素
 ) : Element(
     id,
     width,

@@ -24,7 +24,7 @@ class ColumnElement(
     weight: Float? = null,
     isNeedScroll: Boolean? = false, // 是否需要滚动
     align: LayoutAlignment? = null,
-    childs: MutableList<Element>? = null, // 如果是row，column则会有子元素
+    childs: MutableList<Element> = mutableListOf(), // 如果是row，column则会有子元素
 ) : LayoutElement(
     id,
     width,
@@ -47,4 +47,10 @@ class ColumnElement(
     override fun createElementPreview(viewModel: PageMainViewModel): ElementPreview<out Element> =
         ColumnPreview(this, viewModel)
     override fun getElementName(): String = "竖布局"
+
+    companion object {
+        fun new(): ColumnElement {
+            return ColumnElement("")
+        }
+    }
 }

@@ -38,8 +38,17 @@ class DividerElement(
     backgroundRoundBottomRight,
     weight
 ) {
-    override fun createElementCreator(space: String): ElementCreator<out Element> = DividerCreator(this, space)
+    override fun createElementCreator(space: String): ElementCreator<out Element> =
+        DividerCreator(this, space)
+
     override fun createElementPreview(viewModel: PageMainViewModel): ElementPreview<out Element> =
         DividerPreview(this, viewModel)
+
     override fun getElementName(): String = "分割线"
+
+    companion object {
+        fun new(): DividerElement {
+            return DividerElement("divider")
+        }
+    }
 }

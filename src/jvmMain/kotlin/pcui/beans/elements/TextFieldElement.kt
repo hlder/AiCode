@@ -44,8 +44,17 @@ open class TextFieldElement(
     backgroundRoundBottomRight,
     weight
 ) {
-    override fun createElementCreator(space: String): ElementCreator<out Element> = TextFieldCreator(this, space)
+    override fun createElementCreator(space: String): ElementCreator<out Element> =
+        TextFieldCreator(this, space)
+
     override fun createElementPreview(viewModel: PageMainViewModel): ElementPreview<out Element> =
         TextFieldPreview(this, viewModel)
+
     override fun getElementName(): String = "输入框"
+
+    companion object {
+        fun new(): TextFieldElement {
+            return TextFieldElement("TextField");
+        }
+    }
 }

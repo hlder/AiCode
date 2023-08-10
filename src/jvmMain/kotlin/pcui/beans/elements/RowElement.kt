@@ -24,7 +24,7 @@ class RowElement(
     weight: Float? = null,
     isNeedScroll: Boolean? = false, // 是否需要滚动
     align: LayoutAlignment? = null,
-    childs: MutableList<Element>? = null, // 如果是row，column则会有子元素
+    childs: MutableList<Element> = mutableListOf(), // 如果是row，column则会有子元素
 ) : LayoutElement(
     id,
     width,
@@ -43,8 +43,17 @@ class RowElement(
     align,
     childs
 ) {
-    override fun createElementCreator(space: String): ElementCreator<out Element> = RowCreator(this, space)
+    override fun createElementCreator(space: String): ElementCreator<out Element> =
+        RowCreator(this, space)
+
     override fun createElementPreview(viewModel: PageMainViewModel): ElementPreview<out Element> =
         RowPreview(this, viewModel)
+
     override fun getElementName(): String = "横布局"
+
+    companion object {
+        fun new(): RowElement {
+            return RowElement("row")
+        }
+    }
 }
