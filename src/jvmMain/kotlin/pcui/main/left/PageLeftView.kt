@@ -14,6 +14,8 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.mouseClickable
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -56,8 +58,9 @@ class PageLeftView(private val viewModel: PageMainViewModel) {
         val isNeedDrag = remember { mutableStateOf(false) }
 
         val nowSelectedElement = remember { viewModel.nowSelectedElement }
+        val scrollState = rememberScrollState()
         Column(
-            modifier = Modifier.onGloballyPositioned {
+            modifier = Modifier.verticalScroll(scrollState).onGloballyPositioned {
                 pageLeftViewModel.contentPosition = it.positionInRoot()
             }.touchListener(
                 onTouchDown = { // touchDown
@@ -135,11 +138,12 @@ class PageLeftView(private val viewModel: PageMainViewModel) {
                         .width(100.dp)
                         .border(1.dp, color = Color(0xff515151))
                 ) {
-                    rightMenuItem(listOf("新建", "上移", "下移", "删除")) {
+                    rightMenuItem(listOf("新建", "上移", "下移", "删除", "复制")) {
                         when (it) {
                             0 -> { // 显示新建的控件
                                 isShowChildMenu.value = true
                             }
+
                             1 -> { // 上移
                                 val nowElement = viewModel.nowSelectedElement.value
                                 nowElement?.let {
@@ -149,37 +153,61 @@ class PageLeftView(private val viewModel: PageMainViewModel) {
                                         parentElement?.childs?.remove(nowElement)
                                         parentElement?.childs?.add(index - 1, nowElement)
                                     } else {
-                                        val parentParentElement = viewModel.getParentElement(parentElement)
+                                        val parentParentElement =
+                                            viewModel.getParentElement(parentElement)
                                         parentElement?.childs?.remove(nowElement)
-                                        val parentIndex = parentParentElement?.childs?.indexOf(parentElement as Element)?:0
+                                        val parentIndex =
+                                            parentParentElement?.childs?.indexOf(parentElement as Element)
+                                                ?: 0
                                         parentParentElement?.childs?.add(parentIndex, nowElement)
                                     }
                                     viewModel.movePositionVersion.value++
                                     PageOverLayer.hideOverPop()
                                 }
                             }
+
                             2 -> { // 下移
                                 val nowElement = viewModel.nowSelectedElement.value
                                 nowElement?.let {
                                     val parentElement = viewModel.getParentElement(nowElement)
                                     val index = parentElement?.childs?.indexOf(nowElement) ?: 0
-                                    if (index < (parentElement?.childs?.size?:0)-1) {
+                                    if (index < (parentElement?.childs?.size ?: 0) - 1) {
                                         parentElement?.childs?.remove(nowElement)
                                         parentElement?.childs?.add(index + 1, nowElement)
                                     } else {
-                                        val parentParentElement = viewModel.getParentElement(parentElement)
+                                        val parentParentElement =
+                                            viewModel.getParentElement(parentElement)
                                         parentElement?.childs?.remove(nowElement)
-                                        val parentIndex = parentParentElement?.childs?.indexOf(parentElement as Element)?:0
-                                        parentParentElement?.childs?.add(parentIndex+1, nowElement)
+                                        val parentIndex =
+                                            parentParentElement?.childs?.indexOf(parentElement as Element)
+                                                ?: 0
+                                        parentParentElement?.childs?.add(
+                                            parentIndex + 1,
+                                            nowElement
+                                        )
                                     }
                                     viewModel.movePositionVersion.value++
                                     PageOverLayer.hideOverPop()
                                 }
                             }
+
                             3 -> { // 删除
                                 viewModel.deleteElement(viewModel.nowSelectedElement.value)
                                 viewModel.movePositionVersion.value++
                                 PageOverLayer.hideOverPop()
+                            }
+
+                            4 -> { // 复制
+                                val nowElement = viewModel.nowSelectedElement.value
+                                nowElement?.let {
+                                    val parentElement = viewModel.getParentElement(nowElement)
+                                    val index = parentElement?.childs?.indexOf(nowElement) ?: 0
+                                    nowElement.copy()?.let { copyElement ->
+                                        parentElement?.childs?.add(index + 1, copyElement)
+                                        viewModel.movePositionVersion.value++
+                                        PageOverLayer.hideOverPop()
+                                    }
+                                }
                             }
                         }
                     }
@@ -210,16 +238,22 @@ class PageLeftView(private val viewModel: PageMainViewModel) {
                                     } else { // 不是布局，那么添加到该控件下面一个
                                         viewModel.getParentElement(viewModel.nowSelectedElement.value)
                                     }
-                                val addIndex =if (layoutElement == viewModel.nowSelectedElement.value) {
+                                val addIndex =
+                                    if (layoutElement == viewModel.nowSelectedElement.value) {
                                         layoutElement?.childs?.size ?: 0
                                     } else {
-                                        (layoutElement?.childs?.indexOf(viewModel.nowSelectedElement.value)?: 0) + 1
+                                        (layoutElement?.childs?.indexOf(viewModel.nowSelectedElement.value)
+                                            ?: 0) + 1
                                     }
                                 when (it) {
                                     0 -> layoutElement?.childs?.add(addIndex, ColumnElement.new())
                                     1 -> layoutElement?.childs?.add(addIndex, RowElement.new())
                                     2 -> layoutElement?.childs?.add(addIndex, TextElement.new())
-                                    3 -> layoutElement?.childs?.add(addIndex, TextFieldElement.new())
+                                    3 -> layoutElement?.childs?.add(
+                                        addIndex,
+                                        TextFieldElement.new()
+                                    )
+
                                     4 -> layoutElement?.childs?.add(addIndex, ButtonElement.new())
                                     5 -> layoutElement?.childs?.add(addIndex, ImageElement.new())
                                     6 -> layoutElement?.childs?.add(addIndex, SpaceElement.new())

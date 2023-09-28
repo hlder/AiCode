@@ -2,11 +2,29 @@ package pcui.beans
 
 import androidx.compose.ui.graphics.Color
 import createcode.templatecode.elements.ElementCreator
+import pcui.beans.elements.ColumnElement
+import pcui.beans.elements.ImageElement
+import pcui.beans.elements.ImageFrom
+import pcui.beans.elements.LayoutAlignment
 import pcui.beans.elements.LayoutElement
+import pcui.beans.elements.TextElement
 import pcui.main.PageMainViewModel
 import pcui.previews.ElementPreview
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import kotlin.reflect.KMutableProperty1
+import kotlin.reflect.full.companionObject
+import kotlin.reflect.full.createInstance
+import kotlin.reflect.full.declaredFunctions
+import kotlin.reflect.full.declaredMemberExtensionFunctions
+import kotlin.reflect.full.declaredMemberFunctions
+import kotlin.reflect.full.functions
+import kotlin.reflect.full.memberExtensionFunctions
+import kotlin.reflect.full.memberFunctions
+import kotlin.reflect.full.memberProperties
+import kotlin.reflect.full.staticFunctions
+import kotlin.reflect.jvm.isAccessible
+import kotlin.reflect.jvm.javaField
 
 abstract class Element(
     var id: String, // element的id
@@ -60,7 +78,31 @@ abstract class Element(
      */
     abstract fun getElementName(): String
 
-    companion object{
+    fun copy(): Element? {
+        val newFun = this::class.companionObject?.functions?.find { it.name == "new" }
+        newFun?.let { _ ->
+            val newObj: Element =
+                newFun.call(this::class.companionObject?.objectInstance) as Element
+            val parentProperties = this::class.memberProperties
+            parentProperties.forEach { property ->
+                if ((property.name == "childs") && (this is LayoutElement)) {
+                    this.childs.forEach {
+                        it.copy()?.let { itemElement ->
+                            (newObj as LayoutElement).childs.add(itemElement)
+                        }
+                    }
+                } else if (property.name != "id") {
+                    property.isAccessible = true
+                    val javaField = property.javaField
+                    javaField?.set(newObj, javaField.get(this))
+                }
+            }
+            return newObj
+        }
+        return null
+    }
+
+    companion object {
         private var index = 1
 
         /**
@@ -103,4 +145,35 @@ fun Element.getParent(rootElement: Element): LayoutElement? {
     } else {
         return null
     }
+}
+
+fun main() {
+    val c1 = ColumnElement(
+        id = "actionItemLayout1",
+        weight = 1f,
+        align = LayoutAlignment.CENTER,
+        childs = mutableListOf(
+            ImageElement(
+                id = "imageElement1",
+                image = "icon_home_waimai",
+                imageFrom = ImageFrom.LOCAL,
+                contentDescription = "外卖",
+                filePath = "G:\\temp\\icons\\icon_home_waimai.png",
+                width = 50,
+                height = 50
+            ),
+            TextElement(
+                id = "actionItemText1",
+                textColor = Color(0xFF353535),
+                text = "外卖",
+                textSize = 14,
+                paddingTop = 5
+            )
+        )
+    )
+    val c2 = c1.copy()
+
+    println("============c1:$c1")
+    println("============c2:$c2")
+    println("============c:${c1.id}  ${c2?.id}")
 }

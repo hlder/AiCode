@@ -44,13 +44,16 @@ open class TextElement(
     backgroundRoundBottomRight,
     weight
 ) {
-    override fun createElementCreator(space: String): ElementCreator<out Element> = TextCreator(this, space)
+    override fun createElementCreator(space: String): ElementCreator<out Element> =
+        TextCreator(this, space)
+
     override fun createElementPreview(viewModel: PageMainViewModel): ElementPreview<out Element> =
         TextPreview(this, viewModel)
+
     override fun getElementName(): String = "文本"
 
-    companion object{
-        fun new():TextElement{
+    companion object {
+        fun new(): TextElement {
             return TextElement("text" + getBaseId())
         }
     }

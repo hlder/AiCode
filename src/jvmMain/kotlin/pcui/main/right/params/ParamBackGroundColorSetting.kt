@@ -35,18 +35,82 @@ fun ParamBackGroundColorSetting(element: Element, notifyChange: () -> Unit) {
         println("a:${alphaStr} r:${redStr} g:${greenStr} b:${blueStr}")
         "#${alphaStr}${redStr}${greenStr}${blueStr}"
     } ?: ""
-    ParamSettingInputItem(
-        element = element,
-        label = "背景颜色:",
-        text = colorStr,
-        showInput = false,
-        onValueChange = {}
-    ) { close ->
-        MenuContent(colorStr) {
-            element.backgroundColor = it
-            notifyChange.invoke()
+
+    Column{
+        ParamSettingInputItem(
+            element = element,
+            label = "背景颜色:",
+            text = colorStr,
+            showInput = false,
+            onValueChange = {}
+        ) { close ->
+            MenuContent(colorStr) {
+                element.backgroundColor = it
+                notifyChange.invoke()
+            }
+        }
+
+        Column(Modifier.padding(start = contentPaddingStart.dp, end = contentPaddingEnd.dp)) {
+            ParamBackGroundColorRoundSetting(element, notifyChange)
         }
     }
+}
+
+@Composable
+private fun ParamBackGroundColorRoundSetting(element: Element, notifyChange: () -> Unit) {
+    Text(
+        text = "背景圆角:",
+        color = inputColor,
+        fontSize = labelFontSize.sp
+    )
+    Spacer(modifier = Modifier.height(5.dp))
+    ParamSettingInputItem(
+        element = element,
+        label = "左上角",
+        text = "${element.backgroundRoundTopLeft ?: ""}",
+        onValueChange = {
+            if (it.toIntOrNull() != null || it.isEmpty()) {
+                element.backgroundRoundTopLeft = it.toIntOrNull()
+            }
+            notifyChange.invoke()
+        }
+    )
+    Spacer(modifier = Modifier.height(2.dp))
+    ParamSettingInputItem(
+        element = element,
+        label = "右上角",
+        text = "${element.backgroundRoundTopRight ?: ""}",
+        onValueChange = {
+            if (it.toIntOrNull() != null || it.isEmpty()) {
+                element.backgroundRoundTopRight = it.toIntOrNull()
+            }
+            notifyChange.invoke()
+        }
+    )
+    Spacer(modifier = Modifier.height(2.dp))
+    ParamSettingInputItem(
+        element = element,
+        label = "左下角",
+        text = "${element.backgroundRoundBottomLeft ?: ""}",
+        onValueChange = {
+            if (it.toIntOrNull() != null || it.isEmpty()) {
+                element.backgroundRoundBottomLeft = it.toIntOrNull()
+            }
+            notifyChange.invoke()
+        }
+    )
+    Spacer(modifier = Modifier.height(2.dp))
+    ParamSettingInputItem(
+        element = element,
+        label = "右下角",
+        text = "${element.backgroundRoundBottomRight ?: ""}",
+        onValueChange = {
+            if (it.toIntOrNull() != null || it.isEmpty()) {
+                element.backgroundRoundBottomRight = it.toIntOrNull()
+            }
+            notifyChange.invoke()
+        }
+    )
 }
 
 /**
@@ -140,17 +204,17 @@ private fun doChangeColor(text: String, notifyChange: (color: Color) -> Unit) {
     }
     when (inputTextStr.length) {
         6 -> {
-            val red = inputTextStr.substring(0, 1).toColorInt() / 255f
-            val green = inputTextStr.substring(2, 3).toColorInt() / 255f
-            val blue = inputTextStr.substring(4, 5).toColorInt() / 255f
-            notifyChange.invoke(Color(red, green, blue))
+            val red = inputTextStr.substring(0, 2).toColorInt() / 255f
+            val green = inputTextStr.substring(2, 4).toColorInt() / 255f
+            val blue = inputTextStr.substring(4, 6).toColorInt() / 255f
+            notifyChange.invoke(Color(red = red, green = green, blue = blue))
         }
         8 -> {
-            val alpha = inputTextStr.substring(0, 1).toColorInt() / 255f
-            val red = inputTextStr.substring(2, 3).toColorInt() / 255f
-            val green = inputTextStr.substring(4, 5).toColorInt() / 255f
-            val blue = inputTextStr.substring(6, 7).toColorInt() / 255f
-            notifyChange.invoke(Color(alpha, red, green, blue))
+            val alpha = inputTextStr.substring(0, 2).toColorInt() / 255f
+            val red = inputTextStr.substring(2, 4).toColorInt() / 255f
+            val green = inputTextStr.substring(4, 6).toColorInt() / 255f
+            val blue = inputTextStr.substring(6, 8).toColorInt() / 255f
+            notifyChange.invoke(Color(alpha = alpha, red = red, green = green, blue = blue))
         }
         else -> {
 
